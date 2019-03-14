@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f4df8fc7b6345d9ade807b69f0ffd70" Name="Diagram1">
+        <EntityTypeShape EntityType="SmetaModel.Договор_подряда" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Заказчик" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Исполнитель" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Локальная_смета" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Объект" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Поправочный_коэффициент_по_типу_ПИР" Width="1.5" PointX="3.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Проектная_организация" Width="1.5" PointX="3.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Справочник_видов_работ" Width="1.5" PointX="6.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Справочник_расценок" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmetaModel.Ставка_14_го_разряда" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="SmetaModel.FK__Договор_подряда__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Договор_подряда__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Исполните__КодЗа__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Исполните__КодЗа__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодЗаказ__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодЗаказ__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Локальная_смета__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Локальная_смета__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Локальная_смета__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK_Локальная_смета_Объект" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__Код_коэф__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__Код_коэф__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодПроек__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодПроек__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодСтавк__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Объект__КодСтавк__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Справочни__КодВи__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="SmetaModel.FK__Справочни__КодВи__66603565" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

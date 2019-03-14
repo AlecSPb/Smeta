@@ -1,0 +1,1101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SmetaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Договор_подряда">
+          <Key>
+            <PropertyRef Name="КодСтавки" />
+            <PropertyRef Name="Код_коэффициента" />
+            <PropertyRef Name="НомерДог" />
+            <PropertyRef Name="Шифр" />
+          </Key>
+          <Property Name="ДатаДог" Type="datetime" Nullable="false" />
+          <Property Name="КодСтавки" Type="int" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="int" Nullable="false" />
+          <Property Name="НомерДог" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Шифр" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Заказчик">
+          <Key>
+            <PropertyRef Name="КодЗаказчик" />
+          </Key>
+          <Property Name="ЮрАдрес" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="int" Nullable="false" />
+          <Property Name="УНП" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Расчетный_счет" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Тел" Type="varchar" MaxLength="15" />
+          <Property Name="ЭлПочта" Type="varchar" MaxLength="20" />
+          <Property Name="НаименованиеЗаказчика" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Исполнитель">
+          <Key>
+            <PropertyRef Name="КодИсполнителя" />
+            <PropertyRef Name="КодЗаказчик" />
+          </Key>
+          <Property Name="КодИсполнителя" Type="int" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="int" Nullable="false" />
+          <Property Name="ФИО" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Должность" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Логин" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Пароль" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Роль" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Локальная_смета">
+          <Key>
+            <PropertyRef Name="КодВидаРабот" />
+            <PropertyRef Name="Шифр" />
+            <PropertyRef Name="КодРаботы" />
+            <PropertyRef Name="КодСтавки" />
+            <PropertyRef Name="Код_коэффициента" />
+          </Key>
+          <Property Name="КодВидаРабот" Type="int" Nullable="false" />
+          <Property Name="Шифр" Type="int" Nullable="false" />
+          <Property Name="КодРаботы" Type="int" Nullable="false" />
+          <Property Name="КодСтавки" Type="int" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="int" Nullable="false" />
+          <Property Name="ФизОбъемРабот" Type="float" />
+          <Property Name="СтоимостьРаботы" Type="float" />
+          <Property Name="ТрудоемкостьРаботы" Type="float" />
+        </EntityType>
+        <EntityType Name="Объект">
+          <Key>
+            <PropertyRef Name="Код_коэффициента" />
+            <PropertyRef Name="Шифр" />
+            <PropertyRef Name="КодСтавки" />
+          </Key>
+          <Property Name="Код_коэффициента" Type="int" Nullable="false" />
+          <Property Name="Шифр" Type="int" Nullable="false" />
+          <Property Name="КодСтавки" Type="int" Nullable="false" />
+          <Property Name="Адрес" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="НаименованиеОбъекта" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="КодПроектировщика" Type="int" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Поправочный_коэффициент_по_типу_ПИР">
+          <Key>
+            <PropertyRef Name="Код_коэффициента" />
+          </Key>
+          <Property Name="Наименование_коэффициента" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="int" Nullable="false" />
+          <Property Name="Значение_коэффициента" Type="float" />
+        </EntityType>
+        <EntityType Name="Проектная_организация">
+          <Key>
+            <PropertyRef Name="КодПроектировщика" />
+          </Key>
+          <Property Name="УНП" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="КодПроектировщика" Type="int" Nullable="false" />
+          <Property Name="ЮрАдрес" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Р_с" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Тел" Type="varchar" MaxLength="15" />
+          <Property Name="ЭлПочта" Type="varchar" MaxLength="20" />
+          <Property Name="НаименованиеПроектиров" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Справочник_видов_работ">
+          <Key>
+            <PropertyRef Name="КодВидаРабот" />
+          </Key>
+          <Property Name="ЕдИзмОб" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="КодВидаРабот" Type="int" Nullable="false" />
+          <Property Name="ЕдИзмТруд" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ВидРабот" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Справочник_расценок">
+          <Key>
+            <PropertyRef Name="КодРаботы" />
+            <PropertyRef Name="КодВидаРабот" />
+          </Key>
+          <Property Name="КодРаботы" Type="int" Nullable="false" />
+          <Property Name="КодВидаРабот" Type="int" Nullable="false" />
+          <Property Name="ЗатратыТрудаЕдОбъема" Type="float" Nullable="false" />
+          <Property Name="ИмяРаботы" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ставка_14_го_разряда">
+          <Key>
+            <PropertyRef Name="КодСтавки" />
+          </Key>
+          <Property Name="Дата_ставки" Type="datetime" Nullable="false" />
+          <Property Name="КодСтавки" Type="int" Nullable="false" />
+          <Property Name="Значение_ставки" Type="float" Nullable="false" />
+          <Property Name="Обоснование" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Договор_подряда__571DF1D5">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Договор_подряда" Type="Self.Договор_подряда" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Договор_подряда">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Договор_подряда__5FB337D6">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Договор_подряда" Type="Self.Договор_подряда" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Договор_подряда">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Исполните__КодЗа__5812160E">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Исполнитель" Type="Self.Исполнитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Исполнитель">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Исполните__КодЗа__693CA210">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Исполнитель" Type="Self.Исполнитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Исполнитель">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__59063A47">
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_расценок">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__59FA5E80">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__68487DD7">
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_расценок">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__Код_коэф__5BE2A6F2">
+          <End Role="Поправочный_коэффициент_по_типу_ПИР" Type="Self.Поправочный_коэффициент_по_типу_ПИР" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поправочный_коэффициент_по_типу_ПИР">
+              <PropertyRef Name="Код_коэффициента" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__Код_коэф__628FA481">
+          <End Role="Поправочный_коэффициент_по_типу_ПИР" Type="Self.Поправочный_коэффициент_по_типу_ПИР" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поправочный_коэффициент_по_типу_ПИР">
+              <PropertyRef Name="Код_коэффициента" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодЗаказ__5CD6CB2B">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодЗаказ__6383C8BA">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодПроек__5DCAEF64">
+          <End Role="Проектная_организация" Type="Self.Проектная_организация" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проектная_организация">
+              <PropertyRef Name="КодПроектировщика" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодПроектировщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодПроек__6477ECF3">
+          <End Role="Проектная_организация" Type="Self.Проектная_организация" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проектная_организация">
+              <PropertyRef Name="КодПроектировщика" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодПроектировщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодСтавк__5AEE82B9">
+          <End Role="Ставка_14_го_разряда" Type="Self.Ставка_14_го_разряда" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ставка_14_го_разряда">
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодСтавк__656C112C">
+          <End Role="Ставка_14_го_разряда" Type="Self.Ставка_14_го_разряда" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ставка_14_го_разряда">
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Справочни__КодВи__5EBF139D">
+          <End Role="Справочник_видов_работ" Type="Self.Справочник_видов_работ" Multiplicity="1" />
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_видов_работ">
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Справочник_расценок">
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Справочни__КодВи__66603565">
+          <End Role="Справочник_видов_работ" Type="Self.Справочник_видов_работ" Multiplicity="1" />
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_видов_работ">
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Справочник_расценок">
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Локальная_смета_Объект">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_InsertProect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="YNP" Type="varchar" Mode="In" />
+          <Parameter Name="Adress" Type="varchar" Mode="In" />
+          <Parameter Name="RS" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Mail" Type="varchar" Mode="In" />
+          <Parameter Name="NameProect" Type="varchar" Mode="In" />
+          <Parameter Name="IdProect" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="ФормированиеОбщейСтоимостиОбъекта" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ШифрОбъекта" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ФормированиеОбщейТрудоемкостиОбъекта" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ШифрОбъекта" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="SmetaModelStoreContainer">
+          <EntitySet Name="Договор_подряда" EntityType="Self.Договор_подряда" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заказчик" EntityType="Self.Заказчик" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Исполнитель" EntityType="Self.Исполнитель" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Локальная_смета" EntityType="Self.Локальная_смета" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Объект" EntityType="Self.Объект" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поправочный_коэффициент_по_типу_ПИР" EntityType="Self.Поправочный_коэффициент_по_типу_ПИР" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Проектная_организация" EntityType="Self.Проектная_организация" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Справочник_видов_работ" EntityType="Self.Справочник_видов_работ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Справочник_расценок" EntityType="Self.Справочник_расценок" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ставка_14_го_разряда" EntityType="Self.Ставка_14_го_разряда" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Договор_подряда__571DF1D5" Association="Self.FK__Договор_подряда__571DF1D5">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Договор_подряда" EntitySet="Договор_подряда" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Договор_подряда__5FB337D6" Association="Self.FK__Договор_подряда__5FB337D6">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Договор_подряда" EntitySet="Договор_подряда" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Исполните__КодЗа__5812160E" Association="Self.FK__Исполните__КодЗа__5812160E">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Исполнитель" EntitySet="Исполнитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Исполните__КодЗа__693CA210" Association="Self.FK__Исполните__КодЗа__693CA210">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Исполнитель" EntitySet="Исполнитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__59063A47" Association="Self.FK__Локальная_смета__59063A47">
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__59FA5E80" Association="Self.FK__Локальная_смета__59FA5E80">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__68487DD7" Association="Self.FK__Локальная_смета__68487DD7">
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__Код_коэф__5BE2A6F2" Association="Self.FK__Объект__Код_коэф__5BE2A6F2">
+            <End Role="Поправочный_коэффициент_по_типу_ПИР" EntitySet="Поправочный_коэффициент_по_типу_ПИР" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__Код_коэф__628FA481" Association="Self.FK__Объект__Код_коэф__628FA481">
+            <End Role="Поправочный_коэффициент_по_типу_ПИР" EntitySet="Поправочный_коэффициент_по_типу_ПИР" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодЗаказ__5CD6CB2B" Association="Self.FK__Объект__КодЗаказ__5CD6CB2B">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодЗаказ__6383C8BA" Association="Self.FK__Объект__КодЗаказ__6383C8BA">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодПроек__5DCAEF64" Association="Self.FK__Объект__КодПроек__5DCAEF64">
+            <End Role="Проектная_организация" EntitySet="Проектная_организация" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодПроек__6477ECF3" Association="Self.FK__Объект__КодПроек__6477ECF3">
+            <End Role="Проектная_организация" EntitySet="Проектная_организация" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодСтавк__5AEE82B9" Association="Self.FK__Объект__КодСтавк__5AEE82B9">
+            <End Role="Ставка_14_го_разряда" EntitySet="Ставка_14_го_разряда" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодСтавк__656C112C" Association="Self.FK__Объект__КодСтавк__656C112C">
+            <End Role="Ставка_14_го_разряда" EntitySet="Ставка_14_го_разряда" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Справочни__КодВи__5EBF139D" Association="Self.FK__Справочни__КодВи__5EBF139D">
+            <End Role="Справочник_видов_работ" EntitySet="Справочник_видов_работ" />
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Справочни__КодВи__66603565" Association="Self.FK__Справочни__КодВи__66603565">
+            <End Role="Справочник_видов_работ" EntitySet="Справочник_видов_работ" />
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Локальная_смета_Объект" Association="Self.FK_Локальная_смета_Объект">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmetaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Договор_подряда">
+          <Key>
+            <PropertyRef Name="КодСтавки" />
+            <PropertyRef Name="Код_коэффициента" />
+            <PropertyRef Name="НомерДог" />
+            <PropertyRef Name="Шифр" />
+          </Key>
+          <Property Name="ДатаДог" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="КодСтавки" Type="Int32" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="Int32" Nullable="false" />
+          <Property Name="НомерДог" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Шифр" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Договор_подряда__571DF1D5" FromRole="Договор_подряда" ToRole="Объект" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK__Договор_подряда__5FB337D6" FromRole="Договор_подряда" ToRole="Объект" />
+        </EntityType>
+        <EntityType Name="Заказчик">
+          <Key>
+            <PropertyRef Name="КодЗаказчик" />
+          </Key>
+          <Property Name="ЮрАдрес" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="Int32" Nullable="false" />
+          <Property Name="УНП" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Расчетный_счет" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Тел" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ЭлПочта" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НаименованиеЗаказчика" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Исполнитель" Relationship="Self.FK__Исполните__КодЗа__5812160E" FromRole="Заказчик" ToRole="Исполнитель" />
+          <NavigationProperty Name="Исполнитель1" Relationship="Self.FK__Исполните__КодЗа__693CA210" FromRole="Заказчик" ToRole="Исполнитель" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Объект__КодЗаказ__5CD6CB2B" FromRole="Заказчик" ToRole="Объект" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK__Объект__КодЗаказ__6383C8BA" FromRole="Заказчик" ToRole="Объект" />
+        </EntityType>
+        <EntityType Name="Исполнитель">
+          <Key>
+            <PropertyRef Name="КодИсполнителя" />
+            <PropertyRef Name="КодЗаказчик" />
+          </Key>
+          <Property Name="КодИсполнителя" Type="Int32" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="Int32" Nullable="false" />
+          <Property Name="ФИО" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Должность" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Пароль" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Роль" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Заказчик" Relationship="Self.FK__Исполните__КодЗа__5812160E" FromRole="Исполнитель" ToRole="Заказчик" />
+          <NavigationProperty Name="Заказчик1" Relationship="Self.FK__Исполните__КодЗа__693CA210" FromRole="Исполнитель" ToRole="Заказчик" />
+        </EntityType>
+        <EntityType Name="Локальная_смета">
+          <Key>
+            <PropertyRef Name="КодВидаРабот" />
+            <PropertyRef Name="Шифр" />
+            <PropertyRef Name="КодРаботы" />
+            <PropertyRef Name="КодСтавки" />
+            <PropertyRef Name="Код_коэффициента" />
+          </Key>
+          <Property Name="КодВидаРабот" Type="Int32" Nullable="false" />
+          <Property Name="Шифр" Type="Int32" Nullable="false" />
+          <Property Name="КодРаботы" Type="Int32" Nullable="false" />
+          <Property Name="КодСтавки" Type="Int32" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="Int32" Nullable="false" />
+          <Property Name="ФизОбъемРабот" Type="Double" />
+          <Property Name="СтоимостьРаботы" Type="Double" />
+          <Property Name="ТрудоемкостьРаботы" Type="Double" />
+          <NavigationProperty Name="Справочник_расценок" Relationship="Self.FK__Локальная_смета__59063A47" FromRole="Локальная_смета" ToRole="Справочник_расценок" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Локальная_смета__59FA5E80" FromRole="Локальная_смета" ToRole="Объект" />
+          <NavigationProperty Name="Справочник_расценок1" Relationship="Self.FK__Локальная_смета__68487DD7" FromRole="Локальная_смета" ToRole="Справочник_расценок" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK_Локальная_смета_Объект" FromRole="Локальная_смета" ToRole="Объект" />
+        </EntityType>
+        <EntityType Name="Объект">
+          <Key>
+            <PropertyRef Name="Код_коэффициента" />
+            <PropertyRef Name="Шифр" />
+            <PropertyRef Name="КодСтавки" />
+          </Key>
+          <Property Name="Код_коэффициента" Type="Int32" Nullable="false" />
+          <Property Name="Шифр" Type="Int32" Nullable="false" />
+          <Property Name="КодСтавки" Type="Int32" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="НаименованиеОбъекта" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодПроектировщика" Type="Int32" Nullable="false" />
+          <Property Name="КодЗаказчик" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Договор_подряда" Relationship="Self.FK__Договор_подряда__571DF1D5" FromRole="Объект" ToRole="Договор_подряда" />
+          <NavigationProperty Name="Договор_подряда1" Relationship="Self.FK__Договор_подряда__5FB337D6" FromRole="Объект" ToRole="Договор_подряда" />
+          <NavigationProperty Name="Заказчик" Relationship="Self.FK__Объект__КодЗаказ__5CD6CB2B" FromRole="Объект" ToRole="Заказчик" />
+          <NavigationProperty Name="Заказчик1" Relationship="Self.FK__Объект__КодЗаказ__6383C8BA" FromRole="Объект" ToRole="Заказчик" />
+          <NavigationProperty Name="Локальная_смета" Relationship="Self.FK__Локальная_смета__59FA5E80" FromRole="Объект" ToRole="Локальная_смета" />
+          <NavigationProperty Name="Локальная_смета1" Relationship="Self.FK_Локальная_смета_Объект" FromRole="Объект" ToRole="Локальная_смета" />
+          <NavigationProperty Name="Поправочный_коэффициент_по_типу_ПИР" Relationship="Self.FK__Объект__Код_коэф__5BE2A6F2" FromRole="Объект" ToRole="Поправочный_коэффициент_по_типу_ПИР" />
+          <NavigationProperty Name="Поправочный_коэффициент_по_типу_ПИР1" Relationship="Self.FK__Объект__Код_коэф__628FA481" FromRole="Объект" ToRole="Поправочный_коэффициент_по_типу_ПИР" />
+          <NavigationProperty Name="Проектная_организация" Relationship="Self.FK__Объект__КодПроек__5DCAEF64" FromRole="Объект" ToRole="Проектная_организация" />
+          <NavigationProperty Name="Проектная_организация1" Relationship="Self.FK__Объект__КодПроек__6477ECF3" FromRole="Объект" ToRole="Проектная_организация" />
+          <NavigationProperty Name="Ставка_14_го_разряда" Relationship="Self.FK__Объект__КодСтавк__5AEE82B9" FromRole="Объект" ToRole="Ставка_14_го_разряда" />
+          <NavigationProperty Name="Ставка_14_го_разряда1" Relationship="Self.FK__Объект__КодСтавк__656C112C" FromRole="Объект" ToRole="Ставка_14_го_разряда" />
+        </EntityType>
+        <EntityType Name="Поправочный_коэффициент_по_типу_ПИР">
+          <Key>
+            <PropertyRef Name="Код_коэффициента" />
+          </Key>
+          <Property Name="Наименование_коэффициента" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Код_коэффициента" Type="Int32" Nullable="false" />
+          <Property Name="Значение_коэффициента" Type="Double" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Объект__Код_коэф__5BE2A6F2" FromRole="Поправочный_коэффициент_по_типу_ПИР" ToRole="Объект" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK__Объект__Код_коэф__628FA481" FromRole="Поправочный_коэффициент_по_типу_ПИР" ToRole="Объект" />
+        </EntityType>
+        <EntityType Name="Проектная_организация">
+          <Key>
+            <PropertyRef Name="КодПроектировщика" />
+          </Key>
+          <Property Name="УНП" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодПроектировщика" Type="Int32" Nullable="false" />
+          <Property Name="ЮрАдрес" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Р_с" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Тел" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ЭлПочта" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="НаименованиеПроектиров" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Объект__КодПроек__5DCAEF64" FromRole="Проектная_организация" ToRole="Объект" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK__Объект__КодПроек__6477ECF3" FromRole="Проектная_организация" ToRole="Объект" />
+        </EntityType>
+        <EntityType Name="Справочник_видов_работ">
+          <Key>
+            <PropertyRef Name="КодВидаРабот" />
+          </Key>
+          <Property Name="ЕдИзмОб" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="КодВидаРабот" Type="Int32" Nullable="false" />
+          <Property Name="ЕдИзмТруд" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ВидРабот" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Справочник_расценок" Relationship="Self.FK__Справочни__КодВи__5EBF139D" FromRole="Справочник_видов_работ" ToRole="Справочник_расценок" />
+          <NavigationProperty Name="Справочник_расценок1" Relationship="Self.FK__Справочни__КодВи__66603565" FromRole="Справочник_видов_работ" ToRole="Справочник_расценок" />
+        </EntityType>
+        <EntityType Name="Справочник_расценок">
+          <Key>
+            <PropertyRef Name="КодРаботы" />
+            <PropertyRef Name="КодВидаРабот" />
+          </Key>
+          <Property Name="КодРаботы" Type="Int32" Nullable="false" />
+          <Property Name="КодВидаРабот" Type="Int32" Nullable="false" />
+          <Property Name="ЗатратыТрудаЕдОбъема" Type="Double" Nullable="false" />
+          <Property Name="ИмяРаботы" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Локальная_смета" Relationship="Self.FK__Локальная_смета__59063A47" FromRole="Справочник_расценок" ToRole="Локальная_смета" />
+          <NavigationProperty Name="Локальная_смета1" Relationship="Self.FK__Локальная_смета__68487DD7" FromRole="Справочник_расценок" ToRole="Локальная_смета" />
+          <NavigationProperty Name="Справочник_видов_работ" Relationship="Self.FK__Справочни__КодВи__5EBF139D" FromRole="Справочник_расценок" ToRole="Справочник_видов_работ" />
+          <NavigationProperty Name="Справочник_видов_работ1" Relationship="Self.FK__Справочни__КодВи__66603565" FromRole="Справочник_расценок" ToRole="Справочник_видов_работ" />
+        </EntityType>
+        <EntityType Name="Ставка_14_го_разряда">
+          <Key>
+            <PropertyRef Name="КодСтавки" />
+          </Key>
+          <Property Name="Дата_ставки" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="КодСтавки" Type="Int32" Nullable="false" />
+          <Property Name="Значение_ставки" Type="Double" Nullable="false" />
+          <Property Name="Обоснование" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Объект" Relationship="Self.FK__Объект__КодСтавк__5AEE82B9" FromRole="Ставка_14_го_разряда" ToRole="Объект" />
+          <NavigationProperty Name="Объект1" Relationship="Self.FK__Объект__КодСтавк__656C112C" FromRole="Ставка_14_го_разряда" ToRole="Объект" />
+        </EntityType>
+        <Association Name="FK__Договор_подряда__571DF1D5">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Договор_подряда" Type="Self.Договор_подряда" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Договор_подряда">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Договор_подряда__5FB337D6">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Договор_подряда" Type="Self.Договор_подряда" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Договор_подряда">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Исполните__КодЗа__5812160E">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Исполнитель" Type="Self.Исполнитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Исполнитель">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Исполните__КодЗа__693CA210">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Исполнитель" Type="Self.Исполнитель" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Исполнитель">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодЗаказ__5CD6CB2B">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодЗаказ__6383C8BA">
+          <End Role="Заказчик" Type="Self.Заказчик" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Заказчик">
+              <PropertyRef Name="КодЗаказчик" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодЗаказчик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__59063A47">
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_расценок">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__59FA5E80">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Локальная_смета__68487DD7">
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_расценок">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="КодРаботы" />
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Локальная_смета_Объект">
+          <End Role="Объект" Type="Self.Объект" Multiplicity="1" />
+          <End Role="Локальная_смета" Type="Self.Локальная_смета" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Локальная_смета">
+              <PropertyRef Name="Код_коэффициента" />
+              <PropertyRef Name="Шифр" />
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__Код_коэф__5BE2A6F2">
+          <End Role="Поправочный_коэффициент_по_типу_ПИР" Type="Self.Поправочный_коэффициент_по_типу_ПИР" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поправочный_коэффициент_по_типу_ПИР">
+              <PropertyRef Name="Код_коэффициента" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__Код_коэф__628FA481">
+          <End Role="Поправочный_коэффициент_по_типу_ПИР" Type="Self.Поправочный_коэффициент_по_типу_ПИР" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поправочный_коэффициент_по_типу_ПИР">
+              <PropertyRef Name="Код_коэффициента" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="Код_коэффициента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодПроек__5DCAEF64">
+          <End Role="Проектная_организация" Type="Self.Проектная_организация" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проектная_организация">
+              <PropertyRef Name="КодПроектировщика" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодПроектировщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодПроек__6477ECF3">
+          <End Role="Проектная_организация" Type="Self.Проектная_организация" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проектная_организация">
+              <PropertyRef Name="КодПроектировщика" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодПроектировщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодСтавк__5AEE82B9">
+          <End Role="Ставка_14_го_разряда" Type="Self.Ставка_14_го_разряда" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ставка_14_го_разряда">
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Объект__КодСтавк__656C112C">
+          <End Role="Ставка_14_го_разряда" Type="Self.Ставка_14_го_разряда" Multiplicity="1" />
+          <End Role="Объект" Type="Self.Объект" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ставка_14_го_разряда">
+              <PropertyRef Name="КодСтавки" />
+            </Principal>
+            <Dependent Role="Объект">
+              <PropertyRef Name="КодСтавки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Справочни__КодВи__5EBF139D">
+          <End Role="Справочник_видов_работ" Type="Self.Справочник_видов_работ" Multiplicity="1" />
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_видов_работ">
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Справочник_расценок">
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Справочни__КодВи__66603565">
+          <End Role="Справочник_видов_работ" Type="Self.Справочник_видов_работ" Multiplicity="1" />
+          <End Role="Справочник_расценок" Type="Self.Справочник_расценок" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Справочник_видов_работ">
+              <PropertyRef Name="КодВидаРабот" />
+            </Principal>
+            <Dependent Role="Справочник_расценок">
+              <PropertyRef Name="КодВидаРабот" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmetaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Договор_подряда" EntityType="Self.Договор_подряда" />
+          <EntitySet Name="Заказчик" EntityType="Self.Заказчик" />
+          <EntitySet Name="Исполнитель" EntityType="Self.Исполнитель" />
+          <EntitySet Name="Локальная_смета" EntityType="Self.Локальная_смета" />
+          <EntitySet Name="Объект" EntityType="Self.Объект" />
+          <EntitySet Name="Поправочный_коэффициент_по_типу_ПИР" EntityType="Self.Поправочный_коэффициент_по_типу_ПИР" />
+          <EntitySet Name="Проектная_организация" EntityType="Self.Проектная_организация" />
+          <EntitySet Name="Справочник_видов_работ" EntityType="Self.Справочник_видов_работ" />
+          <EntitySet Name="Справочник_расценок" EntityType="Self.Справочник_расценок" />
+          <EntitySet Name="Ставка_14_го_разряда" EntityType="Self.Ставка_14_го_разряда" />
+          <AssociationSet Name="FK__Договор_подряда__571DF1D5" Association="Self.FK__Договор_подряда__571DF1D5">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Договор_подряда" EntitySet="Договор_подряда" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Договор_подряда__5FB337D6" Association="Self.FK__Договор_подряда__5FB337D6">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Договор_подряда" EntitySet="Договор_подряда" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Исполните__КодЗа__5812160E" Association="Self.FK__Исполните__КодЗа__5812160E">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Исполнитель" EntitySet="Исполнитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Исполните__КодЗа__693CA210" Association="Self.FK__Исполните__КодЗа__693CA210">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Исполнитель" EntitySet="Исполнитель" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодЗаказ__5CD6CB2B" Association="Self.FK__Объект__КодЗаказ__5CD6CB2B">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодЗаказ__6383C8BA" Association="Self.FK__Объект__КодЗаказ__6383C8BA">
+            <End Role="Заказчик" EntitySet="Заказчик" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__59063A47" Association="Self.FK__Локальная_смета__59063A47">
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__59FA5E80" Association="Self.FK__Локальная_смета__59FA5E80">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Локальная_смета__68487DD7" Association="Self.FK__Локальная_смета__68487DD7">
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Локальная_смета_Объект" Association="Self.FK_Локальная_смета_Объект">
+            <End Role="Объект" EntitySet="Объект" />
+            <End Role="Локальная_смета" EntitySet="Локальная_смета" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__Код_коэф__5BE2A6F2" Association="Self.FK__Объект__Код_коэф__5BE2A6F2">
+            <End Role="Поправочный_коэффициент_по_типу_ПИР" EntitySet="Поправочный_коэффициент_по_типу_ПИР" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__Код_коэф__628FA481" Association="Self.FK__Объект__Код_коэф__628FA481">
+            <End Role="Поправочный_коэффициент_по_типу_ПИР" EntitySet="Поправочный_коэффициент_по_типу_ПИР" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодПроек__5DCAEF64" Association="Self.FK__Объект__КодПроек__5DCAEF64">
+            <End Role="Проектная_организация" EntitySet="Проектная_организация" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодПроек__6477ECF3" Association="Self.FK__Объект__КодПроек__6477ECF3">
+            <End Role="Проектная_организация" EntitySet="Проектная_организация" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодСтавк__5AEE82B9" Association="Self.FK__Объект__КодСтавк__5AEE82B9">
+            <End Role="Ставка_14_го_разряда" EntitySet="Ставка_14_го_разряда" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Объект__КодСтавк__656C112C" Association="Self.FK__Объект__КодСтавк__656C112C">
+            <End Role="Ставка_14_го_разряда" EntitySet="Ставка_14_го_разряда" />
+            <End Role="Объект" EntitySet="Объект" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Справочни__КодВи__5EBF139D" Association="Self.FK__Справочни__КодВи__5EBF139D">
+            <End Role="Справочник_видов_работ" EntitySet="Справочник_видов_работ" />
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Справочни__КодВи__66603565" Association="Self.FK__Справочни__КодВи__66603565">
+            <End Role="Справочник_видов_работ" EntitySet="Справочник_видов_работ" />
+            <End Role="Справочник_расценок" EntitySet="Справочник_расценок" />
+          </AssociationSet>
+          <FunctionImport Name="sp_InsertProect">
+            <Parameter Name="YNP" Mode="In" Type="String" />
+            <Parameter Name="Adress" Mode="In" Type="String" />
+            <Parameter Name="RS" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Mail" Mode="In" Type="String" />
+            <Parameter Name="NameProect" Mode="In" Type="String" />
+            <Parameter Name="IdProect" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ФормированиеОбщейСтоимостиОбъекта" ReturnType="Collection(Double)">
+            <Parameter Name="ШифрОбъекта" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ФормированиеОбщейТрудоемкостиОбъекта" ReturnType="Collection(Double)">
+            <Parameter Name="ШифрОбъекта" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmetaModelStoreContainer" CdmEntityContainer="SmetaEntities">
+          <EntitySetMapping Name="Договор_подряда">
+            <EntityTypeMapping TypeName="SmetaModel.Договор_подряда">
+              <MappingFragment StoreEntitySet="Договор_подряда">
+                <ScalarProperty Name="ДатаДог" ColumnName="ДатаДог" />
+                <ScalarProperty Name="КодСтавки" ColumnName="КодСтавки" />
+                <ScalarProperty Name="Код_коэффициента" ColumnName="Код_коэффициента" />
+                <ScalarProperty Name="НомерДог" ColumnName="НомерДог" />
+                <ScalarProperty Name="Шифр" ColumnName="Шифр" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заказчик">
+            <EntityTypeMapping TypeName="SmetaModel.Заказчик">
+              <MappingFragment StoreEntitySet="Заказчик">
+                <ScalarProperty Name="ЮрАдрес" ColumnName="ЮрАдрес" />
+                <ScalarProperty Name="КодЗаказчик" ColumnName="КодЗаказчик" />
+                <ScalarProperty Name="УНП" ColumnName="УНП" />
+                <ScalarProperty Name="Расчетный_счет" ColumnName="Расчетный_счет" />
+                <ScalarProperty Name="Тел" ColumnName="Тел" />
+                <ScalarProperty Name="ЭлПочта" ColumnName="ЭлПочта" />
+                <ScalarProperty Name="НаименованиеЗаказчика" ColumnName="НаименованиеЗаказчика" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Исполнитель">
+            <EntityTypeMapping TypeName="SmetaModel.Исполнитель">
+              <MappingFragment StoreEntitySet="Исполнитель">
+                <ScalarProperty Name="КодИсполнителя" ColumnName="КодИсполнителя" />
+                <ScalarProperty Name="КодЗаказчик" ColumnName="КодЗаказчик" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Роль" ColumnName="Роль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Локальная_смета">
+            <EntityTypeMapping TypeName="SmetaModel.Локальная_смета">
+              <MappingFragment StoreEntitySet="Локальная_смета">
+                <ScalarProperty Name="КодВидаРабот" ColumnName="КодВидаРабот" />
+                <ScalarProperty Name="Шифр" ColumnName="Шифр" />
+                <ScalarProperty Name="КодРаботы" ColumnName="КодРаботы" />
+                <ScalarProperty Name="КодСтавки" ColumnName="КодСтавки" />
+                <ScalarProperty Name="Код_коэффициента" ColumnName="Код_коэффициента" />
+                <ScalarProperty Name="ФизОбъемРабот" ColumnName="ФизОбъемРабот" />
+                <ScalarProperty Name="СтоимостьРаботы" ColumnName="СтоимостьРаботы" />
+                <ScalarProperty Name="ТрудоемкостьРаботы" ColumnName="ТрудоемкостьРаботы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Объект">
+            <EntityTypeMapping TypeName="SmetaModel.Объект">
+              <MappingFragment StoreEntitySet="Объект">
+                <ScalarProperty Name="Код_коэффициента" ColumnName="Код_коэффициента" />
+                <ScalarProperty Name="Шифр" ColumnName="Шифр" />
+                <ScalarProperty Name="КодСтавки" ColumnName="КодСтавки" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="НаименованиеОбъекта" ColumnName="НаименованиеОбъекта" />
+                <ScalarProperty Name="КодПроектировщика" ColumnName="КодПроектировщика" />
+                <ScalarProperty Name="КодЗаказчик" ColumnName="КодЗаказчик" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поправочный_коэффициент_по_типу_ПИР">
+            <EntityTypeMapping TypeName="SmetaModel.Поправочный_коэффициент_по_типу_ПИР">
+              <MappingFragment StoreEntitySet="Поправочный_коэффициент_по_типу_ПИР">
+                <ScalarProperty Name="Наименование_коэффициента" ColumnName="Наименование_коэффициента" />
+                <ScalarProperty Name="Код_коэффициента" ColumnName="Код_коэффициента" />
+                <ScalarProperty Name="Значение_коэффициента" ColumnName="Значение_коэффициента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Проектная_организация">
+            <EntityTypeMapping TypeName="SmetaModel.Проектная_организация">
+              <MappingFragment StoreEntitySet="Проектная_организация">
+                <ScalarProperty Name="УНП" ColumnName="УНП" />
+                <ScalarProperty Name="КодПроектировщика" ColumnName="КодПроектировщика" />
+                <ScalarProperty Name="ЮрАдрес" ColumnName="ЮрАдрес" />
+                <ScalarProperty Name="Р_с" ColumnName="Р_с" />
+                <ScalarProperty Name="Тел" ColumnName="Тел" />
+                <ScalarProperty Name="ЭлПочта" ColumnName="ЭлПочта" />
+                <ScalarProperty Name="НаименованиеПроектиров" ColumnName="НаименованиеПроектиров" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Справочник_видов_работ">
+            <EntityTypeMapping TypeName="SmetaModel.Справочник_видов_работ">
+              <MappingFragment StoreEntitySet="Справочник_видов_работ">
+                <ScalarProperty Name="ЕдИзмОб" ColumnName="ЕдИзмОб" />
+                <ScalarProperty Name="КодВидаРабот" ColumnName="КодВидаРабот" />
+                <ScalarProperty Name="ЕдИзмТруд" ColumnName="ЕдИзмТруд" />
+                <ScalarProperty Name="ВидРабот" ColumnName="ВидРабот" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Справочник_расценок">
+            <EntityTypeMapping TypeName="SmetaModel.Справочник_расценок">
+              <MappingFragment StoreEntitySet="Справочник_расценок">
+                <ScalarProperty Name="КодРаботы" ColumnName="КодРаботы" />
+                <ScalarProperty Name="КодВидаРабот" ColumnName="КодВидаРабот" />
+                <ScalarProperty Name="ЗатратыТрудаЕдОбъема" ColumnName="ЗатратыТрудаЕдОбъема" />
+                <ScalarProperty Name="ИмяРаботы" ColumnName="ИмяРаботы" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ставка_14_го_разряда">
+            <EntityTypeMapping TypeName="SmetaModel.Ставка_14_го_разряда">
+              <MappingFragment StoreEntitySet="Ставка_14_го_разряда">
+                <ScalarProperty Name="Дата_ставки" ColumnName="Дата_ставки" />
+                <ScalarProperty Name="КодСтавки" ColumnName="КодСтавки" />
+                <ScalarProperty Name="Значение_ставки" ColumnName="Значение_ставки" />
+                <ScalarProperty Name="Обоснование" ColumnName="Обоснование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertProect" FunctionName="SmetaModel.Store.sp_InsertProect" />
+          <FunctionImportMapping FunctionImportName="ФормированиеОбщейСтоимостиОбъекта" FunctionName="SmetaModel.Store.ФормированиеОбщейСтоимостиОбъекта" />
+          <FunctionImportMapping FunctionImportName="ФормированиеОбщейТрудоемкостиОбъекта" FunctionName="SmetaModel.Store.ФормированиеОбщейТрудоемкостиОбъекта" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

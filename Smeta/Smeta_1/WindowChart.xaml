@@ -1,0 +1,61 @@
+﻿<Controls:MetroWindow x:Class="Smeta_1.Chart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Smeta_1"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+          
+        mc:Ignorable="d"
+        Title="График" Height="450" Width="800"
+        FontSize="16" ResizeMode="CanMinimize"
+        BorderThickness="0" 
+        GlowBrush="Black"
+        WindowTransitionsEnabled="False"
+        ShowMinButton="True"
+        ShowMaxRestoreButton="True"
+        ShowCloseButton="True">
+   
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition Width="0.25*"></ColumnDefinition>
+            <ColumnDefinition Width="0.40*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="0.8*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Шифр объекта" Margin="10" HorizontalContentAlignment="Right"></Label>
+        <!--<ComboBox  Name="cmbPIR" DisplayMemberPath="PerformerName" ItemsSource="{Binding}" SelectedValuePath="PerformerId" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  Margin="20,20,20,10"></ComboBox>-->
+        <!--<ComboBox Name="cbSelectShifr" Grid.Row="0" Grid.Column="1" Margin="10" SelectionChanged="cbSelectShifr_SelectionChanged" ></ComboBox>-->
+        <ScrollViewer Grid.Row="0" Grid.Column="1">
+            <ListBox x:Name="listBox2" SelectionChanged="listBox2_SelectionChanged" DisplayMemberPath="Шифр" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,10,0,0" />
+        </ScrollViewer>
+        <WrapPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" >
+            <Label Content="Наименование объекта" Margin="10" HorizontalContentAlignment="Right"></Label>
+            <Label  x:Name="labelName" Margin="10" Content=""  FontSize="14"></Label>
+
+        </WrapPanel>
+        
+        <!--<TextBox x:Name="txName" Grid.Row="0" Grid.Column="3" Margin="10"></TextBox>-->
+
+       
+        <DVC:Chart Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Canvas.Top="10" Canvas.Left="10" Name="mcChart"
+        Width="auto" Height="300" Background="LightSteelBlue">
+            <DVC:Chart.Series>
+                <DVC:PieSeries Title="Стоимость работы " IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                </DVC:PieSeries>
+                <DVC:PieSeries Title="Трудозатраты " IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                </DVC:PieSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
+        <!--<DVC:PieSeries  Name="pieChart" Title="Top Products" Margin="10,10,0,0" Height="262" BorderBrush="#00000000" DataContext="{Binding}" IsHitTestVisible="False" IsTabStop="True" ForceCursor="True">
+           --><!--DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />--><!--
+
+            
+        </DVC:PieSeries>-->
+    </Grid>
+</Controls:MetroWindow>
