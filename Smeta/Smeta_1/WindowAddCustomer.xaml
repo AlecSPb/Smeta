@@ -15,7 +15,8 @@
         WindowTransitionsEnabled="False"
         ShowMinButton="True"
         ShowMaxRestoreButton="True"
-        ShowCloseButton="True">
+        ShowCloseButton="True"
+        >
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
@@ -51,52 +52,157 @@
 
     </Window.Resources>
 
-    <Grid Name="grid">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label x:Name="ProjectCod" Grid.Row="0" Grid.Column="0" Content="* Код проект. орг-ции:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="ProjectName" Grid.Row="1" Grid.Column="0" Content="* Наименование:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="ProejctAdress" Grid.Row="2" Grid.Column="0" Content="* Адрес:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="ProjectYNP" Grid.Row="3" Grid.Column="0" Content="* УНП:" Margin="10,10,10,10"></Label>
-        <Label x:Name="ProjectRS" Grid.Row="4" Grid.Column="0" Content="Р/с:" Margin="10,10,10,10"></Label>
-        <Label x:Name="ProjectPhone" Grid.Row="5" Grid.Column="0" Content="Телефон:" Margin="10,10,10,10"></Label>
-        <Label x:Name="ProjectMail" Grid.Row="6" Grid.Column="0" Content="Эл. почта:" Margin="10,10,10,10"></Label>
-        <WrapPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
-            <!--<TextBox Width="250" Height="20" Text="{Binding Path=CustomerName, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="10,10,10,10"></TextBox>-->
-            <TextBox x:Name="tbProjectCod" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодПроектировщика, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>
-        </WrapPanel>
-        <WrapPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <TextBox x:Name="tbProjectName" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding НаименованиеПроектиров, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-            <TextBlock Name="commentName" Width="280" Height="15" Foreground="Red" ></TextBlock>
-        </WrapPanel>
-        <!--<TextBox Text="{Binding Path=ContractNumberWithCustomer, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,10,10,10"></TextBox>-->
-        <TextBox x:Name="tbProjectAdress" Text="{Binding Path=ЮрАдрес, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,10,10,10"></TextBox>
-        <!--<TextBox Text="{Binding Path=CustomerNumber, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,10,10,10"></TextBox>-->
-        <TextBox x:Name="tbProjectYNP" Text="{Binding Path=УНП, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,10,10,10"></TextBox>
-        <!--<TextBox  Text="{Binding Path=CustomerRequisites, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>-->
-        <TextBox  x:Name="tbRS" Text="{Binding Path=Р_с, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>
-        <!--<TextBox  Text="{Binding Path=CustomerAddress, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>-->
-        <TextBox   x:Name="tbPhone" Text="{Binding Path=Тел, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>
-        <!--<TextBox  Text="{Binding Path=CustomerRepresentative, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>-->
-        <TextBox  x:Name="tbMail" Text="{Binding Path=ЭлПочта, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"  Margin="10,10,10,10"></TextBox>
-
-        <!--<Button Content="OK" IsDefault="True" Click="OkButton_Click"   Margin="10,5,10,5" Grid.Row="7" Grid.Column="1" ></Button>-->
-        <Button Content="OK" IsDefault="True" Click="OkButton_Click"    Margin="10,5,10,5" Grid.Row="7" Grid.Column="1" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-        <!--<Button Content="Cancel" IsCancel="True" Click="CancelButton_Click" Margin="10,5,10,5" Grid.Row="7" Grid.Column="2"></Button>-->
-        <Button Content="Cancel" IsCancel="True" Click="CancelButton_Click" Margin="10,5,10,5" Grid.Row="7" Grid.Column="2" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-
+        <Label
+            x:Name="ProjectCod"
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="* Код проект. орг-ции:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProjectName"
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="* Наименование:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProejctAdress"
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="* Адрес:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProjectYNP"
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="* УНП:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProjectRS"
+            Grid.Row="4"
+            Grid.Column="0"
+            Content="* Р/с:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProjectPhone"
+            Grid.Row="5"
+            Grid.Column="0"
+            Content="* Телефон:"
+            Margin="5"
+            />
+        <Label
+            x:Name="ProjectMail"
+            Grid.Row="6"
+            Grid.Column="0"
+            Content="* Эл. почта:"
+            Margin="5"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="tbProjectCod"
+            Margin="5"
+            Text="{Binding Path=КодПроектировщика, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            />
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Orientation="Vertical"
+            >
+            <TextBox
+                x:Name="tbProjectName"
+                Margin="5"
+                Text="{Binding НаименованиеПроектиров, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+                />
+            <TextBlock
+                Name="commentName"
+                Foreground="Red"
+                />
+        </StackPanel>
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1" 
+            x:Name="tbProjectAdress"
+            Text="{Binding Path=ЮрАдрес, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Grid.ColumnSpan="2" 
+            x:Name="tbProjectYNP"
+            Text="{Binding Path=УНП, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            x:Name="tbRS"
+            Text="{Binding Path=Р_с, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            Grid.Row="5"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            x:Name="tbPhone"
+            Text="{Binding Path=Тел, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            Grid.Row="6"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            x:Name="tbMail"
+            Text="{Binding Path=ЭлПочта, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"
+            />
+        <StackPanel
+            Grid.Row="7"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            >
+            <Button
+                Content="OK"
+                IsDefault="True"
+                Click="OkButton_Click"
+                Margin="5"
+                MinWidth="100"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+            />
+            <Button
+                Content="Cancel"
+                IsCancel="True"
+                Click="CancelButton_Click"
+                Margin="5"
+                MinWidth="100"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                />
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
