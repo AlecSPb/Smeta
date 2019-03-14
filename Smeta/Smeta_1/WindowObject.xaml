@@ -15,267 +15,313 @@
         ShowCloseButton="True">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-
-            <RowDefinition Height="auto"></RowDefinition>
-
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.ColumnSpan="2">
-            <MenuItem Header="Смета" BorderThickness="1">
-
-
+        <Menu
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">
+            <MenuItem
+                Header="Смета"
+                BorderThickness="1"
+                >
                 <MenuItem Header="Сохранить смету">
                     <MenuItem.Icon>
-                        <Image Source="Images/save_object.png" Height="15" Width="15">
-                        </Image>
+                        <Image Source="Images/save_object.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-
-            <MenuItem Header="График" BorderThickness="1">
-              
-                <MenuItem Header="График ПИР" Click="MenuItem_Click_OpenChart">
+            <MenuItem
+                Header="График"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="График ПИР"
+                    Click="MenuItem_Click_OpenChart"
+                    >
                     <MenuItem.Icon>
-                        <Image Source="Images/Chart.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/Chart.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Справочник" BorderThickness="1">
-               
-                <MenuItem Header="Расценки" Click="MenuItem_Click_OpenDirectory">
+            <MenuItem
+                Header="Справочник"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="Расценки"
+                    Click="MenuItem_Click_OpenDirectory"
+                    >
                     <MenuItem.Icon>
-                        <Image Source="Images/folder_object.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/folder_object.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem x:Name="menu_addProject" Header="Проектировщик" BorderThickness="1">
-                <MenuItem Header="Добавить организацию" Click="MenuItem_Click_AddProjectCompany">
+            <MenuItem
+                x:Name="menu_addProject"
+                Header="Проектировщик"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="Добавить организацию"
+                    Click="MenuItem_Click_AddProjectCompany">
                     <MenuItem.Icon>
-                        <Image Source="Images/builder_object.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/builder_object.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem x:Name="menu_saveDogovor" Header="Документы" BorderThickness="1">
-                <MenuItem Header="Договор подряда" Click="MenuItem_Click_SaveDogovor">
+            <MenuItem
+                x:Name="menu_saveDogovor"
+                Header="Документы"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="Договор подряда"
+                    Click="MenuItem_Click_SaveDogovor"
+                    >
                     <MenuItem.Icon>
-                        <Image Source="Images/add_stavka.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/add_stavka.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <!--<MenuItem Header="Смета ПИР" Click="MenuItem_Click_SaveSmeta">-->
-                <MenuItem Header="Смета ПИР">
+                <MenuItem
+                    Header="Смета ПИР"
+                    >
                     <MenuItem.Icon>
-                        <Image Source="Images/add_price.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/add_price.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
-               
             </MenuItem>
-            <MenuItem Header="Справка" BorderThickness="1">
-                <MenuItem Header="О программе" Click="MenuItem_Click_OpenAbout">
+            <MenuItem
+                Header="Справка"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="О программе"
+                    Click="MenuItem_Click_OpenAbout"
+                    >
                     <MenuItem.Icon>
-                        <Image Source="Images/question.png" Height="15" Width="15"></Image>
+                        <Image Source="Images/question.png" Height="15" Width="15"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ToolBar Grid.Row="1" Grid.ColumnSpan="2">
-            <Button x:Name="chart" ToolTip="Создать график" Click="MenuItem_Click_OpenChart">
-                <Image Source="Images\Chart.png" Height="23" Width="24" />
+        <ToolBar
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            >
+            <Button
+                x:Name="chart"
+                ToolTip="Создать график"
+                Click="MenuItem_Click_OpenChart">
+                <Image Source="Images\Chart.png" Height="24" Width="24"/>
             </Button>
             <Separator />
-             <!--<Button x:Name="save" ToolTip="Сохранить смету" Click="MenuItem_Click_SaveSmeta">-->
-            <Button x:Name="save" ToolTip="Сохранить смету" >
-
-                <Image Source="Images\save_object.png" Height="30" Width="24" />
+            <Button
+                x:Name="save"
+                ToolTip="Сохранить смету"
+                >
+                <Image Source="Images\save_object.png" Height="24" Width="24"/>
             </Button>
             <Separator />
-            <Button x:Name="directory" ToolTip="Справочник расценок" Click="MenuItem_Click_OpenDirectory">
-                <Image Source="Images\folder_object.png" Height="25" Width="26" />
+            <Button
+                x:Name="directory"
+                ToolTip="Справочник расценок"
+                Click="MenuItem_Click_OpenDirectory">
+                <Image Source="Images\folder_object.png" Height="24" Width="24" />
             </Button>
             <Separator />
-            <Button x:Name="about" ToolTip="О программе" Click="MenuItem_Click_OpenAbout">
-                <Image Source="Images\question.png" Height="25" Width="26" />
+            <Button
+                x:Name="about"
+                ToolTip="О программе"
+                Click="MenuItem_Click_OpenAbout">
+                <Image Source="Images\question.png" Height="24" Width="24"/>
             </Button>
             <Separator />
-            <TextBox Foreground="LightGray" Width="100">Search...</TextBox>
+            <TextBox
+                Foreground="LightGray"
+                Width="150">Search...</TextBox>
         </ToolBar>
-
-        <WrapPanel Grid.Column="0" Grid.Row="2">
-            <GroupBox  Header="Шифр объекта">
-                <ScrollViewer Grid.Row="2" Grid.Column="0">
-                      <ListBox x:Name="listBox1" SelectionChanged="listBox1_SelectionChanged" DisplayMemberPath="Шифр" Height="500" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,10,0,0" />
-                </ScrollViewer>
-            </GroupBox>
-        </WrapPanel>
-        <ScrollViewer Grid.Column="1" Grid.Row="2">
-            <Grid Grid.Column="1" Grid.Row="2">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
+        <GroupBox
+            Grid.Row="2"
+            Grid.Column="0"
+            Header="Шифр объекта">
+            <ListBox
+                x:Name="listBox1"
+                SelectionChanged="listBox1_SelectionChanged"
+                DisplayMemberPath="Шифр"
+                Margin="5"/>
+        </GroupBox>
+        <ScrollViewer
+            Grid.Row="2"
+            Grid.Column="1"
+            >
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="210"></RowDefinition>
-                    <RowDefinition Height="210"></RowDefinition>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-
-                <Expander Grid.Row="0"  IsExpanded="True" Header="Заказчик" Grid.ColumnSpan="2">
-                    <ScrollViewer>
-                        <WrapPanel>
-                        <GroupBox  Grid.Row="0"  Header="Реквизиты">
+                <Expander
+                    Grid.Row="0"
+                    IsExpanded="True"
+                    Header="Заказчик"
+                    >
+                    <GroupBox
+                        Grid.Row="0"
+                        Header="Реквизиты"
+                        >
+                        <StackPanel>
+                            <WrapPanel>
+                                <Image Source="Images\customer_object.png" Height="40" Width="40"></Image>
+                                <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
+                                <!--<Label  x:Name="labelCustName" Content=""></Label>-->
+                                <TextBlock x:Name="txtCustName" Width="300" Height="30"></TextBlock>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
+                                <!--<Label  x:Name="labelCustAdress" Content=""></Label>-->
+                                <TextBlock x:Name="txtCustAdress" Height="30" Width="260"></TextBlock>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">УНП:</TextBlock>
+                                <!--<Label  x:Name="labelCustYNP" Content=""></Label>-->
+                                <TextBlock x:Name="txtCustYNP" Height="30" Width="270"></TextBlock>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Image Source="Images\phone_object.png" Height="30" Width="40"></Image>
+                                <TextBlock FontSize="14" FontWeight="Bold">Телефон:</TextBlock>
+                                <!--<Label  x:Name="labelCustPhone" Content=""></Label>-->
+                                <TextBlock x:Name="txtCustPhone" Height="30" Width="200"></TextBlock>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <Image Source="Images\mail_object_1.png" Height="30" Width="40"></Image>
+                                <TextBlock FontSize="14" FontWeight="Bold">Эл.почта:</TextBlock>
+                                <!--<Label  x:Name="labelCustMail" Content=""></Label>-->
+                                <TextBlock x:Name="txtCustMail" Height="30" Width="200"></TextBlock>
+                            </WrapPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </Expander>
+                <Expander
+                    Grid.Row="1"
+                    IsExpanded="True"
+                    Header="Проектная организация"
+                    >
+                    <WrapPanel>
+                        <GroupBox  Grid.Row="1"  Header="Реквизиты">
                             <StackPanel>
                                 <WrapPanel>
-                                    <Image Source="Images\customer_object.png" Height="40" Width="40"></Image>
+                                    <Image Source="Images\builder_object.png" Width="40" Height="40"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                     <!--<Label  x:Name="labelCustName" Content=""></Label>-->
-                                        <TextBlock x:Name="txtCustName" Width="300" Height="30"></TextBlock>
+                                    <!--<Label x:Name="labelProectName" Content=""></Label>-->
+                                    <TextBlock x:Name="txtProectName" Height="30" Width="300"></TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                     <!--<Label  x:Name="labelCustAdress" Content=""></Label>-->
-                                        <TextBlock x:Name="txtCustAdress" Height="30" Width="260"></TextBlock>
+                                    <!--<Label x:Name="labelProectAdress" Content=""></Label>-->
+                                    <TextBlock x:Name="txtProectAdress" Height="30" Width="340"></TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">УНП:</TextBlock>
-                                    <!--<Label  x:Name="labelCustYNP" Content=""></Label>-->
-                                        <TextBlock x:Name="txtCustYNP" Height="30" Width="270"></TextBlock>
-                                 </WrapPanel>
+                                    <!--<Label x:Name="labelProectYNP" Content=""></Label>-->
+                                    <TextBlock x:Name="txtProectYNP" Height="30" Width="200"></TextBlock>
+                                </WrapPanel>
                                 <WrapPanel>
-                                    <Image Source="Images\phone_object.png" Height="30" Width="40"></Image>
+                                    <Image Source="Images\phone_object.png" Width="40" Height="30"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Телефон:</TextBlock>
-                                    <!--<Label  x:Name="labelCustPhone" Content=""></Label>-->
-                                        <TextBlock x:Name="txtCustPhone" Height="30" Width="200"></TextBlock>
-                                 </WrapPanel>
+                                    <!--<Label x:Name="labelProectPhone" Content=""></Label>-->
+                                    <TextBlock x:Name="txtProectPhone" Height="30" Width="200"></TextBlock>
+                                </WrapPanel>
                                 <WrapPanel>
-                                    <Image Source="Images\mail_object_1.png" Height="30" Width="40"></Image>
+                                    <Image Source="Images\mail_object_1.png" Width="40" Height="30"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Эл.почта:</TextBlock>
-                                    <!--<Label  x:Name="labelCustMail" Content=""></Label>-->
-                                        <TextBlock x:Name="txtCustMail" Height="30" Width="200"></TextBlock>
+                                    <!--<Label x:Name="labelProectMail" Content=""></Label>-->
+                                    <TextBlock x:Name="txtProectMail" Height="30" Width="200"></TextBlock>
                                 </WrapPanel>
 
                             </StackPanel>
                         </GroupBox>
                     </WrapPanel>
-                        </ScrollViewer>
                 </Expander>
-                <Expander Grid.Row="1"  IsExpanded="True" Header="Проектная организация" Grid.ColumnSpan="2">
-                    <ScrollViewer>
-                        <WrapPanel>
-                            <GroupBox  Grid.Row="1"  Header="Реквизиты">
-                                <StackPanel>
-                                    <WrapPanel>
-                                        <Image Source="Images\builder_object.png" Width="40" Height="40"></Image>
-                                        <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                        <!--<Label x:Name="labelProectName" Content=""></Label>-->
-                                        <TextBlock x:Name="txtProectName" Height="30" Width="300"></TextBlock>
-                                     </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                        <!--<Label x:Name="labelProectAdress" Content=""></Label>-->
-                                        <TextBlock x:Name="txtProectAdress" Height="30" Width="340"></TextBlock>
-                                     </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">УНП:</TextBlock>
-                                        <!--<Label x:Name="labelProectYNP" Content=""></Label>-->
-                                        <TextBlock x:Name="txtProectYNP" Height="30" Width="200"></TextBlock>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <Image Source="Images\phone_object.png" Width="40" Height="30"></Image>
-                                        <TextBlock FontSize="14" FontWeight="Bold">Телефон:</TextBlock>
-                                        <!--<Label x:Name="labelProectPhone" Content=""></Label>-->
-                                        <TextBlock x:Name="txtProectPhone" Height="30" Width="200"></TextBlock>
-                                     </WrapPanel>
-                                    <WrapPanel>
-                                        <Image Source="Images\mail_object_1.png" Width="40" Height="30"></Image>
-                                        <TextBlock FontSize="14" FontWeight="Bold">Эл.почта:</TextBlock>
-                                        <!--<Label x:Name="labelProectMail" Content=""></Label>-->
-                                        <TextBlock x:Name="txtProectMail" Height="30" Width="200"></TextBlock>
-                                    </WrapPanel>
+                <Expander
+                    Grid.Row="2"
+                    IsExpanded="True"
+                    Header="Объект">
+                    <WrapPanel>
+                        <GroupBox  Header="Данные">
+                            <StackPanel>
+                                <WrapPanel>
+                                    <Image Source="Images\object.png" Width="40" Height="40"></Image>
+                                    <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
+                                    <!--<Label x:Name="labelName" Content="" FontSize="14"></Label>-->
+                                    <TextBlock x:Name="txtName" Height="30" Width="300"></TextBlock>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
+                                    <!--<Label x:Name="labelAd" Content="" FontSize="14" ></Label>-->
+                                    <TextBlock x:Name="txtAd" Height="30" Width="320"></TextBlock>
+                                </WrapPanel>
+                            </StackPanel>
 
-                                </StackPanel>
-                            </GroupBox>
-                        </WrapPanel>
-                    </ScrollViewer>
+                        </GroupBox>
+                    </WrapPanel>
                 </Expander>
+                <Expander
+                    Grid.Row="3"
+                    IsExpanded="True"
+                    Header="Договор">
+                    <WrapPanel>
+                        <GroupBox  Header="Данные">
+                            <StackPanel>
+                                <WrapPanel>
+                                    <Image Source="Images\dogovor_object.png" Width="40" Height="40"></Image>
+                                    <TextBlock FontSize="14" FontWeight="Bold">№</TextBlock>
+                                    <!--<Label x:Name="labelData" Content=""></Label>-->
+                                    <TextBlock x:Name="txtData" Height="30" Width="300"></TextBlock>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Дата:</TextBlock>
+                                    <!--<Label x:Name="labelNomer" Content=""></Label>-->
+                                    <TextBlock x:Name="txtNomer" Height="30" Width="200"></TextBlock>
+                                </WrapPanel>
 
-                <Expander Grid.Row="2" IsExpanded="True" Header="Объект" Grid.ColumnSpan="2">
-                    <ScrollViewer>
-                        <WrapPanel>
-                            <GroupBox  Header="Данные">
-                                <StackPanel>
-                                    <WrapPanel>
-                                        <Image Source="Images\object.png" Width="40" Height="40"></Image>
-                                        <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                        <!--<Label x:Name="labelName" Content="" FontSize="14"></Label>-->
-                                        <TextBlock x:Name="txtName" Height="30" Width="300"></TextBlock>
-                                    </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                        <!--<Label x:Name="labelAd" Content="" FontSize="14" ></Label>-->
-                                        <TextBlock x:Name="txtAd" Height="30" Width="320"></TextBlock>
-                                     </WrapPanel>
-                                </StackPanel>
-
-                            </GroupBox>
-
-                        </WrapPanel>
-                    </ScrollViewer>
+                            </StackPanel>
+                        </GroupBox>
+                    </WrapPanel>
                 </Expander>
-                <Expander Grid.Row="3" IsExpanded="True" Header="Договор" Grid.ColumnSpan="2">
-                    <ScrollViewer>
-                        <WrapPanel>
-                            <GroupBox  Header="Данные">
-                                <StackPanel>
-                                    <WrapPanel>
-                                        <Image Source="Images\dogovor_object.png" Width="40" Height="40"></Image>
-                                        <TextBlock FontSize="14" FontWeight="Bold">№</TextBlock>
-                                        <!--<Label x:Name="labelData" Content=""></Label>-->
-                                        <TextBlock x:Name="txtData" Height="30" Width="300"></TextBlock>
-                                     </WrapPanel>
-                                    <WrapPanel>
-                                        <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Дата:</TextBlock>
-                                        <!--<Label x:Name="labelNomer" Content=""></Label>-->
-                                        <TextBlock x:Name="txtNomer" Height="30" Width="200"></TextBlock>
-                                        </WrapPanel>
-
-                                </StackPanel>
-                            </GroupBox>
-                        </WrapPanel>
-                    </ScrollViewer>
-                </Expander>
-
-
-                <GroupBox Grid.RowSpan="4" Grid.Column="2" Header="Смета">
-                      <StackPanel >
-                           <!--<WrapPanel>
-                                <Label Content="Наименование объекта:" Margin="10" HorizontalAlignment="Center"></Label>
-                            </WrapPanel>
-                            <WrapPanel>
-                                <ComboBox x:Name="cmbObjectName1" Width="200" Height="20" SelectionChanged="CmbObjectName_SelectionChanged" Margin="10" HorizontalAlignment="Center"></ComboBox>
-                            </WrapPanel>-->
-                            <WrapPanel>
-                                <!--<ScrollViewer Grid.Row="3">-->
-
-                                    <DataGrid x:Name="dgObject" IsReadOnly="True"  Height="200"  Margin="10,20,10,0"
-                                    ItemsSource="{Binding People}"
-                                    AutoGenerateColumns="True"
-                                    Style="{StaticResource AzureDataGrid}"
-                                    FontSize="12"
-                                   SelectionChanged="dgObject_SelectionChanged">
-
-                                        <DataGrid.Columns>
-                                            <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
+            </Grid>
+        </ScrollViewer>
+        <GroupBox
+            Grid.Row="2"
+            Grid.Column="2"
+            Header="Смета"
+            >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <DataGrid
+                    Grid.Row="0"
+                    x:Name="dgObject"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding People}"
+                    AutoGenerateColumns="True"
+                    Style="{StaticResource AzureDataGrid}"
+                    FontSize="12"
+                    SelectionChanged="dgObject_SelectionChanged">
+                    <DataGrid.Columns>
+                        <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
                                         <DataGridTextColumn  Header="Наименование работы" Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Объем" Width="90" Binding="{Binding Objem}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
@@ -286,31 +332,52 @@
                                         <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
                                         <DataGridTextColumn  Width="100" Binding="{Binding Sum}"></DataGridTextColumn>-->
 
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                <!--</ScrollViewer>-->
-                         </WrapPanel>
-                        <WrapPanel HorizontalAlignment="Right">
-                            <Label Content="Всего трудозатраты:" HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
-                            <TextBox x:Name="txSumTrud" Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" Controls:TextBoxHelper.ClearTextButton="True" ></TextBox>
-                             <Label Content="чел/час" HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
-                        </WrapPanel>
-                        <WrapPanel HorizontalAlignment="Right">
-                            <Label  Content="Всего стоимость:" HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
-                            <TextBox x:Name="txStoimost" Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" Controls:TextBoxHelper.ClearTextButton="True"></TextBox>
-                            <Label Content="руб.коп." HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
-                        </WrapPanel>
-                    </StackPanel>
-                </GroupBox>
-
-
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid
+                    Grid.Row="1"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Всего трудозатраты:"
+                    />
+                    <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    x:Name="txSumTrud"/>
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Content="чел/час"/>
+                    <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Всего стоимость:"/>
+                    <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    x:Name="txStoimost"/>
+                    <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Content="руб.коп."/>
+                </Grid>
             </Grid>
-        </ScrollViewer>
+        </GroupBox>
         <StatusBar Grid.Row="6" FontSize="12" Grid.ColumnSpan="2">
             <Label Content="Пользователь:" Foreground="White"></Label>
             <Label x:Name="user" Foreground="White"></Label>
         </StatusBar>
-
     </Grid>
 
 </Controls:MetroWindow>
