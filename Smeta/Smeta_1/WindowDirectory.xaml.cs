@@ -38,6 +38,23 @@ namespace Smeta_1
 			dgDirectory.Items.Clear();
 			dgKof.Items.Clear();
 			dgStavka.Items.Clear();
+			if (MainWindow.sRole == "admin")
+			{
+				add_index.IsEnabled = true;
+				add_price.IsEnabled = true;
+				add_stavka.IsEnabled = true;
+				menuEdit.IsEnabled = true;
+				
+
+			}
+			if (MainWindow.sRole == "user")
+			{
+				add_index.IsEnabled = false;
+				add_price.IsEnabled = false;
+				add_stavka.IsEnabled = false;
+				menuEdit.IsEnabled = false;
+
+			}
 
 			foreach (Справочник_расценок item in GetAllPrices())
 			{

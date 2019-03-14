@@ -29,6 +29,13 @@ namespace Smeta_1
 	/// </summary>
 	public partial class CreateSmeta : MetroWindow
 	{
+		static int categAddCust;
+		static int categAddProject;
+		static int categAddKof;
+		static int categAddStavka;
+		static int categAddWorkTypeCode;
+		static int categAddWorkCode;
+		//static int cat;
 		SmetaEntities context = new SmetaEntities();
 		public CreateSmeta()
 		{
@@ -37,6 +44,9 @@ namespace Smeta_1
 			cmbObjectProject.Items.Clear();
 			cmbProject.Items.Clear();
 			cmbStavka.Items.Clear();
+			cmbWorkName.Items.Clear();
+			//dgDirectory_1.Items.Clear();
+			cmbWorkType.Items.Clear();
 
 			foreach (Заказчик stw in GetAllCustomer())
 			{
@@ -57,6 +67,15 @@ namespace Smeta_1
 			{
 				cmbStavka.Items.Add(stw.Обоснование);
 
+			}
+			foreach (Справочник_видов_работ stw in GetAllTypeWork())
+			{
+				cmbWorkType.Items.Add(stw.ВидРабот);
+			}
+			foreach (Справочник_расценок stw in GetAllPrices())
+			{
+				cmbWorkName.Items.Add(stw.ИмяРаботы);
+				//dgDirectory_1.Items.Add(stw);
 			}
 		}
 		public IEnumerable<Заказчик> GetAllCustomer()
@@ -118,6 +137,66 @@ namespace Smeta_1
 				};
 			});
 		}
+		public IEnumerable<Объект> GetAllObject()
+		{
+			return context.Объект.ToArray().Select((Объект ob) =>
+			{
+				return new Объект
+				{
+					Шифр = ob.Шифр,
+					Адрес = ob.Адрес,
+					НаименованиеОбъекта = ob.НаименованиеОбъекта,
+					КодПроектировщика = ob.КодПроектировщика,
+					Код_коэффициента = ob.Код_коэффициента,
+					КодЗаказчик = ob.КодЗаказчик,
+					КодСтавки = ob.КодСтавки
+				};
+			});
+
+		}
+		public IEnumerable<Справочник_расценок> GetAllPrices()
+		{
+			return context.Справочник_расценок.ToArray().Select((Справочник_расценок catw) =>
+			{
+				return new Справочник_расценок
+				{
+					КодРаботы = catw.КодРаботы,
+					ИмяРаботы = catw.ИмяРаботы,
+					ЗатратыТрудаЕдОбъема = catw.ЗатратыТрудаЕдОбъема,
+					КодВидаРабот = catw.КодВидаРабот
+				};
+			});
+		}
+		public IEnumerable<Справочник_видов_работ> GetAllTypeWork()
+		{
+			return context.Справочник_видов_работ.ToArray().Select((Справочник_видов_работ typew) =>
+			{
+				return new Справочник_видов_работ
+				{
+					КодВидаРабот = typew.КодВидаРабот,
+					ВидРабот = typew.ВидРабот,
+					ЕдИзмОб = typew.ЕдИзмОб,
+					ЕдИзмТруд = typew.ЕдИзмТруд
+				};
+			});
+		}
+		public IEnumerable<Локальная_смета> GetAllSmeta()
+		{
+			return context.Локальная_смета.ToArray().Select((Локальная_смета locsmeta) =>
+			{
+				return new Локальная_смета
+				{
+					КодВидаРабот = locsmeta.КодВидаРабот,
+					КодРаботы = locsmeta.КодРаботы,
+					Шифр = locsmeta.Шифр,
+					Код_коэффициента = locsmeta.Код_коэффициента,
+					КодСтавки = locsmeta.КодСтавки,
+					ФизОбъемРабот = locsmeta.ФизОбъемРабот,
+					ТрудоемкостьРаботы = locsmeta.ТрудоемкостьРаботы,
+					СтоимостьРаботы = locsmeta.СтоимостьРаботы
+				};
+			});
+		}
 		private void cbSelectCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Заказчик cust = cmbCustomers.SelectedItem as Заказчик;
@@ -128,6 +207,7 @@ namespace Smeta_1
 				.FirstOrDefault();
 
 			context.Заказчик.Load();
+			categAddCust = cust.КодЗаказчик;
 		}
 		private void cbSelectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
@@ -139,6 +219,7 @@ namespace Smeta_1
 				.FirstOrDefault();
 
 			context.Проектная_организация.Load();
+			categAddProject = pro.КодПроектировщика;
 		}
 
 		private void CmbObjectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -151,6 +232,7 @@ namespace Smeta_1
 				.FirstOrDefault();
 
 			context.Поправочный_коэффициент_по_типу_ПИР.Load();
+			categAddKof = kof.Код_коэффициента;
 		}
 
 		private void CmbStavka_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -163,6 +245,38 @@ namespace Smeta_1
 				.FirstOrDefault();
 
 			context.Ставка_14_го_разряда.Load();
+			categAddStavka = stv.КодСтавки;
+		}
+		private void cbSelectWorkType_SelectionChanged (object sender, SelectionChangedEventArgs e)
+		{
+			Справочник_видов_работ dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
+			dir = context.Справочник_видов_работ
+				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+			context.Справочник_видов_работ.Load();
+			categAddWorkTypeCode = dir.КодВидаРабот;
+			//dgDirectory_1.Items.Clear();
+			//cat = dir.КодВидаРабот;
+			//foreach (Справочник_расценок item in GetAllPrices())
+			//{
+			//	if (item.КодВидаРабот == cat)
+			//	{
+			//		dgDirectory_1.Items.Add(item);
+			//	}
+
+			//}
+		}
+		private void CmbWorkName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			Справочник_расценок pr = cmbWorkName.SelectedItem as Справочник_расценок;
+			pr = context.Справочник_расценок
+				.Where(v => v.ИмяРаботы == cmbWorkName.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+			context.Справочник_расценок.Load();
+			categAddWorkCode = pr.КодРаботы;
+
 		}
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -170,7 +284,85 @@ namespace Smeta_1
 		}
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			
+			int nomer;
+			DateTime date;
+			int nomer1;
+			//if (cbSelectCustomer.Text.Length == 0 || cbSelectProject.Text.Length == 0 || CmbObjectProject.Text.Length ==0 || CmbStavka.Text.Length == 0)
+			//{
+			//	MessageBox.Show("Выберите категорию!");
+				
+			//}
+			if (txObjectName.Text.Length < 2 || txObjectName.Text.Length > 60)
+			{
+				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
+			}
+			else if (!Int32.TryParse(txShifr.Text, out nomer))
+			{
+				MessageBox.Show("В поле Шифр введите цифры");
+			}
+			//else if (txShifr != null)
+			//{
+			//	MessageBox.Show("Поле Шифр не может быть пустым");
+			//}
+			else if (txAdress.Text.Length < 2 || txAdress.Text.Length > 60)
+			{
+				MessageBox.Show("Поле адрес содержит от 2 до 60 символов A-Z");
+			}
+			else if (!DateTime.TryParse(txDateDog.Text, out date))
+			{
+				MessageBox.Show("В поле дата договора введен неверный формат даты");
+			}
+			else if (!Int32.TryParse(txNomerDog.Text, out nomer1))
+			{
+				MessageBox.Show("В поле номер договора введите цифры");
+			}
+			else
+			{
+				Объект addObject = new Объект()
+				{
+					КодЗаказчик = categAddCust,
+					КодПроектировщика = categAddProject,
+					Код_коэффициента = categAddKof,
+					КодСтавки = categAddStavka,
+					Шифр = Convert.ToInt32(txShifr.Text),
+					НаименованиеОбъекта = txObjectName.Text,
+					Адрес = txAdress.Text
+				};
+
+				
+				Договор_подряда addDogovor = new Договор_подряда()
+				{
+					НомерДог = Convert.ToInt32(txNomerDog.Text),
+					ДатаДог = Convert.ToDateTime(txDateDog.Text),
+					Код_коэффициента = categAddKof,
+					КодСтавки = categAddStavka,
+					Шифр = Convert.ToInt32(txShifr.Text)
+
+				};
+
+				Локальная_смета addSmeta = new Локальная_смета()
+				{
+					Шифр = Convert.ToInt32(txShifr.Text),
+					КодВидаРабот = categAddWorkTypeCode,
+					КодРаботы = categAddWorkCode,
+					КодСтавки = categAddStavka,
+					Код_коэффициента = categAddKof,
+					ФизОбъемРабот = Convert.ToDouble(txObjem.Text),
+					//СтоимостьРаботы = Convert.ToDouble(txSum.Text),
+					//ТрудоемкостьРаботы = Convert.ToDouble(txTrud.Text)
+
+				};
+				context.Объект.Add(addObject);
+				context.Договор_подряда.Add(addDogovor);
+				context.Локальная_смета.Add(addSmeta);
+				context.SaveChanges();
+				MessageBox.Show("Данные добавлены. Смета создана");
+				Close();
+			}
+
 		}
+
+		
 	}
 }
+//сделать проверку на существование объекта в базе!!!

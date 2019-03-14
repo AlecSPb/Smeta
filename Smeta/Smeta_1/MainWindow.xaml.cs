@@ -26,98 +26,116 @@ namespace Smeta_1
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
-		//static string role = WindowLogin.sRole; // Код заявки
+
+		//string sLogin;
+		//string sPassword;
+		public static string sRole; // Роль пользователя, вошедшего в систему
+		public static int idSotrudn; // ID пользователя, вошедшего в систему
+
 		SmetaEntities context = new SmetaEntities();
-		
-		
+
 		public MainWindow()
 		{
-			var windowLogin = new WindowLogin();
-			windowLogin.ClickAdmin += WindowLogin_ClickAdmin;
-			windowLogin.ClickUser += WindowLogin_ClickUser;
-
-			
-			windowLogin.Show();
 			InitializeComponent();
 		}
-		private void WindowLogin_ClickAdmin(object sender, EventArgs e)
+
+		public event EventHandler ClickAdmin;
+		public event EventHandler ClickUser;
+		private void btnLogin_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Вы вошли в систему с ролью Администратор");
-			btnObject.IsEnabled = true;
-			btnChart.IsEnabled = true;
-			btnDirectory.IsEnabled = true;
-			btnAbout.IsEnabled = true;
-			btnSmeta.IsEnabled = false;
+			//using (SmetaEntities Исполнитель = new SmetaEntities())
+			//{
+			//	string login = textBoxLogin.Text;
+			//	string password = passwordBox1.Text;
+
+			//	var query = context.Исполнитель
+			//			   .Where(p => p.Логин == login && p.Пароль == password)
+			//			   .Select(c => c.Роль);
+
+			//	foreach (var c in query)   // Только сейчас запрос начинает выполняться!
+			//	{
+			//		string position1 = String.Empty;
+			//		position1 = Convert.ToString(c);
+
+			//		if (position1 == "admin")
+
+			//		{
+			//			//this.Hide();
+			//			About ab = new About();
+			//			//ab.ShowDialog();
+			//			//this.Close();
+			//			ab.Show();
+			//			Close();
 
 
-			//Directory mw = new Directory();
-			//mw.Show();
-			//Close();
+			//		}
+			//		else
+			//		{
+			//			if (position1 == "user")
 
-		}
-		private void WindowLogin_ClickUser(object sender, EventArgs e)
-		{
-			MessageBox.Show("Вы вошли в систему с ролью Пользователь");
-			btnObject.IsEnabled = true;
-			btnChart.IsEnabled = true;
-			btnDirectory.IsEnabled = true;
-			btnAbout.IsEnabled = true;
-			btnSmeta.IsEnabled = true;
+			//			{
+			//				//this.Hide();
+			//				WindowStart mw = new WindowStart();
+			//				//mw.ShowDialog();
+			//				//this.Close();
+			//				mw.Show();
+			//				Close();
+			//			}
+			//		}
+			//	}
+			DateTime localDate = DateTime.Now;
 
-			//About ab = new About();
-			//ab.Show();
-			//Close();
+			Исполнитель sotrudn = context.Исполнитель
+				   .Where(v => v.Логин == textBoxLogin.Text && v.Пароль == passwordBox1.Text)
+				   .AsEnumerable()
+				   .FirstOrDefault();
 
-		}
-		//private void Create_Click(object sender, RoutedEventArgs e)
-		//{
-
-		//}
-
-		private void btnOpenObject_Click(object sender, RoutedEventArgs e)
-		{
-			Object wa = new Object();
-			if (wa.ShowDialog() == true)
+			if (sotrudn is null)
 			{
+				lbLogin.Content = "неверное имя или пароль";
+			}
+			else
+			{
+				sRole = sotrudn.Роль;
+				idSotrudn = sotrudn.КодИсполнителя;
+				lbLogin.Content = sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность;
+
+				if (sRole == "admin")
+				{
+					
+					this.Hide();
+					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
+					WindowStart mw = new WindowStart();
+					//mw.Owner = this;
+					mw.ShowDialog();
+					//mw.Show();
+					//Close();
+					this.Close();
+					//ClickAdmin?.Invoke(this, EventArgs.Empty);
+					
+				}
+				if (sRole == "user")
+				{
+					
+					this.Hide();
+					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
+					WindowStart mw = new WindowStart();
+					//ab.Owner = this;
+					mw.ShowDialog();
+					this.Close();
+					//ab.Show();
+					//Close();
+					//ClickUser?.Invoke(this, EventArgs.Empty);
+				}
 
 			}
+
 		}
-		private void btnOpenChart_Click(object sender, RoutedEventArgs e)
+
+		private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
-
-			Chart wa = new Chart();
-			if (wa.ShowDialog() == true)
-			{
-
-			}
+			//Environment.Exit(0);
+			Close();
 		}
-		private void btnOpenDirectory_Click(object sender, RoutedEventArgs e)
-		{
-
-			Directory wa = new Directory();
-			if (wa.ShowDialog() == true)
-			{
-
-			}
-		}
-		private void btnOpenAbout_Click(object sender, RoutedEventArgs e)
-		{
-
-			About wa = new About();
-			if (wa.ShowDialog() == true)
-			{
-
-			}
-		}
-		private void btnCreateSmeta_Click(object sender, RoutedEventArgs e)
-		{
-
-			CreateSmeta wa = new CreateSmeta();
-			if (wa.ShowDialog() == true)
-			{
-
-			}
-		}
-		
 	}
 }

@@ -38,21 +38,26 @@ namespace Smeta_1
 		{
 			int nomer;
 			double stavka;
-			if (!Int32.TryParse(tbStavkaCode.Text, out nomer))
+			DateTime dt;
+			if (!Int32.TryParse(tbStavkaCode.Text, out nomer) & nomer <=0)
 			{
-				tbStavkaCode.Text = "Некорретный ввод!";
+				MessageBox.Show("В поле Код ставки введите положительное число");
 			}
 			else if (tbStavkaCode != null)
 			{
-				tbStavkaCode.Text = "Поле не может быть пустым";
+				MessageBox.Show("Поле Код Ставки не может быть пустым");
 			}
-			else if (!double.TryParse(tbStavkaSize.Text, out stavka))
+			else if (!double.TryParse(tbStavkaSize.Text, out stavka) & stavka <=0)
 			{
-				tbStavkaSize.Text = "Некорретный ввод!";
+				MessageBox.Show("В поле Значение ставки введите положительное число");
 			}
 			else if (tbStavkaName.Text.Length < 2 || tbStavkaName.Text.Length > 60)
 			{
-				tbStavkaName.Text = "Слишком короткий или длинный!";
+				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
+			}
+			else if (!DateTime.TryParse(tbStavkaDate.Text, out dt))
+			{
+				MessageBox.Show("В поле дата ставки введен неверный формат даты");
 			}
 			else
 			{
@@ -68,6 +73,7 @@ namespace Smeta_1
 
 				context.Ставка_14_го_разряда.Add(addStavka);
 				context.SaveChanges();
+				MessageBox.Show("Ставка добавлена");
 				Close();
 			}
 

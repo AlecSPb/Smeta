@@ -21,6 +21,8 @@ using Microsoft.Win32;
 using System.Xml.Linq;
 using Ninject;
 using Smeta_DB;
+using Word = Microsoft.Office.Interop.Word;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Smeta_1
 {
@@ -39,7 +41,22 @@ namespace Smeta_1
 			InitializeComponent();
 			ReDrow();
 			dgObject.Items.Clear();
-
+			if (MainWindow.sRole == "admin")
+			{
+				menu_addProject.IsEnabled = true;
+				menu_saveDogovor.IsEnabled = true;
+			}
+			if (MainWindow.sRole == "user")
+			{
+				menu_addProject.IsEnabled = false;
+				menu_saveDogovor.IsEnabled = false;
+				
+			}
+			//cmbObjectName1.Items.Clear();
+			//foreach (Объект obt in GetAllObject())
+			//{
+			//	cmbObjectName1.Items.Add(obt.НаименованиеОбъекта);
+			//}
 			//foreach (Локальная_смета item in GetAllSmeta())
 			//{
 			//	dgObject.Items.Add(item);
@@ -197,51 +214,156 @@ namespace Smeta_1
 			
 			if (obj != null)
 			{
-				labelAd.Content = obj.Адрес;
-				labelName.Content = obj.НаименованиеОбъекта;
+
+				//labelAd.Content = obj.Адрес;
+				txtAd.Text = obj.Адрес;
+				txtName.Text = obj.НаименованиеОбъекта;
+				//labelName.Content = obj.НаименованиеОбъекта;
 				code = obj.Шифр;
+				foreach (Локальная_смета sm in GetAllSmeta())
+				{
+					if (sm.Шифр == code)
+					{
+						var query = context.Локальная_смета.Select(l => new
+						{
+							Код = l.КодРаботы,
+							Наименование = l.Справочник_расценок.ИмяРаботы,
+							Объем = l.ФизОбъемРабот,
+							Трудоемкость = l.ТрудоемкостьРаботы,
+							Стоимость = l.СтоимостьРаботы
 
-                dgObject.ItemsSource = context.Локальная_смета.
-                    Where(sm => sm.Шифр == code).
-                    Select(l => new
-                    {
-                        Код = l.КодРаботы,
-                        Наименование = l.Справочник_расценок.ИмяРаботы,
-                        Объем = l.ФизОбъемРабот,
-                        Трудоемкость = l.ТрудоемкостьРаботы,
-                        Стоимость = l.СтоимостьРаботы
-                    }).ToList();
+						});
+						foreach (var l in query)
+						{
+							dgObject.ItemsSource = query.ToList();
 
-                txSumTrud.Text = context.Локальная_смета
-                    .Where(c => c.Шифр == obj.Шифр)
-                    .Select(c => c.ТрудоемкостьРаботы)
-                    .Sum().ToString();
+						}
+						//dgObject.ItemsSource = GetAllSmeta().Where(sm => sm.Шифр == code).Select(l => new
+						//{
+						//	Код = l.КодРаботы,
+						//	Наименование = l.Справочник_расценок.ИмяРаботы,
+						//	Объем = l.ФизОбъемРабот,
+						//	Трудоемкость = l.ТрудоемкостьРаботы,
+						//	Стоимость = l.СтоимостьРаботы
 
-                txStoimost.Text = context.Локальная_смета
-                    .Where(c => c.Шифр == obj.Шифр)
-                    .Select(c => c.СтоимостьРаботы)
-                    .Sum().ToString();
+						//}).ToList();
+						txSumTrud.Text = context.Локальная_смета
+								.Where(c => c.Шифр == obj.Шифр)
+								.Select(c => c.ТрудоемкостьРаботы)
+								.Sum().ToString();
 
-                Договор_подряда dg = context.Договор_подряда.Where(d => d.Шифр == obj.Шифр).FirstOrDefault();
-			    labelData.Content = dg.ДатаДог;
-			    labelNomer.Content = dg.НомерДог;
+						txStoimost.Text = context.Локальная_смета
+								  .Where(c => c.Шифр == obj.Шифр)
+								  .Select(c => c.СтоимостьРаботы)
+								  .Sum().ToString();
+					}
+				}
 
-			    Заказчик cu = context.Заказчик.Where(c => c.КодЗаказчик == obj.КодЗаказчик).FirstOrDefault();
-			    labelCustName.Content = cu.НаименованиеЗаказчика;
-			    labelCustAdress.Content = cu.ЮрАдрес;
-			    labelCustYNP.Content = cu.УНП;
-			    labelCustPhone.Content = cu.Тел;
-			    labelCustMail.Content = cu.ЭлПочта;
+				//var Labor1 = context.Локальная_смета
+				//			.Where(c => c.Шифр == obj.Шифр)
+				//			.Select(c => c.ТрудоемкостьРаботы)
+				//			.Sum();
+				//txSumTrud.Text = Labor1.ToString();
+				//var Cost1 = context.Локальная_смета
+				//		   .Where(c => c.Шифр == obj.Шифр)
+				//		   .Select(c => c.СтоимостьРаботы)
+				//		   .Sum();
+				//txStoimost.Text = Cost1.ToString();
 
-			    Проектная_организация pr = context.Проектная_организация.Where(p => p.КодПроектировщика == obj.КодПроектировщика).FirstOrDefault();
-			    labelProectName.Content = pr.НаименованиеПроектиров;
-			    labelProectAdress.Content = pr.ЮрАдрес;
-			    labelProectYNP.Content = pr.УНП;
-			    labelProectPhone.Content = pr.Тел;
-			    labelProectMail.Content = pr.ЭлПочта;
+			
+		
+
+
+				Договор_подряда dg = context.Договор_подряда
+				   .Where(d => d.Шифр == obj.Шифр)
+				   .AsEnumerable()
+				   .FirstOrDefault();
+				//labelData.Content = dg.ДатаДог;
+				//labelNomer.Content = dg.НомерДог;
+				txtData.Text = Convert.ToString(dg.ДатаДог);
+				txtNomer.Text = Convert.ToString(dg.НомерДог);
+				Заказчик cu = context.Заказчик
+			   .Where(c => c.КодЗаказчик == obj.КодЗаказчик)
+			   .AsEnumerable()
+			   .FirstOrDefault();
+				//labelCustName.Content = cu.НаименованиеЗаказчика;
+			    txtCustName.Text = cu.НаименованиеЗаказчика;
+				txtCustAdress.Text = cu.ЮрАдрес;
+				txtCustYNP.Text = cu.УНП;
+				txtCustPhone.Text = cu.Тел;
+				txtCustMail.Text = cu.ЭлПочта;
+				//labelCustAdress.Content = cu.ЮрАдрес;
+				//labelCustYNP.Content = cu.УНП;
+				//labelCustPhone.Content = cu.Тел;
+				//labelCustMail.Content = cu.ЭлПочта;
+				Проектная_организация pr = context.Проектная_организация
+			   .Where(p => p.КодПроектировщика == obj.КодПроектировщика)
+			   .AsEnumerable()
+			   .FirstOrDefault();
+				//labelProectName.Content = pr.НаименованиеПроектиров;
+				//labelProectAdress.Content = pr.ЮрАдрес;
+				//labelProectYNP.Content = pr.УНП;
+				//labelProectPhone.Content = pr.Тел;
+				//labelProectMail.Content = pr.ЭлПочта;
+				txtProectName.Text = pr.НаименованиеПроектиров;
+				txtProectAdress.Text = pr.ЮрАдрес;
+				txtProectYNP.Text = pr.УНП;
+				txtProectPhone.Text = pr.Тел;
+				txtProectMail.Text = pr.ЭлПочта;
+
+				//dgObject.Items.Clear();
+
+
+
 			}
+			
+			
 		}
+		//private void CmbObjectName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		//{
+		//	Объект selobj = cmbObjectName1.SelectedItem as Объект;
 
+		//	selobj = context.Объект
+		//		.Where(v => v.НаименованиеОбъекта == cmbObjectName1.SelectedItem)
+		//		.AsEnumerable()
+		//		.FirstOrDefault();
+
+		//	context.Объект.Load();
+		//	code = selobj.Шифр;
+		//	//dgObject.Items.Clear();
+		//	foreach (Локальная_смета item in GetAllSmeta())
+		//	{
+		//		if (item.Шифр == code)
+		//		{
+
+		//			var query = context.Локальная_смета.Select(l => new
+		//			{
+		//				Код = l.КодРаботы,
+		//				Наименование = l.Справочник_расценок.ИмяРаботы,
+		//				Объем = l.ФизОбъемРабот,
+		//				Трудоемкость = l.ТрудоемкостьРаботы,
+		//				Стоимость = l.СтоимостьРаботы
+
+		//			});
+		//			foreach (var l in query)
+		//			{
+		//				dgObject.ItemsSource = query.ToList();
+		//			}
+		//			var Labor1 = context.Локальная_смета
+		//						.Where(c => c.Шифр == selobj.Шифр)
+		//						.Select(c => c.ТрудоемкостьРаботы)
+		//						.Sum();
+		//			txSumTrud.Text = Labor1.ToString();
+		//			var Cost1 = context.Локальная_смета
+		//					   .Where(c => c.Шифр == selobj.Шифр)
+		//					   .Select(c => c.СтоимостьРаботы)
+		//					   .Sum();
+		//			txStoimost.Text = Cost1.ToString();
+		//			//dgObject.Items.Add(item);
+		//		}
+
+		//	}
+		//}
 		private void dgObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
@@ -252,51 +374,16 @@ namespace Smeta_1
 					.Where(v => v.Шифр == ls.Шифр)
 					.AsEnumerable()
 					.FirstOrDefault();
-			
-			
+
+
 			}
-			
-			//code1 = ls.КодРаботы;
 
-			//foreach (Справочник_расценок sr in GetAllPrices())
-			//{
-			//	if (sr.КодРаботы == code1)
-			//	{
-			//		dgObject.Items.Add(sr);
-			//	}
-			//}
-
-			
 			
 			context.Локальная_смета.Load();
 			context.Справочник_расценок.Load();
 			//dgObject.ItemsSource = query.ToList();
 		}
 
-
-
-
-
-			//SqlConnection ThisConnection = new SqlConnection(@"Data Source=E520-THINK\SQLSERVER;Initial Catalog= Smeta_1");
-			//ThisConnection.Open();
-			//SqlCommand thisCommand = ThisConnection.CreateCommand();
-			//thisCommand.CommandText = "select sum([ТрудоемкостьРаботы]) as [ОбщаяТрудоемкостьРаботы] FROM [dbo].[Локальная_смета] where [dbo].[Локальная_смета].Шифр= [dbo].[Объект].Шифр ";
-			//SqlDataReader thisReader = thisCommand.ExecuteReader();
-			//string res = string.Empty;
-			//while (thisReader.Read())
-			//{
-			//	res += thisReader["ОбщаяТрудоемкостьРаботы"];
-			//}
-			//thisReader.Close();
-			//ThisConnection.Close();
-			//txSumTrud.Text = res.ToString();
-
-			//var l = context.Локальная_смета
-			//   .Where(v => v.Шифр == 33)
-			//   .Select(v => v.ТрудоемкостьРаботы)
-			//   .Sum();
-			//txSumTrud.Text = l.ToString();
-		
 
 		private void MenuItem_Click_OpenChart(object sender, RoutedEventArgs e)
 		{
@@ -328,5 +415,70 @@ namespace Smeta_1
 			wa.Owner = this;
 			wa.ShowDialog();
 		}
+
+		Word._Application oWord = new Word.Application();
+		object oMissing = System.Reflection.Missing.Value;
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			oWord.Quit(ref oMissing, ref oMissing, ref oMissing);
+		}
+
+		private void MenuItem_Click_SaveDogovor(object sender, RoutedEventArgs e)
+		{
+			Word._Document oDoc = LoadTemplate("D:\\Diplom\\Smeta_1\\template_dogovor.dotx");
+			SetTemplate(oDoc);
+			SaveToDisk(oDoc, "d:\\Diplom\\Smeta_1\\New.docx");
+			MessageBox.Show("Документ создан под именем new.docx");
+			oDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+		}
+		private Word._Document LoadTemplate(string filePath)
+		{
+			object oTemplate = filePath;
+			Word._Document oDoc = oWord.Documents.Add(ref oTemplate, ref oMissing, ref oMissing, ref oMissing);
+			return oDoc;
+		}
+		private void SetTemplate(Word._Document oDoc)
+		{
+			object oBookMark = "CustomerName";
+			object oBookMark_1 = "DogNomer";
+			object oBookMark_2 = "ProectName";
+			object oBookMark_3 = "ObjectName";
+			object oBookMark_4 = "ObjectAdress";
+			object oBookMark_5 = "DogData";
+			object oBookMark_6 = "WorkSum";
+			object oBookMark_7 = "CustomerAdress";
+			object oBookMark_8 = "CustomerYNP";
+			object oBookMark_9 = "CustomerPhone";
+			object oBookMark_10 = "ProectAdress";
+			object oBookMark_11 = "ProectYNP";
+			object oBookMark_12 = "ProectPhone";
+			object oBookMark_13 = "ProectName_1";
+			object oBookMark_14 = "CustomerName_1";
+			oDoc.Bookmarks.get_Item(ref oBookMark).Range.Text = txtCustName.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_1).Range.Text = txtNomer.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_2).Range.Text = txtProectName.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_3).Range.Text = txtName.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_4).Range.Text = txtAd.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_5).Range.Text = txtData.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_6).Range.Text = txStoimost.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_7).Range.Text = txtCustAdress.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_8).Range.Text = txtCustYNP.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_9).Range.Text = txtCustPhone.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_10).Range.Text = txtProectAdress.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_11).Range.Text = txtProectYNP.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_12).Range.Text = txtProectPhone.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_13).Range.Text = txtProectName.Text;
+			oDoc.Bookmarks.get_Item(ref oBookMark_14).Range.Text = txtCustName.Text;
+		}
+		private void SaveToDisk(Word._Document oDoc, string filePath)
+		{
+			object fileName = filePath;
+			oDoc.SaveAs(ref fileName, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref
+
+		   oMissing, ref oMissing, ref oMissing, ref oMissing);
+		}
+
+
 	}
 }

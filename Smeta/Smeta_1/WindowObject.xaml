@@ -55,12 +55,26 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Проектировщик" BorderThickness="1">
+            <MenuItem x:Name="menu_addProject" Header="Проектировщик" BorderThickness="1">
                 <MenuItem Header="Добавить организацию" Click="MenuItem_Click_AddProjectCompany">
                     <MenuItem.Icon>
                         <Image Source="Images/builder_object.png" Height="15" Width="15"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem x:Name="menu_saveDogovor" Header="Документы" BorderThickness="1">
+                <MenuItem Header="Договор подряда" Click="MenuItem_Click_SaveDogovor">
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_stavka.png" Height="15" Width="15"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <!--<MenuItem Header="Смета ПИР" Click="MenuItem_Click_SaveSmeta">-->
+                <MenuItem Header="Смета ПИР">
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_price.png" Height="15" Width="15"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+               
             </MenuItem>
             <MenuItem Header="Справка" BorderThickness="1">
                 <MenuItem Header="О программе" Click="MenuItem_Click_OpenAbout">
@@ -75,7 +89,9 @@
                 <Image Source="Images\Chart.png" Height="23" Width="24" />
             </Button>
             <Separator />
-             <Button x:Name="save" ToolTip="Сохранить смету">
+             <!--<Button x:Name="save" ToolTip="Сохранить смету" Click="MenuItem_Click_SaveSmeta">-->
+            <Button x:Name="save" ToolTip="Сохранить смету" >
+
                 <Image Source="Images\save_object.png" Height="30" Width="24" />
             </Button>
             <Separator />
@@ -122,25 +138,30 @@
                                 <WrapPanel>
                                     <Image Source="Images\customer_object.png" Height="40" Width="40"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                     <Label  x:Name="labelCustName" Content=""></Label>
+                                     <!--<Label  x:Name="labelCustName" Content=""></Label>-->
+                                        <TextBlock x:Name="txtCustName" Width="300" Height="30"></TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                     <Label  x:Name="labelCustAdress" Content=""></Label>
+                                     <!--<Label  x:Name="labelCustAdress" Content=""></Label>-->
+                                        <TextBlock x:Name="txtCustAdress" Height="30" Width="260"></TextBlock>
                                 </WrapPanel>
                                 <WrapPanel>
                                     <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">УНП:</TextBlock>
-                                    <Label  x:Name="labelCustYNP" Content=""></Label>
+                                    <!--<Label  x:Name="labelCustYNP" Content=""></Label>-->
+                                        <TextBlock x:Name="txtCustYNP" Height="30" Width="270"></TextBlock>
                                  </WrapPanel>
                                 <WrapPanel>
                                     <Image Source="Images\phone_object.png" Height="30" Width="40"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Телефон:</TextBlock>
-                                    <Label  x:Name="labelCustPhone" Content=""></Label>
+                                    <!--<Label  x:Name="labelCustPhone" Content=""></Label>-->
+                                        <TextBlock x:Name="txtCustPhone" Height="30" Width="200"></TextBlock>
                                  </WrapPanel>
                                 <WrapPanel>
                                     <Image Source="Images\mail_object_1.png" Height="30" Width="40"></Image>
                                     <TextBlock FontSize="14" FontWeight="Bold">Эл.почта:</TextBlock>
-                                    <Label  x:Name="labelCustMail" Content=""></Label>
+                                    <!--<Label  x:Name="labelCustMail" Content=""></Label>-->
+                                        <TextBlock x:Name="txtCustMail" Height="30" Width="200"></TextBlock>
                                 </WrapPanel>
 
                             </StackPanel>
@@ -156,25 +177,30 @@
                                     <WrapPanel>
                                         <Image Source="Images\builder_object.png" Width="40" Height="40"></Image>
                                         <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                        <Label x:Name="labelProectName" Content=""></Label>
+                                        <!--<Label x:Name="labelProectName" Content=""></Label>-->
+                                        <TextBlock x:Name="txtProectName" Height="30" Width="300"></TextBlock>
                                      </WrapPanel>
                                     <WrapPanel>
                                         <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                        <Label x:Name="labelProectAdress" Content=""></Label>
+                                        <!--<Label x:Name="labelProectAdress" Content=""></Label>-->
+                                        <TextBlock x:Name="txtProectAdress" Height="30" Width="340"></TextBlock>
                                      </WrapPanel>
                                     <WrapPanel>
                                         <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">УНП:</TextBlock>
-                                        <Label x:Name="labelProectYNP" Content=""></Label>
+                                        <!--<Label x:Name="labelProectYNP" Content=""></Label>-->
+                                        <TextBlock x:Name="txtProectYNP" Height="30" Width="200"></TextBlock>
                                     </WrapPanel>
                                     <WrapPanel>
                                         <Image Source="Images\phone_object.png" Width="40" Height="30"></Image>
                                         <TextBlock FontSize="14" FontWeight="Bold">Телефон:</TextBlock>
-                                        <Label x:Name="labelProectPhone" Content=""></Label>
+                                        <!--<Label x:Name="labelProectPhone" Content=""></Label>-->
+                                        <TextBlock x:Name="txtProectPhone" Height="30" Width="200"></TextBlock>
                                      </WrapPanel>
                                     <WrapPanel>
                                         <Image Source="Images\mail_object_1.png" Width="40" Height="30"></Image>
                                         <TextBlock FontSize="14" FontWeight="Bold">Эл.почта:</TextBlock>
-                                        <Label x:Name="labelProectMail" Content=""></Label>
+                                        <!--<Label x:Name="labelProectMail" Content=""></Label>-->
+                                        <TextBlock x:Name="txtProectMail" Height="30" Width="200"></TextBlock>
                                     </WrapPanel>
 
                                 </StackPanel>
@@ -191,11 +217,13 @@
                                     <WrapPanel>
                                         <Image Source="Images\object.png" Width="40" Height="40"></Image>
                                         <TextBlock FontSize="14" FontWeight="Bold">Наименование:</TextBlock>
-                                        <Label x:Name="labelName" Content="" FontSize="14"></Label>
+                                        <!--<Label x:Name="labelName" Content="" FontSize="14"></Label>-->
+                                        <TextBlock x:Name="txtName" Height="30" Width="300"></TextBlock>
                                     </WrapPanel>
                                     <WrapPanel>
                                         <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Адрес:</TextBlock>
-                                        <Label x:Name="labelAd" Content="" FontSize="14" ></Label>
+                                        <!--<Label x:Name="labelAd" Content="" FontSize="14" ></Label>-->
+                                        <TextBlock x:Name="txtAd" Height="30" Width="320"></TextBlock>
                                      </WrapPanel>
                                 </StackPanel>
 
@@ -212,12 +240,14 @@
                                     <WrapPanel>
                                         <Image Source="Images\dogovor_object.png" Width="40" Height="40"></Image>
                                         <TextBlock FontSize="14" FontWeight="Bold">№</TextBlock>
-                                        <Label x:Name="labelData" Content=""></Label>
+                                        <!--<Label x:Name="labelData" Content=""></Label>-->
+                                        <TextBlock x:Name="txtData" Height="30" Width="300"></TextBlock>
                                      </WrapPanel>
                                     <WrapPanel>
                                         <TextBlock FontSize="14" Margin="40,0,0,0" FontWeight="Bold">Дата:</TextBlock>
-                                        <Label x:Name="labelNomer" Content=""></Label>
-                                    </WrapPanel>
+                                        <!--<Label x:Name="labelNomer" Content=""></Label>-->
+                                        <TextBlock x:Name="txtNomer" Height="30" Width="200"></TextBlock>
+                                        </WrapPanel>
 
                                 </StackPanel>
                             </GroupBox>
@@ -228,33 +258,38 @@
 
                 <GroupBox Grid.RowSpan="4" Grid.Column="2" Header="Смета">
                       <StackPanel >
-                        <!--<Label Content="Наименование объекта" Margin="10"></Label>
-                        <ComboBox></ComboBox>-->
-                        <WrapPanel>
-                            <ScrollViewer Grid.Row="3">
-                                <DataGrid x:Name="dgObject" IsReadOnly="True"  Height="400"  Margin="10,20,10,0"
+                           <!--<WrapPanel>
+                                <Label Content="Наименование объекта:" Margin="10" HorizontalAlignment="Center"></Label>
+                            </WrapPanel>
+                            <WrapPanel>
+                                <ComboBox x:Name="cmbObjectName1" Width="200" Height="20" SelectionChanged="CmbObjectName_SelectionChanged" Margin="10" HorizontalAlignment="Center"></ComboBox>
+                            </WrapPanel>-->
+                            <WrapPanel>
+                                <!--<ScrollViewer Grid.Row="3">-->
+
+                                    <DataGrid x:Name="dgObject" IsReadOnly="True"  Height="200"  Margin="10,20,10,0"
                                     ItemsSource="{Binding People}"
                                     AutoGenerateColumns="True"
                                     Style="{StaticResource AzureDataGrid}"
                                     FontSize="12"
                                    SelectionChanged="dgObject_SelectionChanged">
-                          
-                                    <DataGrid.Columns>
-                                        <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
+
+                                        <DataGrid.Columns>
+                                            <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
                                         <DataGridTextColumn  Header="Наименование работы" Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Объем" Width="90" Binding="{Binding Objem}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Стоимость" Width="100" Binding="{Binding Sum}"></DataGridTextColumn>-->
-                                        <!--<DataGridTextColumn  Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Стоимость" Width="100" Binding="{Binding Sum}"></DataGridTextColumn>
+                                        <DataGridTextColumn  Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
                                         <DataGridTextColumn   Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
                                         <DataGridTextColumn  Width="90" Binding="{Binding Objem}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
                                         <DataGridTextColumn  Width="100" Binding="{Binding Sum}"></DataGridTextColumn>-->
 
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </ScrollViewer>
-                        </WrapPanel>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                <!--</ScrollViewer>-->
+                         </WrapPanel>
                         <WrapPanel HorizontalAlignment="Right">
                             <Label Content="Всего трудозатраты:" HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
                             <TextBox x:Name="txSumTrud" Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" Controls:TextBoxHelper.ClearTextButton="True" ></TextBox>
@@ -263,7 +298,7 @@
                         <WrapPanel HorizontalAlignment="Right">
                             <Label  Content="Всего стоимость:" HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
                             <TextBox x:Name="txStoimost" Width="100"  Margin="10,10,10,10" HorizontalAlignment="Right" Controls:TextBoxHelper.ClearTextButton="True"></TextBox>
-                              <Label Content="руб.коп." HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
+                            <Label Content="руб.коп." HorizontalAlignment="Right" Margin="10,10,0,0"></Label>
                         </WrapPanel>
                     </StackPanel>
                 </GroupBox>

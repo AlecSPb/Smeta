@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить расценку" Height="400" Width="500"
+        Title="Добавить расценку" Height="400" Width="600"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
@@ -60,15 +60,16 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
             <ColumnDefinition Width="0.8*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
    
-    <Label x:Name="WorkTypeCode" Grid.Row="0" Grid.Column="0" Content="* Код вида работ:" Margin="10,10,10,10" ></Label>
+    <Label x:Name="WorkTypeName" Grid.Row="0" Grid.Column="0" Content="* Наименование вида работ:" Margin="10,10,10,10" ></Label>
     <Label x:Name="WorkCode" Grid.Row="1" Grid.Column="0" Content="* Код работы:" Margin="10,10,10,10" ></Label>
     <Label x:Name="TrudObjem" Grid.Row="2" Grid.Column="0" Content="* Затраты труда:" Margin="10,10,10,10" ></Label>
     <Label x:Name="WorkName" Grid.Row="3" Grid.Column="0" Content="* Наименование работы:" Margin="10,10,10,10"></Label>
-    <TextBox x:Name="tbWorkTypeCode" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>
+    <!--<TextBox x:Name="tbWorkTypeCode" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>-->
+        <ComboBox x:Name="cmbWorkType" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"></ComboBox>
     <TextBox x:Name="tbWorkCode" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>
     <TextBox x:Name="tbTrudObjem" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=ЗатратыТрудаЕдОбъема, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>
     <TextBox x:Name="tbWorkName" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Width="300" Height="40" Margin="10,10,10,10" Text="{Binding Path=ИмяРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"></TextBox>

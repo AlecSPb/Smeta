@@ -53,8 +53,8 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <GroupBox Grid.Column="0" Header="Объект, договор">
@@ -62,13 +62,13 @@
                 <WrapPanel HorizontalAlignment="Right">
                     <Label Content="Наименование объекта:" ></Label>
                     <!--<TextBox Width="200" Text="{Binding Path=Cargo, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                    <TextBox x:Name="txObjectName" Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
 
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Right"  >
                     <Label Content="Шифр:" ></Label>
                     <!--<TextBox Width="100" Text="{Binding Path=From, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                    <TextBox x:Name="txShifr" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
 
                 </WrapPanel>
 
@@ -76,14 +76,14 @@
                 <WrapPanel HorizontalAlignment="Right">
                     <Label Content="Адрес:" ></Label>
                     <!--<TextBox Width="200" Text="{Binding Path=Notes, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                    <TextBox x:Name="txAdress" Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Right"  >
                     <Label Content="Договор №:" ></Label>
                     <!--<TextBox Width="100" Text="{Binding Path=DateOfLoading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged ,StringFormat=\{0:dd.MM.yyyy\}}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                    <TextBox x:Name="txNomerDog" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
                     <Label Content="Дата договора"  ></Label>
-                    <TextBox Width="100" Text="{Binding Path=DateOfUnloading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0:dd.MM.yyyy\}}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                    <TextBox x:Name="txDateDog" Width="100" Text="{Binding Path=DateOfUnloading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0:dd.MM.yyyy\}}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
                     <!--<DatePicker></DatePicker>-->
 
 
@@ -94,23 +94,19 @@
             <StackPanel>
                 <WrapPanel HorizontalAlignment="Stretch">
                     <Label Content="Заказчик:" Margin="5" ></Label>
-                    <!--<ComboBox Width="200" Name="cmbCustomers" DisplayMemberPath="CustomerName" ItemsSource="{Binding}" SelectedValuePath="CustomerId" Margin="20,20,20,5"></ComboBox>-->
-                    <!--<ComboBox Width="200" Name="cmbCustomers" Height="20"></ComboBox>-->
-                </WrapPanel>
+                    </WrapPanel>
                 <WrapPanel HorizontalAlignment="Stretch">
                     <ComboBox Width="200" Name="cmbCustomers" Height="20" SelectionChanged="cbSelectCustomer_SelectionChanged"></ComboBox>
 
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Stretch">
                      <Label Content="Проектная организация:" Margin="5" />
-                    <!--<ComboBox Width="200" Name="cmbSenders" DisplayMemberPath="CustomerName" ItemsSource="{Binding}" SelectedValuePath="SenderId" Margin="20,20,20,5"></ComboBox>-->
-                    <ComboBox Width="200" x:Name="cmbProject"  SelectionChanged="cbSelectProject_SelectionChanged" Margin="5"/>
+                     <ComboBox Width="200" x:Name="cmbProject"  SelectionChanged="cbSelectProject_SelectionChanged" Margin="5"/>
 
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Stretch">
                     <Label Content="Вид объекта проектирования:" Margin="5" ></Label>
-                    <!--<ComboBox Width="200" Name="cmbObjectProect" DisplayMemberPath="CustomerName" ItemsSource="{Binding}" SelectedValuePath="RecieverId" Margin="20,20,20,5"></ComboBox>-->
-                    <ComboBox Width="200" Name="cmbObjectProject" SelectionChanged="CmbObjectProject_SelectionChanged" Margin="5"></ComboBox>
+                     <ComboBox Width="200" Name="cmbObjectProject" SelectionChanged="CmbObjectProject_SelectionChanged" Margin="5"></ComboBox>
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Stretch">
                     <Label Content="Ставка 14-го разряда" Margin="5"></Label>
@@ -121,12 +117,48 @@
 
         </GroupBox>
         <GroupBox Grid.Column="2" Header="Расценки">
+            <StackPanel>
+                <WrapPanel HorizontalAlignment="Stretch">
+                    <Label Content="Вид проектных работ:" Margin="5" ></Label>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Stretch">
+                    <ComboBox Width="200" Name="cmbWorkType" Height="20" SelectionChanged="cbSelectWorkType_SelectionChanged"></ComboBox>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Stretch">
+                    <Label Content="Наименование работы:" Margin="5" />
+                    <ComboBox Width="200" x:Name="cmbWorkName"  SelectionChanged="CmbWorkName_SelectionChanged" Margin="5"/>
+                    <!--<DataGrid IsReadOnly="True" x:Name="dgDirectory_1" HorizontalAlignment="Left" Height="150" Margin="5" FontSize="10"
+        ItemsSource="{Binding People}"
+        AutoGenerateColumns="True"
+        Style="{StaticResource AzureDataGrid}"
+        SelectionChanged="DgDirectory_SelectionChanged">
+                        <DataGrid.Columns>
+                            --><!--<DataGridTextColumn Header="Код работы" Binding="{Binding КодРаботы}" Width="Auto"></DataGridTextColumn>--><!--
+                            <DataGridTextColumn Header="Код работы" Width="100" Binding="{Binding КодРаботы}"></DataGridTextColumn>
+                            --><!--<DataGridTextColumn Header="Наименование работы" Binding="{Binding ИмяРаботы}" Width="Auto"></DataGridTextColumn>--><!--
+                            <DataGridTextColumn Header="Наименование работы" Width="*" Binding="{Binding ИмяРаботы}"></DataGridTextColumn>
+                            --><!--<DataGridTextColumn Header="Затраты труда" Binding="{Binding ЗатратыТрудаЕдОбъема}" Width="*"></DataGridTextColumn>--><!--
+                            <DataGridTextColumn Header="Затраты труда" Width="100" Binding="{Binding ЗатратыТрудаЕдОбъема}"></DataGridTextColumn>
 
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Stretch">
+                    <Label Content="Объем:" Margin="5" />
+                    <TextBox x:Name="txObjem" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                </WrapPanel>
+                <!--<WrapPanel HorizontalAlignment="Stretch">
+                    <Label Content="Стоимость работы:" Margin="5" />
+                    <TextBox x:Name="txSum" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Stretch">
+                    <Label Content="Трудоемкость работы:" Margin="5" />
+                    <TextBox x:Name="txTrud" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
+                </WrapPanel>-->
+            </StackPanel>
         </GroupBox>
         <WrapPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
-            <!--<Button Content="OK" IsDefault="True" Click="OkButton_Click" Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}"></Button>-->
-            <Button Content="OK" IsDefault="True"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" Click="OkButton_Click"></Button>
-            <!--<Button Content="Cancel" IsCancel="True" Click="CancelButton_Click"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}"></Button>-->
+             <Button Content="OK" IsDefault="True"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" Click="OkButton_Click"></Button>
             <Button Content="Cancel" IsCancel="True"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" Click="CancelButton_Click"></Button>
 
         </WrapPanel>

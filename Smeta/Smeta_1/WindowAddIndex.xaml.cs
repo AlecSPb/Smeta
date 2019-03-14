@@ -22,6 +22,7 @@ using System.Xml.Linq;
 using Ninject;
 using Smeta_DB;
 
+
 namespace Smeta_1
 {
 	/// <summary>
@@ -38,21 +39,33 @@ namespace Smeta_1
 		{
 			int nomer;
 			double kof;
-			if (!Int32.TryParse(tbKofCode.Text, out nomer))
+			string code, name, size;
+			code = tbKofCode.Text;
+			name = tbKofName.Text;
+			size = tbKofSize.Text;
+
+
+			//if (prowSuchs(code, name, size, Context.Поправочный_коэффициент_по_типу_ПИР) == true)
+			//{
+			//	MessageBox.Show("Такой коэффициет уже имеется в базе");
+			//}
+			//else
+
+			if (!Int32.TryParse(tbKofCode.Text, out nomer) & nomer <=0)
 			{
-				tbKofCode.Text = "Некорретный ввод!";
+				MessageBox.Show("В поле Код коэффициента введите цифры больше 0");
 			}
 			else if (tbKofCode != null)
 			{
-				tbKofCode.Text = "Поле не может быть пустым";
+				MessageBox.Show("Поле Код коэффициента не может быть пустым");
 			}
-			else if (!double.TryParse(tbKofSize.Text, out kof))
+			else if (!double.TryParse(tbKofSize.Text, out kof) & kof <=0)
 			{
-				tbKofSize.Text = "Некорретный ввод!";
+				MessageBox.Show("В поле Значение введите положительное число");
 			}
 			else if (tbKofName.Text.Length < 2 || tbKofName.Text.Length > 60)
 			{
-				tbKofName.Text = "Слишком короткий или длинный!";
+				MessageBox.Show("Поле Наименование коэффициента должно содеражать от 2 до 60 символов A-Z");
 			}
 			else
 			{
@@ -60,18 +73,41 @@ namespace Smeta_1
 				{
 					Код_коэффициента = Convert.ToInt32(tbKofCode.Text),
 					Наименование_коэффициента = tbKofName.Text,
-					Значение_коэффициента = Convert.ToDouble(tbKofName.Text)
+					Значение_коэффициента = Convert.ToDouble(tbKofSize.Text)
 			
 				};
 
 
 				context.Поправочный_коэффициент_по_типу_ПИР.Add(addIndex);
 				context.SaveChanges();
+				MessageBox.Show("Коэффициент добавлен в базу");
 				Close();
 			}
 
 		}
 
+
+		//private bool prowSuchs(string code, string name, string size, DataTable Поправочный_коэффициент_по_типу_ПИР)
+		//{
+
+		//	var query = from order in Поправочный_коэффициент_по_типу_ПИР.AsEnumerable()
+		//				where order.Field<string>("Код_коэффициента") == code & order.Field<string>("Наименование_коэффициента") == name & order.Field<string>("Значение_коэффициента") == size
+		//				select new
+		//				{
+		//					ID = order.Field<string>("Код_коэффициента")
+		//				};
+		//	if (query.Count() == 0)
+		//	{
+		//		return false;
+		//	}
+		//	else
+		//	{
+		//		return true;
+		//	}
+
+
+
+		//}
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();

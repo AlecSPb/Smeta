@@ -57,6 +57,24 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem x:Name="menuEdit" Header="Редактирование" BorderThickness="1">
+                <MenuItem Header="Добавить расценку" Click="MenuItem_Click_AddPrice">
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_price.png" Height="15" Width="15"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Добавить ставку" Click="MenuItem_Click_AddStavka">
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_stavka.png" Height="15" Width="15"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Добавить коэффициент" Click="MenuItem_Click_AddIndex">
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_index.png" Height="15" Width="15"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                               
+            </MenuItem>
         </Menu>
         <ToolBar Grid.Row="1" Grid.ColumnSpan="3">
             <!--<Button x:Name="chart" Click="chatr_Click" ToolTip="Создать график">-->

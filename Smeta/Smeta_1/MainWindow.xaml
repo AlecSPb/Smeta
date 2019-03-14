@@ -6,89 +6,28 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Smeta" Height="320" Width="600" FontSize="16" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
-        Icon="Images/calculating(1).ico"
-         BorderThickness="0" 
-         GlowBrush="Black"
+        Title="Вход" Height="180" Width="500"
+        WindowStartupLocation="CenterScreen"
+        BorderThickness="0" 
+        GlowBrush="Black"
         WindowTransitionsEnabled="False"
         ShowMinButton="True"
         ShowMaxRestoreButton="True"
         ShowCloseButton="True">
-
-    <Grid >
-        
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="13*"/>
+            <ColumnDefinition Width="183*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Controls:Tile x:Name="btnObject" Grid.Column="0" Grid.Row="0" Title="Объект" 
-               Width="180"
-               Height="100" 
-               ToolTip="Объект" 
-               Click="btnOpenObject_Click"
-                       VerticalAlignment="Bottom"
-                       HorizontalAlignment="Center"
-                       HorizontalContentAlignment="Right">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5,10,20,10">
-                <Image Source="Images/main_object.png" Height="70" Width="70"/>
-            </StackPanel>
-
-        </Controls:Tile>
-        <Controls:Tile x:Name="btnChart" Grid.Column="1" Grid.Row="0" Title="График" 
-               Width="180"
-               Height="100"
-               ToolTip="График ПИР"
-               Click="btnOpenChart_Click"
-               VerticalAlignment="Bottom"
-               HorizontalAlignment="Center"
-               HorizontalContentAlignment="Right">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5,10,20,10">
-                <Image Source="Images/main_chart.png" Height="80" Width="80"/>
-            </StackPanel>
-        </Controls:Tile>
-
-        <Controls:Tile x:Name="btnDirectory" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Title="Справочник работ" 
-               Width="380"
-               Height="100" 
-               ToolTip="Справочник работ"
-               Click="btnOpenDirectory_Click"
-               VerticalAlignment="Top"
-               HorizontalAlignment="Center"
-               HorizontalContentAlignment="Right">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5,10,20,10">
-                <Image Source="Images/main_directory.png" Height="80" Width="80"/>
-            </StackPanel>
-        </Controls:Tile>
-        <Controls:Tile x:Name="btnAbout" Grid.Column="2" Grid.Row="1" Title="Справка" 
-               Width="180"
-               Height="100" 
-               ToolTip="Справка"
-               Click="btnOpenAbout_Click"
-               VerticalAlignment="Top"
-               HorizontalAlignment="Center"
-               HorizontalContentAlignment="Right">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5,10,20,10">
-                <Image Source="Images/main_help.png" Height="80" Width="80"/>
-            </StackPanel>
-        </Controls:Tile>
-        <Controls:Tile x:Name="btnSmeta" Grid.Column="2" Grid.Row="0" Title="Смета" 
-               Width="180"
-               Height="100"
-               ToolTip="Смета ПИР"
-               Click="btnCreateSmeta_Click"
-               VerticalAlignment="Bottom"
-               HorizontalAlignment="Center"
-               HorizontalContentAlignment="Right">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5,10,20,10">
-                <Image Source="Images/main_smeta.png" Height="80" Width="80"/>
-            </StackPanel>
-        </Controls:Tile>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="6.538,30,0,0" Name="textBlock1" Text="Логин" VerticalAlignment="Top" Width="67" Grid.Column="1" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="6.538,60,0,0" Name="textBlock2" Text="Пароль" VerticalAlignment="Top" Width="77" Grid.Column="1" />
+        <TextBox x:Name="textBoxLogin" Height="23" HorizontalAlignment="Left" Margin="73.538,30,0,0"  VerticalAlignment="Top" Width="247" TextWrapping="Wrap" Text="" Grid.Column="1"/>
+        <TextBox x:Name="passwordBox1" Height="23" HorizontalAlignment="Left" Margin="73.538,60,0,0"  VerticalAlignment="Top" Width="247" TextWrapping="Wrap" Text="" Grid.Column="1"/>
+        <!--<Button Content="Войти" Height="30" HorizontalAlignment="Left" Margin="100,90,0,0" Name="Login" VerticalAlignment="Top" Width="104" Click="Login_Click" Style="{StaticResource AccentedSquareButtonStyle}" />
+        <Button Content="Отмена" Height="30" HorizontalAlignment="Left" Margin="245,90,0,0" Name="Cancel" VerticalAlignment="Top" Width="104" Click="Cancel_Click" Style="{StaticResource AccentedSquareButtonStyle}"/>-->
+        <Button Content="Войти" Height="30" HorizontalAlignment="Left" Margin="73.538,90,0,0" Name="Login" VerticalAlignment="Top" Width="104" Style="{StaticResource AccentedSquareButtonStyle}" Click="btnLogin_Click" Grid.Column="1" />
+        <Button Content="Отмена" Height="30" HorizontalAlignment="Left" Margin="218.538,90,0,0" Name="Cancel" VerticalAlignment="Top" Width="104" Style="{StaticResource AccentedSquareButtonStyle}" Click="Cancel_Click" Grid.Column="1"/>
+        <Label x:Name="lbLogin" Content="ожидание входа..." HorizontalAlignment="Left" Margin="6.538,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.5" Width="273" Height="27" Grid.Column="1"/>
 
     </Grid>
 </Controls:MetroWindow>
-
