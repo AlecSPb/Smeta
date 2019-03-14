@@ -16,18 +16,86 @@
         ShowCloseButton="True">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="13*"/>
-            <ColumnDefinition Width="183*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="6.538,30,0,0" Name="textBlock1" Text="Логин" VerticalAlignment="Top" Width="67" Grid.Column="1" />
-        <TextBlock Height="23" HorizontalAlignment="Left" Margin="6.538,60,0,0" Name="textBlock2" Text="Пароль" VerticalAlignment="Top" Width="77" Grid.Column="1" />
-        <TextBox x:Name="textBoxLogin" Height="23" HorizontalAlignment="Left" Margin="73.538,30,0,0"  VerticalAlignment="Top" Width="247" TextWrapping="Wrap" Text="" Grid.Column="1"/>
-        <TextBox x:Name="passwordBox1" Height="23" HorizontalAlignment="Left" Margin="73.538,60,0,0"  VerticalAlignment="Top" Width="247" TextWrapping="Wrap" Text="" Grid.Column="1"/>
-        <!--<Button Content="Войти" Height="30" HorizontalAlignment="Left" Margin="100,90,0,0" Name="Login" VerticalAlignment="Top" Width="104" Click="Login_Click" Style="{StaticResource AccentedSquareButtonStyle}" />
-        <Button Content="Отмена" Height="30" HorizontalAlignment="Left" Margin="245,90,0,0" Name="Cancel" VerticalAlignment="Top" Width="104" Click="Cancel_Click" Style="{StaticResource AccentedSquareButtonStyle}"/>-->
-        <Button Content="Войти" Height="30" HorizontalAlignment="Left" Margin="73.538,90,0,0" Name="Login" VerticalAlignment="Top" Width="104" Style="{StaticResource AccentedSquareButtonStyle}" Click="btnLogin_Click" Grid.Column="1" />
-        <Button Content="Отмена" Height="30" HorizontalAlignment="Left" Margin="218.538,90,0,0" Name="Cancel" VerticalAlignment="Top" Width="104" Style="{StaticResource AccentedSquareButtonStyle}" Click="Cancel_Click" Grid.Column="1"/>
-        <Label x:Name="lbLogin" Content="ожидание входа..." HorizontalAlignment="Left" Margin="6.538,120,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.289,0.5" Width="273" Height="27" Grid.Column="1"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Name="textBlock1"
+            VerticalAlignment="Center"
+            Text="Логин"
+            Margin="5"
+            />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Name="textBlock2"
+            VerticalAlignment="Center"
+            Text="Пароль"
+            Margin="5"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            x:Name="textBoxLogin"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            Margin="5"
+            />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="passwordBox1"
+            VerticalAlignment="Center"
+            TextWrapping="Wrap"
+            Margin="5"
+            />
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                x:Name="lbLogin"
+                Content="ожидание входа..."
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="5"
+            />
+            <StackPanel
+                Grid.Column="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                >
+                <Button
+                    Name="Login"
+                    Content="Войти"
+                    MinWidth="100"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="btnLogin_Click"
+                    Margin="5"
+                />
+                <Button
+                    Name="Cancel"
+                    Content="Отмена"
+                    MinWidth="100"
+                    Style="{StaticResource AccentedSquareButtonStyle}"
+                    Click="Cancel_Click"
+                    Margin="5"
+                    />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>
