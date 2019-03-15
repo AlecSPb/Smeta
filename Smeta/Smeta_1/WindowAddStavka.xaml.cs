@@ -29,55 +29,69 @@ namespace Smeta_1
 	/// </summary>
 	public partial class AddStavka : MetroWindow
 	{
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
+
 		public AddStavka()
 		{
 			InitializeComponent();
 		}
+
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			int nomer;
-			double stavka;
-			DateTime dt;
-			if (!Int32.TryParse(tbStavkaCode.Text, out nomer) & nomer <=0)
+			if (!int.TryParse(tbStavkaCode.Text, out int nomer) & nomer <= 0)
 			{
 				MessageBox.Show("В поле Код ставки введите положительное число");
+                return;
 			}
-			else if (tbStavkaCode != null)
-			{
-				MessageBox.Show("Поле Код Ставки не может быть пустым");
-			}
-			else if (!double.TryParse(tbStavkaSize.Text, out stavka) & stavka <=0)
+
+            if (!double.TryParse(tbStavkaSize.Text, out double stavka) & stavka <= 0)
 			{
 				MessageBox.Show("В поле Значение ставки введите положительное число");
-			}
-			else if (tbStavkaName.Text.Length < 2 || tbStavkaName.Text.Length > 60)
+                return;
+            }
+
+            if (tbStavkaName.Text.Length < 2 || tbStavkaName.Text.Length > 60)
 			{
 				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
-			}
-			else if (!DateTime.TryParse(tbStavkaDate.Text, out dt))
+                return;
+            }
+
+            if (!DateTime.TryParse(tbStavkaDate.Text, out DateTime dateTime))
 			{
 				MessageBox.Show("В поле дата ставки введен неверный формат даты");
-			}
-			else
-			{
-				Ставка_14_го_разряда addStavka = new Ставка_14_го_разряда()
-				{
-					КодСтавки = Convert.ToInt32(tbStavkaCode.Text),
-					Дата_ставки = Convert.ToDateTime(tbStavkaDate.Text),
-					Значение_ставки = Convert.ToDouble(tbStavkaSize.Text),
-					Обоснование = tbStavkaName.Text
+                return;
+            }
 
-				};
+            var existedItem = context.Ставка_14_го_разряда
+                .Where(n => n.КодСтавки == nomer)
+                .FirstOrDefault();
 
+            if(existedItem != null)
+            {
+                MessageBox.Show("Ставка с данным кодом уже существует!");
+            }
 
-				context.Ставка_14_го_разряда.Add(addStavka);
-				context.SaveChanges();
-				MessageBox.Show("Ставка добавлена");
-				Close();
-			}
+            try
+            {
+                Ставка_14_го_разряда addStavka = new Ставка_14_го_разряда()
+                {
+                    КодСтавки = nomer,
+                    Дата_ставки = dateTime,
+                    Значение_ставки = stavka,
+                    Обоснование = tbStavkaName.Text
+                };
 
-		}
+                context.Ставка_14_го_разряда.Add(addStavka);
+                context.SaveChanges();
+                MessageBox.Show("Ставка добавлена");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "SQL Error");
+            }
+
+            Close();
+        }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
