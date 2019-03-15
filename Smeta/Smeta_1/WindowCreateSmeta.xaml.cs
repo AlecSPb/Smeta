@@ -36,7 +36,7 @@ namespace Smeta_1
 		static int categAddWorkTypeCode;
 		static int categAddWorkCode;
 		//static int cat;
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 		public CreateSmeta()
 		{
 			InitializeComponent();

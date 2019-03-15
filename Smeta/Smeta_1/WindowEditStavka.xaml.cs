@@ -29,7 +29,7 @@ namespace Smeta_1
 	/// </summary>
 	public partial class EditStavka : MetroWindow
 	{
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 		public EditStavka()
 		{
 			InitializeComponent();

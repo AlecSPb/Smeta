@@ -1,39 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
-using System.Data.Sql;
 using System.Data.Entity;
-using Microsoft.Win32;
-using System.Xml.Linq;
 using Ninject;
 using Smeta_DB;
 using Word = Microsoft.Office.Interop.Word;
-using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
 
 namespace Smeta_1
 {
-	/// <summary>
-	/// Interaction logic for Object.xaml
-	/// </summary>
-	public partial class Object : MetroWindow
+    /// <summary>
+    /// Interaction logic for Object.xaml
+    /// </summary>
+    public partial class Object : MetroWindow
 	{
 		static int code;
 		//static int code1;
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 
 		public Object()
 		{
@@ -337,12 +325,28 @@ namespace Smeta_1
 
 		private void MenuItem_Click_SaveDogovor(object sender, RoutedEventArgs e)
 		{
-			Word._Document oDoc = LoadTemplate("D:\\Diplom\\Smeta_1\\template_dogovor.dotx");
-			SetTemplate(oDoc);
-			SaveToDisk(oDoc, "d:\\Diplom\\Smeta_1\\New.docx");
-			MessageBox.Show("Документ создан под именем new.docx");
-			oDoc.Close(ref oMissing, ref oMissing, ref oMissing);
-		}
+			var oDoc = LoadTemplate(Environment.CurrentDirectory + "\\template_dogovor.dotx");
+
+            SetTemplate(oDoc);
+
+            var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
+            var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
+            var documentName = Environment.CurrentDirectory + $"\\Документ от {date} {time}.docx";
+            
+            try
+            {
+                SaveToDisk(oDoc, documentName);
+                MessageBox.Show($"Документ создан под именем {documentName}");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Save Error");
+            }
+            finally
+            {
+                oDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+            }
+        }
 		private Word._Document LoadTemplate(string filePath)
 		{
 			object oTemplate = filePath;
@@ -385,11 +389,25 @@ namespace Smeta_1
 		private void SaveToDisk(Word._Document oDoc, string filePath)
 		{
 			object fileName = filePath;
-			oDoc.SaveAs(ref fileName, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref
+            object fileExtension = Word.WdSaveFormat.wdFormatDocumentDefault;
 
-		   oMissing, ref oMissing, ref oMissing, ref oMissing);
+            oDoc.SaveAs(
+                ref fileName,
+                ref fileExtension,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing,
+                ref oMissing);
 		}
-
-
 	}
 }

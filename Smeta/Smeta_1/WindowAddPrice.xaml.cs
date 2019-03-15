@@ -32,7 +32,7 @@ namespace Smeta_1
 	public partial class AddPrice : MetroWindow
 	{
 		static int categAddWorkType;
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 		public AddPrice()
 		{
 			InitializeComponent();

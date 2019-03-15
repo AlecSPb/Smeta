@@ -32,7 +32,7 @@ namespace Smeta_1
 		public static string sRole; // Роль пользователя, вошедшего в систему
 		public static int idSotrudn; // ID пользователя, вошедшего в систему
 
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 
 		public MainWindow()
 		{

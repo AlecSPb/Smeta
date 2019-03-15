@@ -27,7 +27,7 @@ namespace Smeta_1
 	public partial class WindowStart : MetroWindow
 	{
 		
-		SmetaEntities1 context = new SmetaEntities1();
+		SmetaEntities context = new SmetaEntities();
 
 
 		public WindowStart()
