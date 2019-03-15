@@ -32,49 +32,30 @@ namespace Smeta_1
 	public partial class AddPrice : MetroWindow
 	{
 		static int categAddWorkType;
-		SmetaEntities context = new SmetaEntities();
-		public AddPrice()
-		{
-			InitializeComponent();
-			cmbWorkType.Items.Clear();
-			foreach (Справочник_видов_работ stw in GetAllTypeWork())
-			{
-				cmbWorkType.Items.Add(stw.ВидРабот);
 
-			}
-		}
-		public IEnumerable<Справочник_видов_работ> GetAllTypeWork()
-		{
-			return context.Справочник_видов_работ.ToArray().Select((Справочник_видов_работ typew) =>
-			{
-				return new Справочник_видов_работ
-				{
-					КодВидаРабот = typew.КодВидаРабот,
-					ВидРабот = typew.ВидРабот,
-					ЕдИзмОб = typew.ЕдИзмОб,
-					ЕдИзмТруд = typew.ЕдИзмТруд
-				};
-			});
-		}
+        public SmetaEntities SmetaContext { get; set; }
+
+        public AddPrice(SmetaEntities context)
+        {
+            InitializeComponent();
+
+            SmetaContext = context;
+
+            cmbWorkType.Items.Clear();
+
+            foreach (Справочник_видов_работ stw in SmetaContext.Справочник_видов_работ.ToList())
+            {
+                cmbWorkType.Items.Add(stw.ВидРабот);
+            }
+        }
+
 		private void cbSelectWorkTypeAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			Справочник_видов_работ dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
-
-			dir = context.Справочник_видов_работ
-				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			context.Справочник_видов_работ.Load();
+			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
 			categAddWorkType = dir.КодВидаРабот;
 		}
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			
-			int nomer1;
-			double TrudObjem;
-			
-			
 			//else if (tbTrudObjem < 0)
 			//{
 			//	tbTrudObjem.Text = "Некорретный ввод!";
@@ -82,43 +63,46 @@ namespace Smeta_1
 			if (tbWorkCode != null)
 			{
 				MessageBox.Show("Поле Код работы не может быть пустым");
+                return;
 			}
-			else if (!Int32.TryParse(tbWorkCode.Text, out nomer1) & nomer1<=0)
+
+            if (!int.TryParse(tbWorkCode.Text, out int nomer1) & nomer1<=0)
 			{
 				MessageBox.Show("В поле Код работы введите положительное число");
-			}
-			else if (!double.TryParse(tbTrudObjem.Text, out TrudObjem))
+                return;
+            }
+
+            if (!double.TryParse(tbTrudObjem.Text, out double TrudObjem))
 			{
 				MessageBox.Show("В поле Затраты Труда за ед-ну объема введите число");
-			}
-			else if (TrudObjem <=0)
+                return;
+            }
+
+            if (TrudObjem <=0)
 			{
 				MessageBox.Show("В поле Затраты Труда за ед-цу объема введите положительно число");
-			}
-			else if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
+                return;
+            }
+
+            if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
 			{
 				MessageBox.Show("Поле Наименование работы содержит от 2 до 50 символов A-Z");
-			}
-			else
-			{
-				Справочник_расценок addPrice = new Справочник_расценок()
-				{
-					КодВидаРабот = categAddWorkType,
-					КодРаботы = Convert.ToInt32(tbWorkCode.Text),
-					ЗатратыТрудаЕдОбъема = Convert.ToDouble(tbTrudObjem.Text),
-					ИмяРаботы = tbWorkName.Text
-					
+                return;
+            }
 
-				};
+            var addPrice = new Справочник_расценок()
+            {
+                КодВидаРабот = categAddWorkType,
+                КодРаботы = nomer1,
+                ЗатратыТрудаЕдОбъема = TrudObjem,
+                ИмяРаботы = tbWorkName.Text
+            };
 
-
-				context.Справочник_расценок.Add(addPrice);
-				context.SaveChanges();
-				MessageBox.Show("Расценка добавлена");
-				Close();
-			}
-
-		}
+            SmetaContext.Справочник_расценок.Add(addPrice);
+            SmetaContext.SaveChanges();
+            MessageBox.Show("Расценка добавлена");
+            Close();
+        }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{

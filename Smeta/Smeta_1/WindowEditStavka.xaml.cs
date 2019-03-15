@@ -29,59 +29,59 @@ namespace Smeta_1
 	/// </summary>
 	public partial class EditStavka : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
-		public EditStavka()
-		{
-			InitializeComponent();
-			tbStavkaNameEdit.Text = Directory.oldNazStavka;
-			tbStavkaSizeEdit.Text = Convert.ToString(Directory.oldPriceStavka);
-			tbStavkaDateEdit.Text = Convert.ToString(Directory.oldDateStavka);
-		}
-		private void EditButton_Click(object sender, RoutedEventArgs e)
-		{
+        public SmetaEntities SmetaContext { get; set; }
 
+        public EditStavka(SmetaEntities context)
+        {
+            InitializeComponent();
 
-			double kof;
-			if (!double.TryParse(tbStavkaSizeEdit.Text, out kof))
+            SmetaContext = context;
+
+            tbStavkaNameEdit.Text = Directory.oldNazStavka;
+            tbStavkaSizeEdit.Text = Convert.ToString(Directory.oldPriceStavka);
+            tbStavkaDateEdit.Text = Convert.ToString(Directory.oldDateStavka);
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (!double.TryParse(tbStavkaSizeEdit.Text, out double kof))
 			{
 				tbStavkaSizeEdit.Text = "Некорретный ввод!";
+                return;
 			}
-			else if (tbStavkaNameEdit.Text.Length < 2 || tbStavkaNameEdit.Text.Length > 60)
+
+            if (tbStavkaNameEdit.Text.Length < 2 || tbStavkaNameEdit.Text.Length > 60)
 			{
 				tbStavkaNameEdit.Text = "Слишком короткий или длинный!";
-			}
-			else
-			{
-				Ставка_14_го_разряда c = context.Ставка_14_го_разряда.SingleOrDefault(cl => cl.КодСтавки == Directory.pkIDStavka);
-				c.Обоснование = tbStavkaNameEdit.Text;
-				c.Значение_ставки = Convert.ToDouble(tbStavkaSizeEdit.Text);
-				c.Дата_ставки = Convert.ToDateTime(tbStavkaDateEdit.Text);
-				context.SaveChanges();
-				context.Entry(c).State = System.Data.Entity.EntityState.Modified;
-				Close();
-
+                return;
 			}
 
-		}
+            var c = SmetaContext.Ставка_14_го_разряда.SingleOrDefault(cl => cl.КодСтавки == Directory.pkIDStavka);
+            c.Обоснование = tbStavkaNameEdit.Text;
+            c.Значение_ставки = double.Parse(tbStavkaSizeEdit.Text);
+            c.Дата_ставки = DateTime.Parse(tbStavkaDateEdit.Text);
+            SmetaContext.SaveChanges();
+            Close();
+        }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}
-		public void Update<TEntity>(IEnumerable<TEntity> entities, DbContext context) where TEntity : class
+		public void Update<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
 		{
-			// Отключаем отслеживание и проверку изменений для оптимизации вставки множества полей
-			context.Configuration.AutoDetectChangesEnabled = false;
-			context.Configuration.ValidateOnSaveEnabled = false;
+            // Отключаем отслеживание и проверку изменений для оптимизации вставки множества полей
+            SmetaContext.Configuration.AutoDetectChangesEnabled = false;
+            SmetaContext.Configuration.ValidateOnSaveEnabled = false;
 
-			context.Database.Log = (s => System.Diagnostics.Debug.WriteLine(s));
+            SmetaContext.Database.Log = (s => System.Diagnostics.Debug.WriteLine(s));
 
 			foreach (TEntity entity in entities)
-				context.Entry<TEntity>(entity).State = EntityState.Modified;
-			context.SaveChanges();
+                SmetaContext.Entry(entity).State = EntityState.Modified;
+            SmetaContext.SaveChanges();
 
-			context.Configuration.AutoDetectChangesEnabled = true;
-			context.Configuration.ValidateOnSaveEnabled = true;
+            SmetaContext.Configuration.AutoDetectChangesEnabled = true;
+            SmetaContext.Configuration.ValidateOnSaveEnabled = true;
 		}
 	}
 }

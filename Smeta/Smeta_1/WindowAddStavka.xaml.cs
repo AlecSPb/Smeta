@@ -29,14 +29,16 @@ namespace Smeta_1
 	/// </summary>
 	public partial class AddStavka : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
+        public SmetaEntities SmetaContext { get; set; }
 
-		public AddStavka()
-		{
-			InitializeComponent();
-		}
+        public AddStavka(SmetaEntities context)
+        {
+            InitializeComponent();
 
-		private void OkButton_Click(object sender, RoutedEventArgs e)
+            SmetaContext = context;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (!int.TryParse(tbStavkaCode.Text, out int nomer) & nomer <= 0)
 			{
@@ -62,7 +64,7 @@ namespace Smeta_1
                 return;
             }
 
-            var existedItem = context.Ставка_14_го_разряда
+            var existedItem = SmetaContext.Ставка_14_го_разряда
                 .Where(n => n.КодСтавки == nomer)
                 .FirstOrDefault();
 
@@ -81,8 +83,8 @@ namespace Smeta_1
                     Обоснование = tbStavkaName.Text
                 };
 
-                context.Ставка_14_го_разряда.Add(addStavka);
-                context.SaveChanges();
+                SmetaContext.Ставка_14_го_разряда.Add(addStavka);
+                SmetaContext.SaveChanges();
                 MessageBox.Show("Ставка добавлена");
             }
             catch(Exception ex)

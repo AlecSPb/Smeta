@@ -26,66 +26,23 @@ namespace Smeta_1
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
-
-		//string sLogin;
-		//string sPassword;
 		public static string sRole; // Роль пользователя, вошедшего в систему
 		public static int idSotrudn; // ID пользователя, вошедшего в систему
 
-		SmetaEntities context = new SmetaEntities();
+        public SmetaEntities SmetaContext { get; set; }
 
-		public MainWindow()
+        public MainWindow()
 		{
 			InitializeComponent();
-		}
 
-		public event EventHandler ClickAdmin;
-		public event EventHandler ClickUser;
+            SmetaContext = new SmetaEntities();
+        }
+
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
 		{
-			//using (SmetaEntities Исполнитель = new SmetaEntities())
-			//{
-			//	string login = textBoxLogin.Text;
-			//	string password = passwordBox1.Text;
+			var localDate = DateTime.Now;
 
-			//	var query = context.Исполнитель
-			//			   .Where(p => p.Логин == login && p.Пароль == password)
-			//			   .Select(c => c.Роль);
-
-			//	foreach (var c in query)   // Только сейчас запрос начинает выполняться!
-			//	{
-			//		string position1 = String.Empty;
-			//		position1 = Convert.ToString(c);
-
-			//		if (position1 == "admin")
-
-			//		{
-			//			//this.Hide();
-			//			About ab = new About();
-			//			//ab.ShowDialog();
-			//			//this.Close();
-			//			ab.Show();
-			//			Close();
-
-
-			//		}
-			//		else
-			//		{
-			//			if (position1 == "user")
-
-			//			{
-			//				//this.Hide();
-			//				WindowStart mw = new WindowStart();
-			//				//mw.ShowDialog();
-			//				//this.Close();
-			//				mw.Show();
-			//				Close();
-			//			}
-			//		}
-			//	}
-			DateTime localDate = DateTime.Now;
-
-			Исполнитель sotrudn = context.Исполнитель
+			var sotrudn = SmetaContext.Исполнитель
 				   .Where(v => v.Логин == textBoxLogin.Text && v.Пароль == passwordBox1.Text)
 				   .AsEnumerable()
 				   .FirstOrDefault();
@@ -102,40 +59,29 @@ namespace Smeta_1
 
 				if (sRole == "admin")
 				{
-					
 					this.Hide();
 					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
-					WindowStart mw = new WindowStart();
-					//mw.Owner = this;
+					var mw = new WindowStart(SmetaContext);
 					mw.ShowDialog();
-					//mw.Show();
-					//Close();
 					this.Close();
-					//ClickAdmin?.Invoke(this, EventArgs.Empty);
-					
 				}
 				if (sRole == "user")
 				{
-					
 					this.Hide();
 					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
-					WindowStart mw = new WindowStart();
-					//ab.Owner = this;
+					var mw = new WindowStart(SmetaContext);
 					mw.ShowDialog();
 					this.Close();
-					//ab.Show();
-					//Close();
-					//ClickUser?.Invoke(this, EventArgs.Empty);
 				}
-
 			}
-
 		}
 
 		private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
-			//Environment.Exit(0);
 			Close();
 		}
-	}
+
+        public event EventHandler ClickAdmin;
+        public event EventHandler ClickUser;
+    }
 }

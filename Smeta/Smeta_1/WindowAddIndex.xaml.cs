@@ -30,61 +30,52 @@ namespace Smeta_1
 	/// </summary>
 	public partial class AddIndex : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
-		public AddIndex()
+        public SmetaEntities SmetaContext { get; set; }
+
+        public AddIndex(SmetaEntities context)
+        {
+            InitializeComponent();
+
+            SmetaContext = context;
+        }
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			InitializeComponent();
-		}
-		private void OkButton_Click(object sender, RoutedEventArgs e)
-		{
-			int nomer;
-			double kof;
-			string code, name, size;
-			code = tbKofCode.Text;
-			name = tbKofName.Text;
-			size = tbKofSize.Text;
-
-
-			//if (prowSuchs(code, name, size, Context.Поправочный_коэффициент_по_типу_ПИР) == true)
-			//{
-			//	MessageBox.Show("Такой коэффициет уже имеется в базе");
-			//}
-			//else
-
-			if (!Int32.TryParse(tbKofCode.Text, out nomer) & nomer <=0)
+			if (!int.TryParse(tbKofCode.Text, out int nomer) & nomer <=0)
 			{
 				MessageBox.Show("В поле Код коэффициента введите цифры больше 0");
+                return;
 			}
-			else if (tbKofCode != null)
+
+            if (tbKofCode != null)
 			{
 				MessageBox.Show("Поле Код коэффициента не может быть пустым");
+                return;
 			}
-			else if (!double.TryParse(tbKofSize.Text, out kof) & kof <=0)
+
+			if (!double.TryParse(tbKofSize.Text, out double kof) & kof <=0)
 			{
 				MessageBox.Show("В поле Значение введите положительное число");
+                return;
 			}
-			else if (tbKofName.Text.Length < 2 || tbKofName.Text.Length > 60)
+
+            if (tbKofName.Text.Length < 2 || tbKofName.Text.Length > 60)
 			{
 				MessageBox.Show("Поле Наименование коэффициента должно содеражать от 2 до 60 символов A-Z");
 			}
-			else
-			{
-				Поправочный_коэффициент_по_типу_ПИР addIndex = new Поправочный_коэффициент_по_типу_ПИР()
-				{
-					Код_коэффициента = Convert.ToInt32(tbKofCode.Text),
-					Наименование_коэффициента = tbKofName.Text,
-					Значение_коэффициента = Convert.ToDouble(tbKofSize.Text)
-			
-				};
 
+            var addIndex = new Поправочный_коэффициент_по_типу_ПИР()
+            {
+                Код_коэффициента = Convert.ToInt32(tbKofCode.Text),
+                Наименование_коэффициента = tbKofName.Text,
+                Значение_коэффициента = Convert.ToDouble(tbKofSize.Text)
+            };
 
-				context.Поправочный_коэффициент_по_типу_ПИР.Add(addIndex);
-				context.SaveChanges();
-				MessageBox.Show("Коэффициент добавлен в базу");
-				Close();
-			}
-
-		}
+            SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Add(addIndex);
+            SmetaContext.SaveChanges();
+            MessageBox.Show("Коэффициент добавлен в базу");
+            Close();
+        }
 
 
 		//private bool prowSuchs(string code, string name, string size, DataTable Поправочный_коэффициент_по_типу_ПИР)
@@ -104,9 +95,6 @@ namespace Smeta_1
 		//	{
 		//		return true;
 		//	}
-
-
-
 		//}
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{

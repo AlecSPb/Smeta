@@ -29,45 +29,49 @@ namespace Smeta_1
 	/// </summary>
 	public partial class EditIndex : MetroWindow
 	{
-		
-		SmetaEntities context = new SmetaEntities();
-		public EditIndex()
-		{
-			InitializeComponent();
-			tbKofNameEdit.Text = Directory.oldNaz;
-			tbKofSizeEdit.Text = Convert.ToString(Directory.oldPrice);
-			
-		}
+        public SmetaEntities SmetaContext { get; set; }
+
+        public EditIndex(SmetaEntities context)
+        {
+            InitializeComponent();
+
+            SmetaContext = context;
+
+            tbKofNameEdit.Text = Directory.oldNaz;
+            tbKofSizeEdit.Text = Convert.ToString(Directory.oldPrice);
+        }
+
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
-			
-			
 			double kof;
+
 			if (!double.TryParse(tbKofSizeEdit.Text, out kof))
 			{
 				tbKofSizeEdit.Text = "Некорретный ввод!";
-			}
-			else if (tbKofNameEdit.Text.Length < 2 || tbKofNameEdit.Text.Length > 60)
-			{
-				tbKofNameEdit.Text = "Слишком короткий или длинный!";
-			}
-			else
-			{
-				Поправочный_коэффициент_по_типу_ПИР c = context.Поправочный_коэффициент_по_типу_ПИР.SingleOrDefault(cl => cl.Код_коэффициента == Directory.pk2ID);
-				c.Наименование_коэффициента = tbKofNameEdit.Text;
-				c.Значение_коэффициента = Convert.ToDouble(tbKofSizeEdit.Text);
-				context.SaveChanges();
-				context.Entry(c).State = System.Data.Entity.EntityState.Modified;
-				Close();
-				
+                return;
 			}
 
-		}
+            if (tbKofNameEdit.Text.Length < 2 || tbKofNameEdit.Text.Length > 60)
+			{
+				tbKofNameEdit.Text = "Слишком короткий или длинный!";
+                return;
+			}
+
+            var c = SmetaContext.Поправочный_коэффициент_по_типу_ПИР
+                .SingleOrDefault(cl => cl.Код_коэффициента == Directory.pk2ID);
+
+            c.Наименование_коэффициента = tbKofNameEdit.Text;
+            c.Значение_коэффициента = double.Parse(tbKofSizeEdit.Text);
+            SmetaContext.SaveChanges();
+            SmetaContext.Entry(c).State = EntityState.Modified;
+            Close();
+        }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}
+
 		public void Update<TEntity>(IEnumerable<TEntity> entities, DbContext context) where TEntity : class
 		{
 			// Отключаем отслеживание и проверку изменений для оптимизации вставки множества полей

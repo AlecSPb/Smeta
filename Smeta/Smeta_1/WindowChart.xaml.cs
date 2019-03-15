@@ -31,67 +31,51 @@ namespace Smeta_1
 	/// </summary>
 	public partial class Chart : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
-		
-		public Chart()
-		{
-			InitializeComponent();
-			ReDrow();
-		}
-		public IEnumerable<Объект> GetAllObject()
-		{
-			return context.Объект.ToArray().Select((Объект ob) =>
-			{
-				return new Объект
-				{
-					Шифр = ob.Шифр,
-					Адрес = ob.Адрес,
-					НаименованиеОбъекта = ob.НаименованиеОбъекта,
-					КодПроектировщика = ob.КодПроектировщика,
-					Код_коэффициента = ob.Код_коэффициента,
-					КодЗаказчик = ob.КодЗаказчик,
-					КодСтавки = ob.КодСтавки
-				};
-			});
+        public SmetaEntities SmetaContext { get; set; }
 
-		}
+        public Chart(SmetaEntities context)
+        {
+            InitializeComponent();
+
+            SmetaContext = context;
+
+            ReDrow();
+        }
+        
 		public void ReDrow()
 		{
 			listBox2.Items.Clear();
-			foreach (Объект obj in GetAllObject())
+			foreach (Объект obj in SmetaContext.Объект.ToList())
 			{
 				listBox2.Items.Add(obj);
 			}
 		}
+
 		private void listBox2_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			Объект obj = listBox2.SelectedItem as Объект;
-			if (obj != null)
-			{
+            Объект obj = listBox2.SelectedItem as Объект;
 
-				labelName.Content = obj.НаименованиеОбъекта;
-				var Cost1 = context.Локальная_смета
-					.Where(c => c.Шифр == obj.Шифр)
-					.Select(c => c.СтоимостьРаботы)
-					.Sum();
+            if (obj != null)
+            {
+                labelName.Content = obj.НаименованиеОбъекта;
 
-				var Labor1 = context.Локальная_смета
-					.Where(c => c.Шифр == obj.Шифр)
-					.Select(c => c.ТрудоемкостьРаботы)
-					.Sum();
-				((PieSeries)mcChart.Series[0]).ItemsSource =
-					new KeyValuePair<string, double>[]
-					{
-					new KeyValuePair<string, double>("Стоимость работ", Convert.ToDouble(Cost1)),
-					new KeyValuePair<string, double>("Трудоемкость работ", Convert.ToDouble(Labor1))
+                var Cost1 = SmetaContext.Локальная_смета
+                    .Where(c => c.Шифр == obj.Шифр)
+                    .Select(c => c.СтоимостьРаботы)
+                    .Sum();
 
-					};
-			
-			}
-		}
-		
-			
+                var Labor1 = SmetaContext.Локальная_смета
+                    .Where(c => c.Шифр == obj.Шифр)
+                    .Select(c => c.ТрудоемкостьРаботы)
+                    .Sum();
+
+                ((PieSeries)mcChart.Series[0]).ItemsSource =
+                    new KeyValuePair<string, double>[]
+                    {
+                        new KeyValuePair<string, double>("Стоимость работ", Cost1.Value),
+                        new KeyValuePair<string, double>("Трудоемкость работ", Labor1.Value)
+                    };
+            }
+        }
 	}
-		
-	
 }
