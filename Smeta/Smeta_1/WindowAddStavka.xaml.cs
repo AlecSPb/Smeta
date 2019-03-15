@@ -73,7 +73,7 @@ namespace Smeta_1
 
             try
             {
-                Ставка_14_го_разряда addStavka = new Ставка_14_го_разряда()
+                var addStavka = new Ставка_14_го_разряда()
                 {
                     КодСтавки = nomer,
                     Дата_ставки = dateTime,
