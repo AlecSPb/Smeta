@@ -26,8 +26,8 @@ namespace Smeta_1
 	/// </summary>
 	public partial class WindowStart : MetroWindow
 	{
-		//static string role = MainWindow.sRole; // Код заявки
-		SmetaEntities context = new SmetaEntities();
+		
+		SmetaEntities1 context = new SmetaEntities1();
 
 
 		public WindowStart()
@@ -50,46 +50,10 @@ namespace Smeta_1
 				btnAbout.IsEnabled = true;
 				btnSmeta.IsEnabled = true;
 			}
-			//var Mainwindow = new MainWindow();
-
-			//Mainwindow.ClickAdmin += MainWindow_ClickAdmin;
-			//Mainwindow.ClickUser += MainWindow_ClickUser;
-			//Mainwindow.Show();
+			
 
 		}
-		//private void MainWindow_ClickAdmin(object sender, EventArgs e)
-		//{
-		//	MessageBox.Show("Вы вошли в систему с ролью Администратор");
-		//	btnObject.IsEnabled = true;
-		//	btnChart.IsEnabled = true;
-		//	btnDirectory.IsEnabled = true;
-		//	btnAbout.IsEnabled = true;
-		//	btnSmeta.IsEnabled = false;
-
-
-		//	//Directory mw = new Directory();
-		//	//mw.Show();
-		//	//Close();
-
-		//}
-		//private void MainWindow_ClickUser(object sender, EventArgs e)
-		//{
-		//	MessageBox.Show("Вы вошли в систему с ролью Пользователь");
-		//	btnObject.IsEnabled = true;
-		//	btnChart.IsEnabled = true;
-		//	btnDirectory.IsEnabled = true;
-		//	btnAbout.IsEnabled = true;
-		//	btnSmeta.IsEnabled = true;
-
-		//	//About ab = new About();
-		//	//ab.Show();
-		//	//Close();
-
-		//}
-		//private void Create_Click(object sender, RoutedEventArgs e)
-		//{
-
-		//}
+		
 
 		private void btnOpenObject_Click(object sender, RoutedEventArgs e)
 		{

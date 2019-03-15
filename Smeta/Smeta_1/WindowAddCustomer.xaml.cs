@@ -30,7 +30,7 @@ namespace Smeta_1
     /// </summary>
     public partial class AddCustomer : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
+		SmetaEntities1 context = new SmetaEntities1();
 		public AddCustomer()
         {
             InitializeComponent();

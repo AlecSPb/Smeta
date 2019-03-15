@@ -30,7 +30,7 @@ namespace Smeta_1
 	public partial class Directory : MetroWindow
 	{
 		static int cat;
-		SmetaEntities context = new SmetaEntities();
+		SmetaEntities1 context = new SmetaEntities1();
 		public Directory()
 		{
 			InitializeComponent();

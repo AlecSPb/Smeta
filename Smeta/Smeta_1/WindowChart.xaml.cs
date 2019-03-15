@@ -31,7 +31,7 @@ namespace Smeta_1
 	/// </summary>
 	public partial class Chart : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
+		SmetaEntities1 context = new SmetaEntities1();
 		
 		public Chart()
 		{

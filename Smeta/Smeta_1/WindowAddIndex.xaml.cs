@@ -30,7 +30,7 @@ namespace Smeta_1
 	/// </summary>
 	public partial class AddIndex : MetroWindow
 	{
-		SmetaEntities context = new SmetaEntities();
+		SmetaEntities1 context = new SmetaEntities1();
 		public AddIndex()
 		{
 			InitializeComponent();

@@ -33,7 +33,7 @@ namespace Smeta_1
 	{
 		static int code;
 		//static int code1;
-		SmetaEntities context = new SmetaEntities();
+		SmetaEntities1 context = new SmetaEntities1();
 
 		public Object()
 		{
@@ -220,86 +220,47 @@ namespace Smeta_1
 				txtName.Text = obj.НаименованиеОбъекта;
 				//labelName.Content = obj.НаименованиеОбъекта;
 				code = obj.Шифр;
-				foreach (Локальная_смета sm in GetAllSmeta())
-				{
-					if (sm.Шифр == code)
-					{
-						var query = context.Локальная_смета.Select(l => new
-						{
-							Код = l.КодРаботы,
-							Наименование = l.Справочник_расценок.ИмяРаботы,
-							Объем = l.ФизОбъемРабот,
-							Трудоемкость = l.ТрудоемкостьРаботы,
-							Стоимость = l.СтоимостьРаботы
 
-						});
-						foreach (var l in query)
-						{
-							dgObject.ItemsSource = query.ToList();
+				dgObject.ItemsSource = context.Локальная_смета.
+                          Where(sm => sm.Шифр == code).
+                          Select(l => new
+                        {
+	                      Код = l.КодРаботы,
+	                      Наименование = l.Справочник_расценок.ИмяРаботы,
+	                      Объем = l.ФизОбъемРабот,
+	                      Трудоемкость = l.ТрудоемкостьРаботы,
+	                      Стоимость = l.СтоимостьРаботы
+                        }).ToList();
 
-						}
-						//dgObject.ItemsSource = GetAllSmeta().Where(sm => sm.Шифр == code).Select(l => new
-						//{
-						//	Код = l.КодРаботы,
-						//	Наименование = l.Справочник_расценок.ИмяРаботы,
-						//	Объем = l.ФизОбъемРабот,
-						//	Трудоемкость = l.ТрудоемкостьРаботы,
-						//	Стоимость = l.СтоимостьРаботы
+				txSumTrud.Text = context.Локальная_смета
+				.Where(c => c.Шифр == obj.Шифр)
+				.Select(c => c.ТрудоемкостьРаботы)
+				.Sum().ToString();
 
-						//}).ToList();
-						txSumTrud.Text = context.Локальная_смета
-								.Where(c => c.Шифр == obj.Шифр)
-								.Select(c => c.ТрудоемкостьРаботы)
-								.Sum().ToString();
+				txStoimost.Text = context.Локальная_смета
+				.Where(c => c.Шифр == obj.Шифр)
+				.Select(c => c.СтоимостьРаботы)
+				.Sum().ToString();
 
-						txStoimost.Text = context.Локальная_смета
-								  .Where(c => c.Шифр == obj.Шифр)
-								  .Select(c => c.СтоимостьРаботы)
-								  .Sum().ToString();
-					}
-				}
-
-				//var Labor1 = context.Локальная_смета
-				//			.Where(c => c.Шифр == obj.Шифр)
-				//			.Select(c => c.ТрудоемкостьРаботы)
-				//			.Sum();
-				//txSumTrud.Text = Labor1.ToString();
-				//var Cost1 = context.Локальная_смета
-				//		   .Where(c => c.Шифр == obj.Шифр)
-				//		   .Select(c => c.СтоимостьРаботы)
-				//		   .Sum();
-				//txStoimost.Text = Cost1.ToString();
-
-			
-		
-
-
-				Договор_подряда dg = context.Договор_подряда
-				   .Where(d => d.Шифр == obj.Шифр)
-				   .AsEnumerable()
-				   .FirstOrDefault();
+				Договор_подряда dg = context.Договор_подряда.Where(d => d.Шифр == obj.Шифр).FirstOrDefault();
 				//labelData.Content = dg.ДатаДог;
 				//labelNomer.Content = dg.НомерДог;
 				txtData.Text = Convert.ToString(dg.ДатаДог);
 				txtNomer.Text = Convert.ToString(dg.НомерДог);
-				Заказчик cu = context.Заказчик
-			   .Where(c => c.КодЗаказчик == obj.КодЗаказчик)
-			   .AsEnumerable()
-			   .FirstOrDefault();
+
+				Заказчик cu = context.Заказчик.Where(c => c.КодЗаказчик == obj.КодЗаказчик).FirstOrDefault();
 				//labelCustName.Content = cu.НаименованиеЗаказчика;
-			    txtCustName.Text = cu.НаименованиеЗаказчика;
-				txtCustAdress.Text = cu.ЮрАдрес;
-				txtCustYNP.Text = cu.УНП;
-				txtCustPhone.Text = cu.Тел;
-				txtCustMail.Text = cu.ЭлПочта;
 				//labelCustAdress.Content = cu.ЮрАдрес;
 				//labelCustYNP.Content = cu.УНП;
 				//labelCustPhone.Content = cu.Тел;
 				//labelCustMail.Content = cu.ЭлПочта;
-				Проектная_организация pr = context.Проектная_организация
-			   .Where(p => p.КодПроектировщика == obj.КодПроектировщика)
-			   .AsEnumerable()
-			   .FirstOrDefault();
+				txtCustName.Text = cu.НаименованиеЗаказчика;
+				txtCustAdress.Text = cu.ЮрАдрес;
+				txtCustYNP.Text = cu.УНП;
+				txtCustPhone.Text = cu.Тел;
+				txtCustMail.Text = cu.ЭлПочта;
+
+				Проектная_организация pr = context.Проектная_организация.Where(p => p.КодПроектировщика == obj.КодПроектировщика).FirstOrDefault();
 				//labelProectName.Content = pr.НаименованиеПроектиров;
 				//labelProectAdress.Content = pr.ЮрАдрес;
 				//labelProectYNP.Content = pr.УНП;
@@ -310,60 +271,10 @@ namespace Smeta_1
 				txtProectYNP.Text = pr.УНП;
 				txtProectPhone.Text = pr.Тел;
 				txtProectMail.Text = pr.ЭлПочта;
-
-				//dgObject.Items.Clear();
-
-
-
 			}
-			
-			
+
 		}
-		//private void CmbObjectName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		//{
-		//	Объект selobj = cmbObjectName1.SelectedItem as Объект;
 
-		//	selobj = context.Объект
-		//		.Where(v => v.НаименованиеОбъекта == cmbObjectName1.SelectedItem)
-		//		.AsEnumerable()
-		//		.FirstOrDefault();
-
-		//	context.Объект.Load();
-		//	code = selobj.Шифр;
-		//	//dgObject.Items.Clear();
-		//	foreach (Локальная_смета item in GetAllSmeta())
-		//	{
-		//		if (item.Шифр == code)
-		//		{
-
-		//			var query = context.Локальная_смета.Select(l => new
-		//			{
-		//				Код = l.КодРаботы,
-		//				Наименование = l.Справочник_расценок.ИмяРаботы,
-		//				Объем = l.ФизОбъемРабот,
-		//				Трудоемкость = l.ТрудоемкостьРаботы,
-		//				Стоимость = l.СтоимостьРаботы
-
-		//			});
-		//			foreach (var l in query)
-		//			{
-		//				dgObject.ItemsSource = query.ToList();
-		//			}
-		//			var Labor1 = context.Локальная_смета
-		//						.Where(c => c.Шифр == selobj.Шифр)
-		//						.Select(c => c.ТрудоемкостьРаботы)
-		//						.Sum();
-		//			txSumTrud.Text = Labor1.ToString();
-		//			var Cost1 = context.Локальная_смета
-		//					   .Where(c => c.Шифр == selobj.Шифр)
-		//					   .Select(c => c.СтоимостьРаботы)
-		//					   .Sum();
-		//			txStoimost.Text = Cost1.ToString();
-		//			//dgObject.Items.Add(item);
-		//		}
-
-		//	}
-		//}
 		private void dgObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
@@ -381,7 +292,7 @@ namespace Smeta_1
 			
 			context.Локальная_смета.Load();
 			context.Справочник_расценок.Load();
-			//dgObject.ItemsSource = query.ToList();
+			
 		}
 
 
