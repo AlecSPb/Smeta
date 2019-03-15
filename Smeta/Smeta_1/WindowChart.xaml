@@ -18,44 +18,70 @@
         ShowCloseButton="True">
    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"></ColumnDefinition>
-            <ColumnDefinition Width="0.25*"></ColumnDefinition>
-            <ColumnDefinition Width="0.40*"></ColumnDefinition>
-            <ColumnDefinition Width="0.6*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
-            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Шифр объекта" Margin="10" HorizontalContentAlignment="Right"></Label>
-        <!--<ComboBox  Name="cmbPIR" DisplayMemberPath="PerformerName" ItemsSource="{Binding}" SelectedValuePath="PerformerId" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"  Margin="20,20,20,10"></ComboBox>-->
-        <!--<ComboBox Name="cbSelectShifr" Grid.Row="0" Grid.Column="1" Margin="10" SelectionChanged="cbSelectShifr_SelectionChanged" ></ComboBox>-->
-        <ScrollViewer Grid.Row="0" Grid.Column="1">
-            <ListBox x:Name="listBox2" SelectionChanged="listBox2_SelectionChanged" DisplayMemberPath="Шифр" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,10,0,0" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Шифр объекта"
+            Margin="5"
+            HorizontalContentAlignment="Right"/>
+        <ScrollViewer
+            Grid.Row="0"
+            Grid.Column="1">
+            <ListBox 
+                x:Name="listBox2"
+                SelectionChanged="listBox2_SelectionChanged"
+                DisplayMemberPath="Шифр"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="5" />
         </ScrollViewer>
-        <WrapPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" >
-            <Label Content="Наименование объекта" Margin="10" HorizontalContentAlignment="Right"></Label>
-            <Label  x:Name="labelName" Margin="10" Content=""  FontSize="14"></Label>
+        <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Content="Наименование объекта"
+                Margin="5"
+                HorizontalContentAlignment="Right"/>
+        <Label
+            Grid.Row="0"
+            Grid.Column="3"
+            x:Name="labelName"
+            Margin="5"
+            Content=""
+            FontSize="14"/>
 
-        </WrapPanel>
-        
-        <!--<TextBox x:Name="txName" Grid.Row="0" Grid.Column="3" Margin="10"></TextBox>-->
-
-       
-        <DVC:Chart Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Canvas.Top="10" Canvas.Left="10" Name="mcChart"
-        Width="auto" Height="300" Background="LightSteelBlue">
+        <DVC:Chart 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="4"
+            Canvas.Top="10"
+            Canvas.Left="10"
+            Name="mcChart"
+            Width="auto"
+            Height="300"
+            Background="LightSteelBlue">
             <DVC:Chart.Series>
-                <DVC:PieSeries Title="Стоимость работы " IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                <DVC:PieSeries
+                    Title="Стоимость работы"
+                    IndependentValueBinding="{Binding Path=Key}"
+                    DependentValueBinding="{Binding Path=Value}">
                 </DVC:PieSeries>
-                <DVC:PieSeries Title="Трудозатраты " IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                <DVC:PieSeries 
+                    Title="Трудозатраты"
+                    IndependentValueBinding="{Binding Path=Key}"
+                    DependentValueBinding="{Binding Path=Value}">
                 </DVC:PieSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
-        <!--<DVC:PieSeries  Name="pieChart" Title="Top Products" Margin="10,10,0,0" Height="262" BorderBrush="#00000000" DataContext="{Binding}" IsHitTestVisible="False" IsTabStop="True" ForceCursor="True">
-           --><!--DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" />--><!--
-
-            
-        </DVC:PieSeries>-->
     </Grid>
 </Controls:MetroWindow>

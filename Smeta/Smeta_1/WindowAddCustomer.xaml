@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить / Изменить Проектную организацию" Height="600" Width="500"
+        Title="Добавить Проектную организацию" Height="600" Width="500"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         FontSize="16"

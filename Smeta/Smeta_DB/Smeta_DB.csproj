@@ -98,6 +98,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Договор_подряда.cs">
       <DependentUpon>SmetaDataModel.tt</DependentUpon>
     </Compile>
@@ -167,25 +176,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Smeta.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SmetaDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SmetaDataModel.edmx</DependentUpon>
-      <LastGenOutput>SmetaDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SmetaDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SmetaDataModel.edmx</DependentUpon>
-      <LastGenOutput>SmetaDataModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Smeta_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Smeta.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -196,6 +186,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SmetaDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmetaDataModel.edmx</DependentUpon>
+      <LastGenOutput>SmetaDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SmetaDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SmetaDataModel.edmx</DependentUpon>
+      <LastGenOutput>SmetaDataModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

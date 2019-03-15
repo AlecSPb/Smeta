@@ -51,25 +51,75 @@
 
     <Grid Name="grid3">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="KofCode" Grid.Row="0" Grid.Column="0" Content="* Код коэффициента:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="KofName" Grid.Row="1" Grid.Column="0" Content="* Наименование:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="KofSize" Grid.Row="2" Grid.Column="0" Content="* Значение:" Margin="10,10,10,10" ></Label>
-        <TextBox x:Name="tbKofCode" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Margin="10,10,10,10" Text="{Binding Path=Код_коэффициента, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <TextBox x:Name="tbKofName" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <TextBox x:Name="tbKofSize" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <Button Content="OK" IsDefault="True" Click="OkButton_Click"    Margin="10,5,10,5" Grid.Row="7" Grid.Column="1" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-        <Button Content="Cancel" IsCancel="True" Click="CancelButton_Click" Margin="10,5,10,5" Grid.Row="7" Grid.Column="2" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-
+        <Label 
+            x:Name="KofCode"
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="* Код коэффициента:"
+            Margin="5"/>
+        <Label
+            x:Name="KofName"
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="* Наименование:"
+            Margin="5"/>
+        <Label 
+            x:Name="KofSize"
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="* Значение:"
+            Margin="5" />
+        <TextBox 
+            x:Name="tbKofCode"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="5"
+            Text="{Binding Path=Код_коэффициента, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <TextBox 
+            x:Name="tbKofName"
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            x:Name="tbKofSize"
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button 
+                Content="OK"
+                IsDefault="True"
+                Click="OkButton_Click"
+                Margin="5"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                MinWidth="100"/>
+            <Button
+                Content="Cancel"
+                IsCancel="True"
+                Click="CancelButton_Click"
+                Margin="5"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                MinWidth="100"/>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
 

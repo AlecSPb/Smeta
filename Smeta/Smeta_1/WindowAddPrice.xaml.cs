@@ -89,20 +89,35 @@ namespace Smeta_1
 				MessageBox.Show("Поле Наименование работы содержит от 2 до 50 символов A-Z");
                 return;
             }
+			var existedItem = SmetaContext.Справочник_расценок
+			   .Where(n => n.КодРаботы == nomer1)
+			   .FirstOrDefault();
 
-            var addPrice = new Справочник_расценок()
-            {
-                КодВидаРабот = categAddWorkType,
-                КодРаботы = nomer1,
-                ЗатратыТрудаЕдОбъема = TrudObjem,
-                ИмяРаботы = tbWorkName.Text
-            };
+			if (existedItem != null)
+			{
+				MessageBox.Show("Расценка с данным кодом уже существует!");
+			}
+			try
+			{
+				var addPrice = new Справочник_расценок()
+				{
+					КодВидаРабот = categAddWorkType,
+					КодРаботы = nomer1,
+					ЗатратыТрудаЕдОбъема = TrudObjem,
+					ИмяРаботы = tbWorkName.Text
+				};
 
-            SmetaContext.Справочник_расценок.Add(addPrice);
-            SmetaContext.SaveChanges();
-            MessageBox.Show("Расценка добавлена");
-            Close();
-        }
+				SmetaContext.Справочник_расценок.Add(addPrice);
+				SmetaContext.SaveChanges();
+				MessageBox.Show("Расценка добавлена");
+				
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "SQL Error");
+			}
+			Close();
+		}
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{

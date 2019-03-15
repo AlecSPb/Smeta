@@ -81,7 +81,7 @@ namespace Smeta_1
 			Close();
 		}
 
-        public event EventHandler ClickAdmin;
-        public event EventHandler ClickUser;
+        //public event EventHandler ClickAdmin;
+        //public event EventHandler ClickUser;
     }
 }

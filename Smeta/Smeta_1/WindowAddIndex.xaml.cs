@@ -22,7 +22,6 @@ using System.Xml.Linq;
 using Ninject;
 using Smeta_DB;
 
-
 namespace Smeta_1
 {
 	/// <summary>
@@ -63,39 +62,38 @@ namespace Smeta_1
 			{
 				MessageBox.Show("Поле Наименование коэффициента должно содеражать от 2 до 60 символов A-Z");
 			}
+			var existedItem = SmetaContext.Поправочный_коэффициент_по_типу_ПИР
+			   .Where(n => n.Код_коэффициента == nomer)
+			   .FirstOrDefault();
 
-            var addIndex = new Поправочный_коэффициент_по_типу_ПИР()
-            {
-                Код_коэффициента = Convert.ToInt32(tbKofCode.Text),
-                Наименование_коэффициента = tbKofName.Text,
-                Значение_коэффициента = Convert.ToDouble(tbKofSize.Text)
-            };
+			if (existedItem != null)
+			{
+				MessageBox.Show("Коэффициент с данным кодом уже существует!");
+			}
+			try
+			{
+				var addIndex = new Поправочный_коэффициент_по_типу_ПИР()
+				{
+					Код_коэффициента = Convert.ToInt32(tbKofCode.Text),
+					Наименование_коэффициента = tbKofName.Text,
+					Значение_коэффициента = Convert.ToDouble(tbKofSize.Text)
+				};
 
-            SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Add(addIndex);
-            SmetaContext.SaveChanges();
-            MessageBox.Show("Коэффициент добавлен в базу");
-            Close();
-        }
+				SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Add(addIndex);
+				SmetaContext.SaveChanges();
+				MessageBox.Show("Коэффициент добавлен в базу");
+				
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "SQL Error");
+			}
 
+			Close();
 
-		//private bool prowSuchs(string code, string name, string size, DataTable Поправочный_коэффициент_по_типу_ПИР)
-		//{
+		}
 
-		//	var query = from order in Поправочный_коэффициент_по_типу_ПИР.AsEnumerable()
-		//				where order.Field<string>("Код_коэффициента") == code & order.Field<string>("Наименование_коэффициента") == name & order.Field<string>("Значение_коэффициента") == size
-		//				select new
-		//				{
-		//					ID = order.Field<string>("Код_коэффициента")
-		//				};
-		//	if (query.Count() == 0)
-		//	{
-		//		return false;
-		//	}
-		//	else
-		//	{
-		//		return true;
-		//	}
-		//}
+		
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();

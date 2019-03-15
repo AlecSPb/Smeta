@@ -522,6 +522,7 @@
                     FontSize="12"
                     SelectionChanged="dgObject_SelectionChanged">
                     <DataGrid.Columns>
+                        <!---->
                         <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
                                         <DataGridTextColumn  Header="Наименование работы" Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
                                         <DataGridTextColumn Header="Объем" Width="90" Binding="{Binding Objem}"></DataGridTextColumn>

@@ -76,21 +76,36 @@ namespace Smeta_1
 				tbRS.Text = "Поле должно содержать 13 цифр";
                 return;
             }
+			var existedItem = SmetaContext.Проектная_организация
+			   .Where(n => n.КодПроектировщика == nomer)
+			   .FirstOrDefault();
 
-            var addProjectCompany = new Проектная_организация()
-            {
-                КодПроектировщика = nomer,
-                НаименованиеПроектиров = tbProjectName.Text,
-                ЮрАдрес = tbProjectName.Text,
-                Р_с = tbRS.Text,
-                УНП = tbProjectYNP.Text,
-                Тел = tbPhone.Text,
-                ЭлПочта = tbMail.Text
-            };
+			if (existedItem != null)
+			{
+				MessageBox.Show("Проектная организация с данным кодом уже существует!");
+			}
+			try
+			{
+				var addProjectCompany = new Проектная_организация()
+				{
+					КодПроектировщика = nomer,
+					НаименованиеПроектиров = tbProjectName.Text,
+					ЮрАдрес = tbProjectName.Text,
+					Р_с = tbRS.Text,
+					УНП = tbProjectYNP.Text,
+					Тел = tbPhone.Text,
+					ЭлПочта = tbMail.Text
+				};
 
-            SmetaContext.Проектная_организация.Add(addProjectCompany);
-            SmetaContext.SaveChanges();
-            Close();
+				SmetaContext.Проектная_организация.Add(addProjectCompany);
+				SmetaContext.SaveChanges();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "SQL Error");
+			}
+
+			Close();
         }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)

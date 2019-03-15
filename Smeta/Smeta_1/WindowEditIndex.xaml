@@ -51,22 +51,61 @@
 
     <Grid Name="grid4">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="KofNameEdit" Grid.Row="0" Grid.Column="0" Content="* Наименование:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="KofSizeEdit" Grid.Row="1" Grid.Column="0" Content="* Значение:" Margin="10" ></Label>
-        <TextBox x:Name="tbKofNameEdit" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="40" Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <TextBox x:Name="tbKofSizeEdit" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="200" Height="40" Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <Button Content="Edit" IsDefault="True" Click="EditButton_Click"    Margin="10,5,10,5" Grid.Row="2" Grid.Column="1" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-        <Button Content="Cancel" IsCancel="True" Click="CancelButton_Click" Margin="10,5,10,5" Grid.Row="2" Grid.Column="2" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-
-    </Grid>
+        <Label
+            x:Name="KofNameEdit"
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="* Наименование:"
+            Margin="5" />
+        <Label 
+            x:Name="KofSizeEdit"
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="* Значение:"
+            Margin="5" />
+        <TextBox 
+            x:Name="tbKofNameEdit" 
+            Grid.Row="0" 
+            Grid.Column="1" 
+            Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            x:Name="tbKofSizeEdit"
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button
+                Content="Edit"
+                IsDefault="True"
+                Click="EditButton_Click"
+                Margin="5"
+                MinWidth="100"
+                Style="{StaticResource AccentedSquareButtonStyle}"/>
+            <Button
+                Content="Cancel"
+                IsCancel="True"
+                Click="CancelButton_Click"
+                Margin="5"
+                MinWidth="100"
+                Style="{StaticResource AccentedSquareButtonStyle}"/>
+        </StackPanel>
+     </Grid>
 </Controls:MetroWindow>
 

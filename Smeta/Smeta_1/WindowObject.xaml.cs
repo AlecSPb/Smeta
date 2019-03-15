@@ -132,22 +132,7 @@ namespace Smeta_1
 
 		private void dgObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-            // Этот код ничего не делает. Удалить!
-
-			//var ls = dgObject.SelectedItem as Локальная_смета;
-
-			//if (ls != null)
-			//{
-			//	ls = SmetaContext.Локальная_смета
-			//		.Where(v => v.Шифр == ls.Шифр)
-			//		.AsEnumerable()
-			//		.FirstOrDefault();
-
-
-			//}
-
-   //         SmetaContext.Локальная_смета.Load();
-   //         SmetaContext.Справочник_расценок.Load();
+            
 		}
 
 

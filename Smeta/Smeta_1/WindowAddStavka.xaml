@@ -51,29 +51,91 @@
 
     <Grid Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="StavkaCode" Grid.Row="0" Grid.Column="0" Content="* Код ставки:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="StavkaDate" Grid.Row="1" Grid.Column="0" Content="* Дата ставки:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="StavkaSize" Grid.Row="2" Grid.Column="0" Content="* Значение:" Margin="10,10,10,10" ></Label>
-        <Label x:Name="StavkaName" Grid.Row="3" Grid.Column="0" Content="* Обоснование:" Margin="10,10,10,10"></Label>
-        <TextBox x:Name="tbStavkaCode" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Margin="10,10,10,10" Text="{Binding Path=КодСтавки, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <TextBox x:Name="tbStavkaDate" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Дата_Ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <!--<DatePicker x:Name="tbStavkaDate" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Дата_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top"/>-->
-        <TextBox x:Name="tbStavkaSize" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <TextBox x:Name="tbStavkaName" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Width="250" Height="40" Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}" Margin="10,10,10,10"></TextBox>
-        <Button Content="OK" IsDefault="True" Click="OkButton_Click"    Margin="10,5,10,5" Grid.Row="7" Grid.Column="1" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-        <Button Content="Cancel" IsCancel="True" Click="CancelButton_Click" Margin="10,5,10,5" Grid.Row="7" Grid.Column="2" Style="{StaticResource AccentedSquareButtonStyle}"></Button>
-     
+        <Label 
+            x:Name="StavkaCode"
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="* Код ставки:"
+            Margin="5" />
+
+        <Label 
+            x:Name="StavkaDate"
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="* Дата ставки:"
+            Margin="5" />
+
+        <Label 
+            x:Name="StavkaSize"
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="* Значение:"
+            Margin="5" />
+        <Label 
+            x:Name="StavkaName"
+            Grid.Row="3"
+            Grid.Column="0"
+            Content="* Обоснование:"
+            Margin="5"/>
+        <TextBox 
+            x:Name="tbStavkaCode"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="5" 
+            Text="{Binding Path=КодСтавки, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" 
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <TextBox
+            x:Name="tbStavkaDate"
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Path=Дата_Ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox
+            x:Name="tbStavkaSize"
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <TextBox 
+            x:Name="tbStavkaName"
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            Margin="5"/>
+        <StackPanel
+            Grid.Row="5"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button 
+                  Content="OK"
+                  IsDefault="True"
+                  Click="OkButton_Click"
+                  Margin="5"
+                  MinWidth="100"
+                  Style="{StaticResource AccentedSquareButtonStyle}"/>
+            <Button
+                  Content="Cancel"
+                  IsCancel="True"
+                  Click="CancelButton_Click"
+                  Margin="5" 
+                  MinWidth="100"
+                  Style="{StaticResource AccentedSquareButtonStyle}"/>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow>
 
