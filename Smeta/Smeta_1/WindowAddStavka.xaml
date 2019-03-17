@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить ставку" Height="450" Width="450"
+        Title="Добавить ставку" Height="300" Width="450"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
@@ -25,13 +25,14 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="5"/>
 
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FontStyle" Value="Oblique"/>
-
+            <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                                  <Setter Property="Background" Value="Pink"/>
@@ -65,33 +66,26 @@
             x:Name="StavkaCode"
             Grid.Row="0"
             Grid.Column="0"
-            Content="* Код ставки:"
-            Margin="5" />
-
+            Content="* Код ставки:"/>
         <Label 
             x:Name="StavkaDate"
             Grid.Row="1"
             Grid.Column="0"
-            Content="* Дата ставки:"
-            Margin="5" />
-
+            Content="* Дата ставки:"/>
         <Label 
             x:Name="StavkaSize"
             Grid.Row="2"
             Grid.Column="0"
-            Content="* Значение:"
-            Margin="5" />
+            Content="* Значение:"/>
         <Label 
             x:Name="StavkaName"
             Grid.Row="3"
             Grid.Column="0"
-            Content="* Обоснование:"
-            Margin="5"/>
+            Content="* Обоснование:"/>
         <TextBox 
             x:Name="tbStavkaCode"
             Grid.Row="0"
             Grid.Column="1"
-            Margin="5" 
             Text="{Binding Path=КодСтавки, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
@@ -99,23 +93,20 @@
             Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Path=Дата_Ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbStavkaSize"
             Grid.Row="2"
             Grid.Column="1"
             Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox 
             x:Name="tbStavkaName"
             Grid.Row="3"
             Grid.Column="1"
             Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
-        <StackPanel
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+       <StackPanel
             Grid.Row="5"
             Grid.Column="1"
             Orientation="Horizontal"
@@ -125,15 +116,15 @@
                   Content="OK"
                   IsDefault="True"
                   Click="OkButton_Click"
-                  Margin="5"
                   MinWidth="100"
+                  Margin="5"
                   Style="{StaticResource AccentedSquareButtonStyle}"/>
             <Button
                   Content="Cancel"
                   IsCancel="True"
                   Click="CancelButton_Click"
-                  Margin="5" 
                   MinWidth="100"
+                  Margin="5"
                   Style="{StaticResource AccentedSquareButtonStyle}"/>
         </StackPanel>
     </Grid>

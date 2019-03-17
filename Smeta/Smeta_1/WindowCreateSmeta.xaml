@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Создать смету" Height="450" Width="1000"
+        Title="Создать смету" Height="400" Width="1100"
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTransitionsEnabled="False"
@@ -16,19 +16,18 @@
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16"/>
-        </Style>
-
+       </Style>
         <Style TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
-            <Setter Property="FontSize" Value="16"/>
-
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FontStyle" Value="Oblique"/>
-
+            <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>
@@ -49,118 +48,194 @@
 
     <Grid Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Объект, договор">
-            <StackPanel>
-                <WrapPanel HorizontalAlignment="Right">
-                    <Label Content="Наименование объекта:" ></Label>
-                    <!--<TextBox Width="200" Text="{Binding Path=Cargo, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox x:Name="txObjectName" Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Right"  >
-                    <Label Content="Шифр:" ></Label>
-                    <!--<TextBox Width="100" Text="{Binding Path=From, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox x:Name="txShifr" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-
-                </WrapPanel>
-
-
-                <WrapPanel HorizontalAlignment="Right">
-                    <Label Content="Адрес:" ></Label>
-                    <!--<TextBox Width="200" Text="{Binding Path=Notes, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox x:Name="txAdress" Width="200" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Right"  >
-                    <Label Content="Договор №:" ></Label>
-                    <!--<TextBox Width="100" Text="{Binding Path=DateOfLoading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged ,StringFormat=\{0:dd.MM.yyyy\}}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>-->
-                    <TextBox x:Name="txNomerDog" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                    <Label Content="Дата договора"  ></Label>
-                    <TextBox x:Name="txDateDog" Width="100" Text="{Binding Path=DateOfUnloading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0:dd.MM.yyyy\}}" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                    <!--<DatePicker></DatePicker>-->
-
-
-                </WrapPanel>
-            </StackPanel>
+        <GroupBox
+            Grid.Row="0"
+            Grid.Column="0" 
+            Header="Объект, договор">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                         Grid.Row="0"
+                         Grid.Column="0"
+                         Content="Наименование объекта:"/>
+                <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        x:Name="txObjectName"
+                        Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+                <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Content="Шифр:"/>
+                <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        x:Name="txShifr"
+                        Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+                <Label
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Content="Адрес:"/>
+                <TextBox
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       x:Name="txAdress"
+                       Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+                <Label
+                      Grid.Row="3"
+                      Grid.Column="0"
+                      Content="Договор №:"/>
+                <TextBox
+                      Grid.Row="3"
+                      Grid.Column="1"
+                      x:Name="txNomerDog"/>
+                <Label
+                      Grid.Row="4"
+                      Grid.Column="0"
+                      Content="Дата договора"/>
+                <TextBox
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      x:Name="txDateDog"
+                      Text="{Binding Path=DateOfUnloading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0:dd.MM.yyyy\}}"
+                      Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+            </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="1" Header="Заказчик">
-            <StackPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Заказчик:" Margin="5" ></Label>
-                    </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <ComboBox Width="200" Name="cmbCustomers" Height="20" SelectionChanged="cbSelectCustomer_SelectionChanged"></ComboBox>
-
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                     <Label Content="Проектная организация:" Margin="5" />
-                     <ComboBox Width="200" x:Name="cmbProject"  SelectionChanged="cbSelectProject_SelectionChanged" Margin="5"/>
-
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Вид объекта проектирования:" Margin="5" ></Label>
-                     <ComboBox Width="200" Name="cmbObjectProject" SelectionChanged="CmbObjectProject_SelectionChanged" Margin="5"></ComboBox>
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Ставка 14-го разряда" Margin="5"></Label>
-                    <ComboBox Width="200" Name="cmbStavka" SelectionChanged="CmbStavka_SelectionChanged" Margin="5"></ComboBox>
-                </WrapPanel>
-            </StackPanel>
-
-
+        <GroupBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Header="Заказчик">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Заказчик:"/>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Name="cmbCustomers"
+                    SelectionChanged="cbSelectCustomer_SelectionChanged"/>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Проектная организация:"/>
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    x:Name="cmbProject"
+                    SelectionChanged="cbSelectProject_SelectionChanged"/>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="Вид объекта проектирования:"/>
+                <ComboBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Name="cmbObjectProject"
+                    SelectionChanged="CmbObjectProject_SelectionChanged"/>
+                <Label
+                     Grid.Row="3"
+                     Grid.Column="0"
+                     Content="Ставка 14-го разряда"/>
+                <ComboBox
+                     Grid.Row="3"
+                     Grid.Column="1"
+                     Name="cmbStavka"
+                     SelectionChanged="CmbStavka_SelectionChanged"/>
+            </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="2" Header="Расценки">
-            <StackPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Вид проектных работ:" Margin="5" ></Label>
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <ComboBox Width="200" Name="cmbWorkType" Height="20" SelectionChanged="cbSelectWorkType_SelectionChanged"></ComboBox>
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Наименование работы:" Margin="5" />
-                    <ComboBox Width="200" x:Name="cmbWorkName"  SelectionChanged="CmbWorkName_SelectionChanged" Margin="5"/>
-                    <!--<DataGrid IsReadOnly="True" x:Name="dgDirectory_1" HorizontalAlignment="Left" Height="150" Margin="5" FontSize="10"
-        ItemsSource="{Binding People}"
-        AutoGenerateColumns="True"
-        Style="{StaticResource AzureDataGrid}"
-        SelectionChanged="DgDirectory_SelectionChanged">
-                        <DataGrid.Columns>
-                            --><!--<DataGridTextColumn Header="Код работы" Binding="{Binding КодРаботы}" Width="Auto"></DataGridTextColumn>--><!--
-                            <DataGridTextColumn Header="Код работы" Width="100" Binding="{Binding КодРаботы}"></DataGridTextColumn>
-                            --><!--<DataGridTextColumn Header="Наименование работы" Binding="{Binding ИмяРаботы}" Width="Auto"></DataGridTextColumn>--><!--
-                            <DataGridTextColumn Header="Наименование работы" Width="*" Binding="{Binding ИмяРаботы}"></DataGridTextColumn>
-                            --><!--<DataGridTextColumn Header="Затраты труда" Binding="{Binding ЗатратыТрудаЕдОбъема}" Width="*"></DataGridTextColumn>--><!--
-                            <DataGridTextColumn Header="Затраты труда" Width="100" Binding="{Binding ЗатратыТрудаЕдОбъема}"></DataGridTextColumn>
-
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Объем:" Margin="5" />
-                    <TextBox x:Name="txObjem" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                </WrapPanel>
-                <!--<WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Стоимость работы:" Margin="5" />
-                    <TextBox x:Name="txSum" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                </WrapPanel>
-                <WrapPanel HorizontalAlignment="Stretch">
-                    <Label Content="Трудоемкость работы:" Margin="5" />
-                    <TextBox x:Name="txTrud" Width="100" Validation.ErrorTemplate="{StaticResource ErrorTempl}"  Margin="5,5,5,5"></TextBox>
-                </WrapPanel>-->
-            </StackPanel>
+        <GroupBox
+            Grid.Row="0"
+            Grid.Column="2"
+            Header="Расценки">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Вид проектных работ:"/>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Name="cmbWorkType"
+                    SelectionChanged="cbSelectWorkType_SelectionChanged"/>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Наименование работы:"/>
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    x:Name="cmbWorkName"
+                    SelectionChanged="CmbWorkName_SelectionChanged"
+                    Margin="5"/>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="Объем:"/>
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    x:Name="txObjem"
+                    Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+            </Grid>
         </GroupBox>
-        <WrapPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
-             <Button Content="OK" IsDefault="True"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" Click="OkButton_Click"></Button>
-            <Button Content="Cancel" IsCancel="True"  Margin="5,5,5,5" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" Click="CancelButton_Click"></Button>
-
-        </WrapPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button
+                Content="OK"
+                IsDefault="True"
+                MinWidth="100"
+                Margin="5"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                Click="OkButton_Click"/>
+            <Button 
+                Content="Cancel"
+                IsCancel="True"
+                MinWidth="100"
+                Margin="5"
+                Style="{StaticResource AccentedSquareButtonStyle}"
+                Click="CancelButton_Click"/>
+         </StackPanel>
     </Grid>
 </Controls:MetroWindow>
