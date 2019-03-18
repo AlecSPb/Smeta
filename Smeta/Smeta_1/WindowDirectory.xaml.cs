@@ -84,7 +84,10 @@ namespace Smeta_1
 		private void cbSelectTypeWork_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var catalWork = cbSelectTypeWork.SelectedItem as Справочник_видов_работ;
-
+			catalWork = SmetaContext.Справочник_видов_работ
+				.Where(v => v.ВидРабот == cbSelectTypeWork.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
 			SmetaContext.Справочник_видов_работ.Load();
 
 			dgDirectory.Items.Clear();
@@ -101,53 +104,15 @@ namespace Smeta_1
 
 		private void dg1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-            // Этот код ничего не делает. Удалить!
-
-			//Справочник_расценок catalogPrice = dgDirectory.SelectedItem as Справочник_расценок;
-
-            //if (catalogPrice != null)
-			//{
-			//	catalogPrice = SmetaContext.Справочник_расценок
-			//		.Where(v => v.КодРаботы == catalogPrice.КодРаботы)
-			//		.AsEnumerable()
-			//		.FirstOrDefault();
-
-			//	SmetaContext.Справочник_расценок.Load();
-			//}
+            
 		}
 		private void dgKof_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-            // Этот код ничего не делает. Удалить!
-
-            //Поправочный_коэффициент_по_типу_ПИР kof = dgKof.SelectedItem as Поправочный_коэффициент_по_типу_ПИР;
-            //if (kof != null)
-            //{
-            //	kof = SmetaContext.Поправочный_коэффициент_по_типу_ПИР
-            //		.Where(k=> k.Код_коэффициента == kof.Код_коэффициента)
-            //		.AsEnumerable()
-            //		.FirstOrDefault();
-
-
-            //	SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Load();
-
-            //}
+            
         }
         private void dgStavka_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-            // Этот код ничего не делает. Удалить!
-
-            //Ставка_14_го_разряда stavka = dgStavka.SelectedItem as Ставка_14_го_разряда;
-            //if (stavka != null)
-            //{
-            //	stavka = SmetaContext.Ставка_14_го_разряда
-            //		.Where(s => s.КодСтавки == stavka.КодСтавки)
-            //		.AsEnumerable()
-            //		.FirstOrDefault();
-
-
-            //	SmetaContext.Ставка_14_го_разряда.Load();
-
-            //}
+           
         }
         public static int pk2ID;// вторичный ключ
 		public static string oldNaz;

@@ -6,7 +6,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Вход" Height="180" Width="500"
+        Title="Вход" Height="180" Width="350"
+       ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         BorderThickness="0" 
         GlowBrush="Black"
@@ -14,6 +15,27 @@
         ShowMinButton="True"
         ShowMaxRestoreButton="True"
         ShowCloseButton="True">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+       </Style>
+          <Style TargetType="TextBox">
+           <Setter Property="Margin" Value="5"/>
+       </Style>
+     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -28,33 +50,27 @@
             Grid.Row="0"
             Grid.Column="0"
             Name="textBlock1"
-            VerticalAlignment="Center"
             Text="Логин"
-            Margin="5"
             />
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             Name="textBlock2"
-            VerticalAlignment="Center"
             Text="Пароль"
-            Margin="5"
-            />
+           />
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
             x:Name="textBoxLogin"
             VerticalAlignment="Center"
             TextWrapping="Wrap"
-            Margin="5"
-            />
+           />
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
             x:Name="passwordBox1"
             VerticalAlignment="Center"
             TextWrapping="Wrap"
-            Margin="5"
             />
         <Grid
             Grid.Row="2"
@@ -71,8 +87,7 @@
                 Content="ожидание входа..."
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="5"
-            />
+           />
             <StackPanel
                 Grid.Column="1"
                 Orientation="Horizontal"

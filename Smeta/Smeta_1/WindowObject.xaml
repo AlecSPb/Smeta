@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Oбъект" Height="600" Width="1200" FontSize="16" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Title="Oбъект" Height="600" Width="1200" FontSize="16" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen"
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTransitionsEnabled="False"
@@ -79,11 +79,11 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem
-                x:Name="menu_saveDogovor"
                 Header="Документы"
                 BorderThickness="1"
                 >
                 <MenuItem
+                    x:Name="menu_saveDogovor"
                     Header="Договор подряда"
                     Click="MenuItem_Click_SaveDogovor"
                     >
@@ -93,6 +93,20 @@
                 </MenuItem>
                 <MenuItem
                     Header="Смета ПИР"
+                    >
+                    <MenuItem.Icon>
+                        <Image Source="Images/add_price.png" Height="15" Width="15"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem
+                x:Name="menu_Counter"
+                Header="Сметчик"
+                BorderThickness="1"
+                >
+                <MenuItem
+                    Header="Добавить расценку"
+                    Click="MenuItem_AddPriceToSmeta"
                     >
                     <MenuItem.Icon>
                         <Image Source="Images/add_price.png" Height="15" Width="15"/>
@@ -520,7 +534,8 @@
                     AutoGenerateColumns="True"
                     Style="{StaticResource AzureDataGrid}"
                     FontSize="12"
-                    SelectionChanged="dgObject_SelectionChanged">
+                    SelectionChanged="dgObject_SelectionChanged"
+                    >
                     <DataGrid.Columns>
                         <!---->
                         <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
@@ -540,6 +555,7 @@
                     Grid.Row="1"
                     >
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
@@ -573,13 +589,34 @@
                     Grid.Row="1"
                     Grid.Column="2"
                     Content="руб.коп."/>
+                    <StackPanel
+                        Grid.Row="2"
+                        Grid.ColumnSpan="3"
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom">
+                        <Button
+                             x:Name="btnAddPrice"
+                             Content="add price"
+                             IsDefault="True"
+                             Click="AddPriceToSmetaButton_Click"
+                             Margin="5"
+                             MinWidth="100"
+                             Style="{StaticResource AccentedSquareButtonStyle}"/>
+                        <Button
+                             x:Name="btnEditPrice"
+                             Content="edit price"
+                             IsDefault="True"
+                             Click="EditPriceToSmetaButton_Click"
+                             Margin="5"
+                             MinWidth="100"
+                             Style="{StaticResource AccentedSquareButtonStyle}"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </GroupBox>
-        <StatusBar Grid.Row="6" FontSize="12" Grid.ColumnSpan="2">
-            <Label Content="Пользователь:" Foreground="White"></Label>
-            <Label x:Name="user" Foreground="White"></Label>
-        </StatusBar>
+       
     </Grid>
 
 </Controls:MetroWindow>

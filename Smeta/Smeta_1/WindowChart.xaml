@@ -9,10 +9,11 @@
           
         mc:Ignorable="d"
         Title="График" Height="450" Width="800"
-        FontSize="16" ResizeMode="CanMinimize"
+        FontSize="16" 
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTransitionsEnabled="False"
+        ResizeMode="CanResizeWithGrip"
         ShowMinButton="True"
         ShowMaxRestoreButton="True"
         ShowCloseButton="True">

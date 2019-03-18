@@ -90,6 +90,7 @@ namespace Smeta_1
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "SQL Error");
+				return;
             }
 
             Close();

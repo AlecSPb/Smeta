@@ -47,23 +47,17 @@ namespace Smeta_1
                 return;
 			}
 
-            if (tbProjectCod != null)
-			{
-				commentName.Text = "Поле не может быть пустым";
-                return;
-            }
+   //         if (tbProjectName != null)
+			//{
+			//	tbProjectName.Text = "Поле не может быть пустым";
+   //             return;
+   //         }
 
-            if (tbProjectName != null)
-			{
-				tbProjectName.Text = "Поле не может быть пустым";
-                return;
-            }
-
-            if (tbProjectAdress != null)
-			{
-				tbProjectAdress.Text = "Поле не может быть пустым";
-                return;
-            }
+   //         if (tbProjectAdress != null)
+			//{
+			//	tbProjectAdress.Text = "Поле не может быть пустым";
+   //             return;
+   //         }
 
             if (tbProjectYNP.Text.Length != 9)
 			{
@@ -83,6 +77,7 @@ namespace Smeta_1
 			if (existedItem != null)
 			{
 				MessageBox.Show("Проектная организация с данным кодом уже существует!");
+				return;
 			}
 			try
 			{
@@ -99,6 +94,7 @@ namespace Smeta_1
 
 				SmetaContext.Проектная_организация.Add(addProjectCompany);
 				SmetaContext.SaveChanges();
+				MessageBox.Show("Проектная организация добавлена в базу");
 			}
 			catch (Exception ex)
 			{

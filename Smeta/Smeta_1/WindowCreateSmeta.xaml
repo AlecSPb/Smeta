@@ -9,6 +9,7 @@
         Title="Создать смету" Height="400" Width="1100"
         BorderThickness="0" 
         GlowBrush="Black"
+        ResizeMode="CanResizeWithGrip"
         WindowTransitionsEnabled="False"
         ShowMinButton="True"
         ShowMaxRestoreButton="True"
@@ -22,6 +23,10 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+            
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>

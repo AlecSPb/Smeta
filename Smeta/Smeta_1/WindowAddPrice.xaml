@@ -6,8 +6,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить расценку" Height="300" Width="500"
-        ResizeMode="CanMinimize"
+        Title="Добавить расценку" Height="250" Width="450"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
         BorderThickness="0" 
@@ -19,6 +19,9 @@
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="Label">
@@ -66,8 +69,8 @@
         x:Name="WorkTypeName"
         Grid.Row="0"
         Grid.Column="0"
-        Content="* Наименование вида работ:"
-        Margin="5" />
+        Content="* Наименование вида работ:"/>
+
         <Label
             x:Name="WorkCode"
             Grid.Row="1"
@@ -121,12 +124,14 @@
                 IsDefault="True"
                 Click="OkButton_Click"
                 MinWidth="100"
+                Margin="5"
                 Style="{StaticResource AccentedSquareButtonStyle}"/>
             <Button
                 Content="Cancel"
                 IsCancel="True"
                 Click="CancelButton_Click"
                 MinWidth="100"
+                Margin="5"
                 Style="{StaticResource AccentedSquareButtonStyle}"/>
         </StackPanel>
      </Grid>

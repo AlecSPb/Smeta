@@ -6,8 +6,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить коэффициент" Height="300" Width="400"
-        ResizeMode="CanMinimize"
+        Title="Добавить коэффициент" Height="220" Width="400"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
         BorderThickness="0" 
@@ -25,13 +25,13 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
-
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FontStyle" Value="Oblique"/>
-
+            <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <Setter Property="Background" Value="Pink"/>
@@ -64,25 +64,24 @@
             x:Name="KofCode"
             Grid.Row="0"
             Grid.Column="0"
-            Content="* Код коэффициента:"
-            Margin="5"/>
+            Content="* Код коэффициента:"/>
+
         <Label
             x:Name="KofName"
             Grid.Row="1"
             Grid.Column="0"
-            Content="* Наименование:"
-            Margin="5"/>
+            Content="* Наименование:"/>
+
         <Label 
             x:Name="KofSize"
             Grid.Row="2"
             Grid.Column="0"
-            Content="* Значение:"
-            Margin="5" />
+            Content="* Значение:"/>
+
         <TextBox 
             x:Name="tbKofCode"
             Grid.Row="0"
             Grid.Column="1"
-            Margin="5"
             Text="{Binding Path=Код_коэффициента, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox 
@@ -90,15 +89,13 @@
             Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbKofSize"
             Grid.Row="2"
             Grid.Column="1"
             Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <StackPanel
             Grid.Row="3"
             Grid.Column="1"
@@ -109,15 +106,15 @@
                 Content="OK"
                 IsDefault="True"
                 Click="OkButton_Click"
-                Margin="5"
                 Style="{StaticResource AccentedSquareButtonStyle}"
+                Margin="5"
                 MinWidth="100"/>
             <Button
                 Content="Cancel"
                 IsCancel="True"
                 Click="CancelButton_Click"
-                Margin="5"
                 Style="{StaticResource AccentedSquareButtonStyle}"
+                Margin="5"
                 MinWidth="100"/>
         </StackPanel>
     </Grid>

@@ -6,8 +6,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Добавить Проектную организацию" Height="600" Width="500"
-        ResizeMode="CanMinimize"
+        Title="Добавить Проектную организацию" Height="400" Width="500"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
         BorderThickness="0" 
@@ -26,13 +26,13 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
-
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FontStyle" Value="Oblique"/>
-
+            <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>-->
@@ -71,56 +71,41 @@
             x:Name="ProjectCod"
             Grid.Row="0"
             Grid.Column="0"
-            Content="* Код проект. орг-ции:"
-            Margin="5"
-            />
+            Content="* Код проект. орг-ции:"/>
         <Label
             x:Name="ProjectName"
             Grid.Row="1"
             Grid.Column="0"
-            Content="* Наименование:"
-            Margin="5"
-            />
+            Content="* Наименование:"/>
         <Label
             x:Name="ProejctAdress"
             Grid.Row="2"
             Grid.Column="0"
-            Content="* Адрес:"
-            Margin="5"
-            />
+            Content="* Адрес:"/>
         <Label
             x:Name="ProjectYNP"
             Grid.Row="3"
             Grid.Column="0"
-            Content="* УНП:"
-            Margin="5"
-            />
+            Content="* УНП:"/>
         <Label
             x:Name="ProjectRS"
             Grid.Row="4"
             Grid.Column="0"
-            Content="* Р/с:"
-            Margin="5"
-            />
+            Content="* Р/с:"/>
         <Label
             x:Name="ProjectPhone"
             Grid.Row="5"
             Grid.Column="0"
-            Content="* Телефон:"
-            Margin="5"
-            />
+            Content="* Телефон:"/>
         <Label
             x:Name="ProjectMail"
             Grid.Row="6"
             Grid.Column="0"
-            Content="* Эл. почта:"
-            Margin="5"
-            />
+            Content="* Эл. почта:"/>
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
             x:Name="tbProjectCod"
-            Margin="5"
             Text="{Binding Path=КодПроектировщика, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             />
@@ -131,7 +116,6 @@
             >
             <TextBox
                 x:Name="tbProjectName"
-                Margin="5"
                 Text="{Binding НаименованиеПроектиров, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                 Validation.ErrorTemplate="{StaticResource ErrorTempl}"
                 />
@@ -145,41 +129,35 @@
             Grid.Column="1" 
             x:Name="tbProjectAdress"
             Text="{Binding Path=ЮрАдрес, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="2" 
             x:Name="tbProjectYNP"
             Text="{Binding Path=УНП, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbRS"
             Text="{Binding Path=Р_с, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbPhone"
             Text="{Binding Path=Тел, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbMail"
             Text="{Binding Path=ЭлПочта, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"
-            />
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <StackPanel
             Grid.Row="7"
             Grid.Column="1"

@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="Smeta_1.EditStavka"
+﻿<Controls:MetroWindow x:Class="Smeta_1.EditPriceToSmeta"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Изменить ставку" Height="200" Width="450"
+        Title="Изменить объем в смете" Height="280" Width="500"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
@@ -20,17 +20,18 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
         </Style>
-
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
         <Style TargetType="Label">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
-
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FontStyle" Value="Oblique"/>
+            <Setter Property="Margin" Value="5"/>
 
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
@@ -46,61 +47,82 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
-    </Window.Resources>
-
-    <Grid Name="grid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+ </Window.Resources>
+ <Grid Name="grid4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
         <Label
-            x:Name="StavkaDateEdit"
+            x:Name="WorkTypeNameEdit"
             Grid.Row="0"
             Grid.Column="0"
-            Content="* Дата ставки:"
-            Margin="5" />
+            Content="* Наименование раздела:"/>
         <Label 
-            x:Name="StavkaSizeEdit"
+            x:Name="WorkNameEdit"
             Grid.Row="1"
             Grid.Column="0"
-            Content="* Значение:"
-            Margin="5" />
+            Content="* Наименование вида работ:"/>
         <Label 
-            x:Name="StavkaNameEdit"
+            x:Name="Value"
             Grid.Row="2"
             Grid.Column="0"
-            Content="* Обоснование:"
-            Margin="5"/>
-        <TextBox
-            x:Name="tbStavkaDateEdit"
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding Path=Дата_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
-        <TextBox
-            x:Name="tbStavkaSizeEdit"
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
-        <TextBox
-            x:Name="tbStavkaNameEdit"
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            Margin="5"/>
-        <StackPanel
+            Content="* Объем:"/>
+        <Label 
+            x:Name="StavkaCodeEdit"
             Grid.Row="3"
+            Grid.Column="0"
+            Content="* Ставка 14-го разряда:"/>
+        <Label 
+            x:Name="KofCodeEdit"
+            Grid.Row="4"
+            Grid.Column="0"
+            Content="* Коэффициент:"/>
+        <ComboBox
+            x:Name="cmbWorkType"
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>
+        <ComboBox
+            x:Name="cmbWorkName"
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Path=КодРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            SelectionChanged="cbSelectWorkAdd_SelectionChanged"/>
+        <TextBox
+            x:Name="tbValue"
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Path=ФизОбъемРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            />
+        <ComboBox
+            x:Name="cmbStavka"
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="{Binding Path=КодСтавки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>
+        <ComboBox
+            x:Name="cmbKof"
+            Grid.Row="4"
+            Grid.Column="1"
+            Text="{Binding Path=Код_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>
+        <StackPanel
+            Grid.Row="5"
             Grid.Column="1"
             Orientation="Horizontal"
             HorizontalAlignment="Right"
@@ -120,6 +142,5 @@
                 MinWidth="100"
                 Style="{StaticResource AccentedSquareButtonStyle}"/>
         </StackPanel>
-     </Grid>
+    </Grid>
 </Controls:MetroWindow>
-

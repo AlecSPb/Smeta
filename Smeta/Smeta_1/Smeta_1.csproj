@@ -100,6 +100,9 @@
     <Compile Include="WindowAddPrice.xaml.cs">
       <DependentUpon>WindowAddPrice.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowAddPriceToSmeta.xaml.cs">
+      <DependentUpon>WindowAddPriceToSmeta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowAddStavka.xaml.cs">
       <DependentUpon>WindowAddStavka.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,9 @@
     <Compile Include="WindowEditIndex.xaml.cs">
       <DependentUpon>WindowEditIndex.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowEditPriceToSmeta.xaml.cs">
+      <DependentUpon>WindowEditPriceToSmeta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowEditStavka.xaml.cs">
       <DependentUpon>WindowEditStavka.xaml</DependentUpon>
     </Compile>
@@ -135,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowAddPrice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowAddPriceToSmeta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowEditIndex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowEditPriceToSmeta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

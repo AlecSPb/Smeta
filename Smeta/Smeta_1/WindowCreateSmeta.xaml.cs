@@ -87,30 +87,60 @@ namespace Smeta_1
 		private void cbSelectCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var cust = cmbCustomers.SelectedItem as Заказчик;
+			cust = SmetaContext.Заказчик
+				.Where(v => v.НаименованиеЗаказчика == cmbCustomers.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+
+			SmetaContext.Заказчик.Load();
 			categAddCust = cust.КодЗаказчик;
 		}
 
 		private void cbSelectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var pro = cmbProject.SelectedItem as Проектная_организация;
-            categAddProject = pro.КодПроектировщика;
+			pro = SmetaContext.Проектная_организация
+				.Where(v => v.НаименованиеПроектиров == cmbProject.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+
+			SmetaContext.Проектная_организация.Load();
+			categAddProject = pro.КодПроектировщика;
 		}
 
 		private void CmbObjectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var kof = cmbObjectProject.SelectedItem as Поправочный_коэффициент_по_типу_ПИР;
-            categAddKof = kof.Код_коэффициента;
+			kof = SmetaContext.Поправочный_коэффициент_по_типу_ПИР
+				.Where(v => v.Наименование_коэффициента == cmbObjectProject.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+
+			SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Load();
+			categAddKof = kof.Код_коэффициента;
 		}
 
 		private void CmbStavka_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var stv = cmbStavka.SelectedItem as Ставка_14_го_разряда;
-            categAddStavka = stv.КодСтавки;
+			stv = SmetaContext.Ставка_14_го_разряда
+				.Where(v => v.Обоснование == cmbStavka.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+
+			SmetaContext.Ставка_14_го_разряда.Load();
+
+			categAddStavka = stv.КодСтавки;
 		}
 
 		private void cbSelectWorkType_SelectionChanged (object sender, SelectionChangedEventArgs e)
 		{
 			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
+			dir = SmetaContext.Справочник_видов_работ
+				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+			SmetaContext.Справочник_видов_работ.Load();
 			categAddWorkTypeCode = dir.КодВидаРабот;
 			//dgDirectory_1.Items.Clear();
 			//cat = dir.КодВидаРабот;
@@ -126,6 +156,11 @@ namespace Smeta_1
 		private void CmbWorkName_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var pr = cmbWorkName.SelectedItem as Справочник_расценок;
+			pr = SmetaContext.Справочник_расценок
+				.Where(v => v.ИмяРаботы == cmbWorkName.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+			SmetaContext.Справочник_расценок.Load();
 			categAddWorkCode = pr.КодРаботы;
 		}
 

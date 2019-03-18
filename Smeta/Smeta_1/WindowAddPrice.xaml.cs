@@ -52,20 +52,18 @@ namespace Smeta_1
 		private void cbSelectWorkTypeAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
+			dir = SmetaContext.Справочник_видов_работ
+				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
+				.AsEnumerable()
+				.FirstOrDefault();
+
+			SmetaContext.Справочник_видов_работ.Load();
 			categAddWorkType = dir.КодВидаРабот;
 		}
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			//else if (tbTrudObjem < 0)
-			//{
-			//	tbTrudObjem.Text = "Некорретный ввод!";
-			//}
-			if (tbWorkCode != null)
-			{
-				MessageBox.Show("Поле Код работы не может быть пустым");
-                return;
-			}
-
+			
+			
             if (!int.TryParse(tbWorkCode.Text, out int nomer1) & nomer1<=0)
 			{
 				MessageBox.Show("В поле Код работы введите положительное число");
@@ -96,6 +94,7 @@ namespace Smeta_1
 			if (existedItem != null)
 			{
 				MessageBox.Show("Расценка с данным кодом уже существует!");
+				return;
 			}
 			try
 			{

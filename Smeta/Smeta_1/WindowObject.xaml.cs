@@ -20,7 +20,14 @@ namespace Smeta_1
     public partial class Object : MetroWindow
 	{
 		private static int code;
-        private Word._Application oWord = new Word.Application();
+		public static int WorkTypeCode;
+		public static int Shifr;
+		public static int WorkCode;
+		public static int StavkaCode;
+		public static int KofCode;
+		public static double oldValue;
+
+		private Word._Application oWord = new Word.Application();
         private object oMissing = System.Reflection.Missing.Value;
 
         public SmetaEntities SmetaContext { get; set; }
@@ -28,23 +35,24 @@ namespace Smeta_1
         public Object(SmetaEntities context)
 		{
 			InitializeComponent();
-
             SmetaContext = context;
-
-			ReDrow();
+            ReDrow();
 			dgObject.Items.Clear();
 
 			if (MainWindow.sRole == "admin")
 			{
 				menu_addProject.IsEnabled = true;
 				menu_saveDogovor.IsEnabled = true;
+				menu_Counter.IsEnabled = false;
+				btnAddPrice.IsEnabled = false;
 			}
 
 			if (MainWindow.sRole == "user")
 			{
 				menu_addProject.IsEnabled = false;
 				menu_saveDogovor.IsEnabled = false;
-				
+				menu_Counter.IsEnabled = true;
+				btnAddPrice.IsEnabled = true;
 			}
 		}
 		public void ReDrow()
@@ -63,10 +71,10 @@ namespace Smeta_1
 			if (obj != null)
 			{
 
-				//labelAd.Content = obj.Адрес;
+				
 				txtAd.Text = obj.Адрес;
 				txtName.Text = obj.НаименованиеОбъекта;
-				//labelName.Content = obj.НаименованиеОбъекта;
+				
 				code = obj.Шифр;
 
 				dgObject.ItemsSource = SmetaContext.Локальная_смета
@@ -95,19 +103,14 @@ namespace Smeta_1
 				var dg = SmetaContext.Договор_подряда
                     .Where(d => d.Шифр == obj.Шифр)
                     .FirstOrDefault();
-                //labelData.Content = dg.ДатаДог;
-                //labelNomer.Content = dg.НомерДог;
+               
                 txtData.Text = dg.ДатаДог.ToString();
                 txtNomer.Text = dg.НомерДог.ToString();
 
                 var cu = SmetaContext.Заказчик
                     .Where(c => c.КодЗаказчик == obj.КодЗаказчик)
                     .FirstOrDefault();
-				//labelCustName.Content = cu.НаименованиеЗаказчика;
-				//labelCustAdress.Content = cu.ЮрАдрес;
-				//labelCustYNP.Content = cu.УНП;
-				//labelCustPhone.Content = cu.Тел;
-				//labelCustMail.Content = cu.ЭлПочта;
+				
 				txtCustName.Text = cu.НаименованиеЗаказчика;
 				txtCustAdress.Text = cu.ЮрАдрес;
 				txtCustYNP.Text = cu.УНП;
@@ -117,11 +120,6 @@ namespace Smeta_1
 				var pr = SmetaContext.Проектная_организация
                     .Where(p => p.КодПроектировщика == obj.КодПроектировщика)
                     .FirstOrDefault();
-				//labelProectName.Content = pr.НаименованиеПроектиров;
-				//labelProectAdress.Content = pr.ЮрАдрес;
-				//labelProectYNP.Content = pr.УНП;
-				//labelProectPhone.Content = pr.Тел;
-				//labelProectMail.Content = pr.ЭлПочта;
 				txtProectName.Text = pr.НаименованиеПроектиров;
 				txtProectAdress.Text = pr.ЮрАдрес;
 				txtProectYNP.Text = pr.УНП;
@@ -134,7 +132,15 @@ namespace Smeta_1
 		{
             
 		}
-
+		
+		private void EditPriceToSmetaButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			
+				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+				b.Owner = this;
+				b.ShowDialog();
+			
+		}
 
 		private void MenuItem_Click_OpenChart(object sender, RoutedEventArgs e)
 		{
@@ -161,6 +167,12 @@ namespace Smeta_1
 		private void MenuItem_Click_AddProjectCompany(object sender, RoutedEventArgs e)
 		{
 			var wa = new AddCustomer(SmetaContext);
+			wa.Owner = this;
+			wa.ShowDialog();
+		}
+		private void MenuItem_AddPriceToSmeta(object sender, RoutedEventArgs e)
+		{
+			var wa = new AddPriceToSmeta (SmetaContext);
 			wa.Owner = this;
 			wa.ShowDialog();
 		}
@@ -256,5 +268,13 @@ namespace Smeta_1
                 ref oMissing,
                 ref oMissing);
 		}
+		private void AddPriceToSmetaButton_Click(object sender, RoutedEventArgs e)
+		{
+			var wa = new AddPriceToSmeta(SmetaContext);
+			wa.Owner = this;
+			wa.ShowDialog();
+		}
+
+
 	}
 }

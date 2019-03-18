@@ -69,6 +69,7 @@ namespace Smeta_1
 			if (existedItem != null)
 			{
 				MessageBox.Show("Коэффициент с данным кодом уже существует!");
+				return;
 			}
 			try
 			{

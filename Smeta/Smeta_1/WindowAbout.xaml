@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
         Title="Справка" Height="200" Width="400"
-        ResizeMode="CanMinimize"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
         BorderThickness="0" 
