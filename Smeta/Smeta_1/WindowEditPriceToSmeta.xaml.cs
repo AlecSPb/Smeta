@@ -113,5 +113,10 @@ namespace Smeta_1
 			SmetaContext.Configuration.AutoDetectChangesEnabled = true;
 			SmetaContext.Configuration.ValidateOnSaveEnabled = true;
 		}
-	}
+
+        private void cbSelectStavkakAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 }

@@ -36,47 +36,53 @@ namespace Smeta_1
 			InitializeComponent();
 
             SmetaContext = new SmetaEntities();
+
+            // Удалить после отладки
+            this.Hide();
+            var mw = new WindowStart(SmetaContext);
+            mw.ShowDialog();
+            this.Close();
         }
 
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
 		{
-			var localDate = DateTime.Now;
+            var localDate = DateTime.Now;
 
-			var sotrudn = SmetaContext.Исполнитель
-				   .Where(v => v.Логин == textBoxLogin.Text && v.Пароль == passwordBox1.Text)
-				   .AsEnumerable()
-				   .FirstOrDefault();
+            var sotrudn = SmetaContext.Исполнитель
+                   .Where(v => v.Логин == textBoxLogin.Text && v.Пароль == passwordBox1.Text)
+                   .AsEnumerable()
+                   .FirstOrDefault();
 
-			if (sotrudn is null)
-			{
-				lbLogin.Content = "неверное имя или пароль";
-			}
-			else
-			{
-				sRole = sotrudn.Роль;
-				idSotrudn = sotrudn.КодИсполнителя;
-				lbLogin.Content = sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность;
+            if (sotrudn is null)
+            {
+                lbLogin.Content = "неверное имя или пароль";
+            }
+            else
+            {
+                sRole = sotrudn.Роль;
+                idSotrudn = sotrudn.КодИсполнителя;
+                lbLogin.Content = sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность;
 
-				if (sRole == "admin")
-				{
-					this.Hide();
-					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
-					var mw = new WindowStart(SmetaContext);
-					mw.ShowDialog();
-					this.Close();
-				}
-				if (sRole == "user")
-				{
-					this.Hide();
-					MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
-					var mw = new WindowStart(SmetaContext);
-					mw.ShowDialog();
-					this.Close();
-				}
-			}
-		}
+                if (sRole == "admin")
+                {
+                    this.Hide();
+                    MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
+                    var mw = new WindowStart(SmetaContext);
+                    mw.ShowDialog();
+                    this.Close();
+                }
+                if (sRole == "user")
+                {
+                    this.Hide();
+                    MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
+                    var mw = new WindowStart(SmetaContext);
+                    mw.ShowDialog();
+                    this.Close();
+                }
+            }
+        }
 
-		private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}

@@ -93,6 +93,7 @@
                 </MenuItem>
                 <MenuItem
                     Header="Смета ПИР"
+                    Click="ExportSmetaPIR_Click"
                     >
                     <MenuItem.Icon>
                         <Image Source="Images/add_price.png" Height="15" Width="15"/>

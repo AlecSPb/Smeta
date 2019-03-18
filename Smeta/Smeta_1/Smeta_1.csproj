@@ -228,6 +228,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="shablon_smety.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="template_dogovor.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -10,7 +10,9 @@ using System.Data.Entity;
 using Ninject;
 using Smeta_DB;
 using Word = Microsoft.Office.Interop.Word;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
+using System.Windows.Input;
 
 namespace Smeta_1
 {
@@ -27,7 +29,6 @@ namespace Smeta_1
 		public static int KofCode;
 		public static double oldValue;
 
-		private Word._Application oWord = new Word.Application();
         private object oMissing = System.Reflection.Missing.Value;
 
         public SmetaEntities SmetaContext { get; set; }
@@ -132,17 +133,8 @@ namespace Smeta_1
 		{
             
 		}
-		
-		private void EditPriceToSmetaButton_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			
-				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
-				b.Owner = this;
-				b.ShowDialog();
-			
-		}
 
-		private void MenuItem_Click_OpenChart(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_OpenChart(object sender, RoutedEventArgs e)
 		{
             var wa = new Chart(SmetaContext);
             wa.Owner = this;
@@ -161,7 +153,6 @@ namespace Smeta_1
 			var wa = new About();
 			wa.Owner = this;
 			wa.ShowDialog();
-
 		}
 
 		private void MenuItem_Click_AddProjectCompany(object sender, RoutedEventArgs e)
@@ -179,22 +170,26 @@ namespace Smeta_1
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			oWord.Quit(ref oMissing, ref oMissing, ref oMissing);
+			
 		}
 
 		private void MenuItem_Click_SaveDogovor(object sender, RoutedEventArgs e)
 		{
-			var oDoc = LoadTemplate(Environment.CurrentDirectory + "\\template_dogovor.dotx");
+            Word.Application word = null;
+            Word.Document document = null;
 
-            SetTemplate(oDoc);
-
-            var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
-            var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
-            var documentName = Environment.CurrentDirectory + $"\\Документ от {date} {time}.docx";
-            
             try
             {
-                SaveToDisk(oDoc, documentName);
+                word = new Word.Application();
+                var template = (object)(Environment.CurrentDirectory + "\\template_dogovor.dotx");
+                document = word.Documents.Add(ref template, ref oMissing, ref oMissing, ref oMissing);
+
+                SetTemplate(document);
+
+                var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
+                var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
+                var documentName = Environment.CurrentDirectory + $"\\Документ от {date} {time}.docx";
+                SaveToDisk(document, documentName);
                 MessageBox.Show($"Документ создан под именем {documentName}");
             }
             catch(Exception ex)
@@ -203,15 +198,10 @@ namespace Smeta_1
             }
             finally
             {
-                oDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+                document?.Close(ref oMissing, ref oMissing, ref oMissing);
+                word?.Quit(ref oMissing, ref oMissing, ref oMissing);
             }
         }
-		private Word._Document LoadTemplate(string filePath)
-		{
-			object oTemplate = filePath;
-			Word._Document oDoc = oWord.Documents.Add(ref oTemplate, ref oMissing, ref oMissing, ref oMissing);
-			return oDoc;
-		}
 		private void SetTemplate(Word._Document oDoc)
 		{
 			object oBookMark = "CustomerName";
@@ -275,6 +265,85 @@ namespace Smeta_1
 			wa.ShowDialog();
 		}
 
+        private void EditPriceToSmetaButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+            b.Owner = this;
+            b.ShowDialog();
+        }
 
-	}
+        private void ExportSmetaPIR_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application excel = null;
+            Excel._Workbook workbook = null;
+
+            try
+            {
+                excel = new Excel.Application();
+
+                string myPath = Environment.CurrentDirectory + @"\\shablon_smety.xlsx";
+                workbook = excel.Workbooks.Open(myPath);
+
+                var worksheet = excel.Worksheets[(object)"Smeta"];
+                var range = worksheet.Names.Item("SmetaTable").RefersToRange;
+                var column = range.Column;
+                var row = range.Row;
+
+                var firstRow = worksheet.Rows[row];
+
+                var gridRowCount = 10;
+                var gridColumnCount = 4;
+
+                for (int i = 0; i < gridRowCount - 1; i++)
+                {
+                    firstRow.Insert();
+                }
+
+                var targetTable = worksheet.Rows[row].Cells;
+
+                for (int i = 1; i <= gridRowCount; i++)
+                {
+                    for (int n = 1; n <= gridColumnCount; n++)
+                    {
+                        // Поскольку у тебя в шаблоне колонки 2 и 3 объеденены,
+                        // ты должна делать поправку на эти значения.
+                        var columnIndex = n > 2 ? n + 1 : n;
+                        targetTable[i, columnIndex] = $"Grid Cell[{i - 1}, {n - 1}]";
+                    }
+                }
+
+                var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
+                var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
+                var documentName = Environment.CurrentDirectory + $"\\Смета от {date} {time}.xlsx";
+
+                object fileName = documentName;
+                object fileExtension = Excel.XlFileFormat.xlWorkbookDefault;
+
+                workbook.SaveAs(
+                    fileName,
+                    fileExtension,
+                    oMissing,
+                    oMissing,
+                    oMissing,
+                    oMissing,
+                    Excel.XlSaveAsAccessMode.xlExclusive,
+                    oMissing,
+                    oMissing,
+                    oMissing,
+                    oMissing);
+
+                MessageBox.Show("Success!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!");
+            }
+            finally
+            {
+                workbook?.Close();
+                excel?.Quit();
+            }
+
+        }
+    }
 }
