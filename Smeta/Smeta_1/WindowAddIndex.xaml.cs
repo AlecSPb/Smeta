@@ -40,25 +40,37 @@ namespace Smeta_1
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (!int.TryParse(tbKofCode.Text, out int nomer) & nomer <=0)
+			if (tbKofCode.Text == " ")
+			{
+				MessageBox.Show("Заполните поле Код коэффициента");
+				return;
+			}
+			if (!int.TryParse(tbKofCode.Text, out int nomer) & nomer <= 0)
 			{
 				MessageBox.Show("В поле Код коэффициента введите цифры больше 0");
-                return;
+				return;
 			}
 
-            if (tbKofCode != null)
+			if (tbKofCode != null)
 			{
 				MessageBox.Show("Поле Код коэффициента не может быть пустым");
-                return;
+				return;
 			}
-
-			if (!double.TryParse(tbKofSize.Text, out double kof) & kof <=0)
+			if (tbKofSize.Text == " ")
+			{
+				MessageBox.Show("Заполните поле Значение коэффициента");
+				return;
+			}
+			if (!double.TryParse(tbKofSize.Text, out double kof) & kof <= 0)
 			{
 				MessageBox.Show("В поле Значение введите положительное число");
-                return;
+				return;
 			}
-
-            if (tbKofName.Text.Length < 2 || tbKofName.Text.Length > 60)
+			if (tbKofName.Text == " ")
+			{
+				MessageBox.Show("Заполните поле Наименование коэффициента");
+			}
+			if (tbKofName.Text.Length < 2 || tbKofName.Text.Length > 60)
 			{
 				MessageBox.Show("Поле Наименование коэффициента должно содеражать от 2 до 60 символов A-Z");
 			}

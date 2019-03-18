@@ -106,7 +106,7 @@
                 BorderThickness="1"
                 >
                 <MenuItem
-                    Header="Добавить расценку"
+                    Header="Добавить расценку в смету"
                     Click="MenuItem_AddPriceToSmeta"
                     >
                     <MenuItem.Icon>
@@ -536,7 +536,7 @@
                     Style="{StaticResource AzureDataGrid}"
                     FontSize="12"
                     SelectionChanged="dgObject_SelectionChanged"
-                    >
+                    MouseDoubleClick="DgObject_MouseDoubleClick">
                     <DataGrid.Columns>
                         <!---->
                         <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>

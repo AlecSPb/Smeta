@@ -62,31 +62,46 @@ namespace Smeta_1
 		}
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			
-			
-            if (!int.TryParse(tbWorkCode.Text, out int nomer1) & nomer1<=0)
+
+
+
+			if (tbWorkCode.Text == "")
+			{
+				MessageBox.Show("Заполните поле Код работы");
+				return;
+			}
+			if (!int.TryParse(tbWorkCode.Text, out int nomer1) & nomer1 <= 0)
 			{
 				MessageBox.Show("В поле Код работы введите положительное число");
-                return;
-            }
-
-            if (!double.TryParse(tbTrudObjem.Text, out double TrudObjem))
+				return;
+			}
+			if (tbTrudObjem.Text == "")
+			{
+				MessageBox.Show("Заполните поле Затраты Труда за ед-ну объема");
+				return;
+			}
+			if (!double.TryParse(tbTrudObjem.Text, out double TrudObjem))
 			{
 				MessageBox.Show("В поле Затраты Труда за ед-ну объема введите число");
-                return;
-            }
+				return;
+			}
 
-            if (TrudObjem <=0)
+			if (TrudObjem <= 0)
 			{
 				MessageBox.Show("В поле Затраты Труда за ед-цу объема введите положительно число");
-                return;
-            }
+				return;
+			}
 
-            if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
+			if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
 			{
 				MessageBox.Show("Поле Наименование работы содержит от 2 до 50 символов A-Z");
-                return;
-            }
+				return;
+			}
+			if (tbWorkName.Text == "")
+			{
+				MessageBox.Show("Заполните поле Наименование работы");
+				return;
+			}
 			var existedItem = SmetaContext.Справочник_расценок
 			   .Where(n => n.КодРаботы == nomer1)
 			   .FirstOrDefault();

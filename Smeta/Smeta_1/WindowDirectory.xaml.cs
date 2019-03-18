@@ -114,7 +114,7 @@ namespace Smeta_1
 		{
            
         }
-        public static int pk2ID;// вторичный ключ
+        public static int pk2ID;
 		public static string oldNaz;
 		public static double oldPrice;
 		public static int pkIDStavka;

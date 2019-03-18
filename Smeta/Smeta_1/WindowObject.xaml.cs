@@ -27,7 +27,7 @@ namespace Smeta_1
 		public static int WorkCode;
 		public static int StavkaCode;
 		public static int KofCode;
-		public static double oldValue;
+		public static double oldObjem;
 
         private object oMissing = System.Reflection.Missing.Value;
 
@@ -267,83 +267,120 @@ namespace Smeta_1
 
         private void EditPriceToSmetaButton_Click(object sender, RoutedEventArgs e)
         {
-            EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
-            b.Owner = this;
-            b.ShowDialog();
-        }
+			var sd = dgObject.SelectedItem as Локальная_смета;
 
-        private void ExportSmetaPIR_Click(object sender, RoutedEventArgs e)
-        {
-            Excel.Application excel = null;
-            Excel._Workbook workbook = null;
+			if (sd != null)
+			{
+				WorkTypeCode = sd.КодВидаРабот;
+				Shifr = sd.Шифр;
+				WorkCode = sd.КодРаботы;
+				StavkaCode = sd.КодСтавки;
+				KofCode = sd.Код_коэффициента;
+				oldObjem = sd.ФизОбъемРабот.Value;
+				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+				b.Owner = this;
+				b.ShowDialog();
+			}
 
-            try
-            {
-                excel = new Excel.Application();
+		}
 
-                string myPath = Environment.CurrentDirectory + @"\\shablon_smety.xlsx";
-                workbook = excel.Workbooks.Open(myPath);
 
-                var worksheet = excel.Worksheets[(object)"Smeta"];
-                var range = worksheet.Names.Item("SmetaTable").RefersToRange;
-                var column = range.Column;
-                var row = range.Row;
+		private void ExportSmetaPIR_Click(object sender, RoutedEventArgs e)
+		{
+			Excel.Application excel = null;
+			Excel._Workbook workbook = null;
 
-                var firstRow = worksheet.Rows[row];
+			try
+			{
+				excel = new Excel.Application();
 
-                var gridRowCount = 10;
-                var gridColumnCount = 4;
+				string myPath = Environment.CurrentDirectory + @"\\shablon_smety.xlsx";
+				workbook = excel.Workbooks.Open(myPath);
 
-                for (int i = 0; i < gridRowCount - 1; i++)
-                {
-                    firstRow.Insert();
-                }
+				var worksheet = excel.Worksheets[(object)"Smeta"];
+				var range = worksheet.Names.Item("SmetaTable").RefersToRange;
+				var column = range.Column;
+				var row = range.Row;
 
-                var targetTable = worksheet.Rows[row].Cells;
+				var firstRow = worksheet.Rows[row];
 
-                for (int i = 1; i <= gridRowCount; i++)
-                {
-                    for (int n = 1; n <= gridColumnCount; n++)
-                    {
-                        // Поскольку у тебя в шаблоне колонки 2 и 3 объеденены,
-                        // ты должна делать поправку на эти значения.
-                        var columnIndex = n > 2 ? n + 1 : n;
-                        targetTable[i, columnIndex] = $"Grid Cell[{i - 1}, {n - 1}]";
-                    }
-                }
+				var gridRowCount = 10;
+				var gridColumnCount = 4;
 
-                var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
-                var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
-                var documentName = Environment.CurrentDirectory + $"\\Смета от {date} {time}.xlsx";
+				for (int i = 0; i < gridRowCount - 1; i++)
+				{
 
-                object fileName = documentName;
-                object fileExtension = Excel.XlFileFormat.xlWorkbookDefault;
+					firstRow.Insert();
+				}
 
-                workbook.SaveAs(
-                    fileName,
-                    fileExtension,
-                    oMissing,
-                    oMissing,
-                    oMissing,
-                    oMissing,
-                    Excel.XlSaveAsAccessMode.xlExclusive,
-                    oMissing,
-                    oMissing,
-                    oMissing,
-                    oMissing);
+				var targetTable = worksheet.Rows[row].Cells;
 
-                MessageBox.Show("Success!");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error!");
-            }
-            finally
-            {
-                workbook?.Close();
-                excel?.Quit();
-            }
+				for (int i = 1; i <= gridRowCount; i++)
+				{
+					for (int n = 1; n <= gridColumnCount; n++)
+					{
+						// Поскольку у тебя в шаблоне колонки 2 и 3 объеденены,
+						// ты должна делать поправку на эти значения.
+						var columnIndex = n > 2 ? n + 1 : n;
 
-        }
-    }
+						//targetTable[1, 1] = dgObject.Items[1, 1].Value.ToString();
+						//targetTable[1, 1] = dgObject.Items[1, 1].ToString();
+						//targetTable[1, 1] = txtNomer.Text;
+						targetTable[i, columnIndex] = $"Grid Cell[0, 1]";
+
+					}
+				}
+
+				var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";
+				var time = DateTime.Now.ToLongTimeString().Replace(":", ".");
+				var documentName = Environment.CurrentDirectory + $"\\Смета от {date} {time}.xlsx";
+
+				object fileName = documentName;
+				object fileExtension = Excel.XlFileFormat.xlWorkbookDefault;
+
+				workbook.SaveAs(
+					fileName,
+					fileExtension,
+					oMissing,
+					oMissing,
+					oMissing,
+					oMissing,
+					Excel.XlSaveAsAccessMode.xlExclusive,
+					oMissing,
+					oMissing,
+					oMissing,
+					oMissing);
+
+				MessageBox.Show("Смета создана");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error!");
+			}
+			finally
+			{
+				workbook?.Close();
+				excel?.Quit();
+			}
+
+		}
+
+		private void DgObject_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			var sd = dgObject.SelectedItem as Локальная_смета;
+
+			if (sd != null)
+			{
+				WorkTypeCode = sd.КодВидаРабот;
+				Shifr = sd.Шифр;
+				WorkCode = sd.КодРаботы;
+				StavkaCode = sd.КодСтавки;
+				KofCode = sd.Код_коэффициента;
+				oldObjem = sd.ФизОбъемРабот.Value;
+				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+				b.Owner = this;
+				b.ShowDialog();
+			}
+		}
+	}
 }

@@ -82,7 +82,11 @@ namespace Smeta_1
 		
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (txObjem.Text == "")
+			{
+				MessageBox.Show("Заполните поле Объем");
+				return;
+			}
 			if (!double.TryParse(txObjem.Text, out double TrudObjem))
 			{
 				MessageBox.Show("В поле Объем введите число");

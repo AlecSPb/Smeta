@@ -98,6 +98,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>SmetaDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Договор_подряда.cs">
       <DependentUpon>SmetaDataModel.tt</DependentUpon>
     </Compile>
@@ -179,22 +188,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Smeta.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="SmetaDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SmetaDataModel.Context.cs</LastGenOutput>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
+      <LastGenOutput>SmetaDataModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="SmetaDataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
       <LastGenOutput>SmetaDataModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Smeta_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Smeta.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

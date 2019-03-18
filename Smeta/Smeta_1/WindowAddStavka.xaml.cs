@@ -40,31 +40,49 @@ namespace Smeta_1
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
+			if (tbStavkaCode.Text == "")
+			{
+				MessageBox.Show("Заполните поле Код ставки");
+				return;
+			}
 			if (!int.TryParse(tbStavkaCode.Text, out int nomer) & nomer <= 0)
 			{
 				MessageBox.Show("В поле Код ставки введите положительное число");
-                return;
+				return;
 			}
-
-            if (!double.TryParse(tbStavkaSize.Text, out double stavka) & stavka <= 0)
+			if (tbStavkaSize.Text == "")
+			{
+				MessageBox.Show("Заполните поле Значение ставки");
+				return;
+			}
+			if (!double.TryParse(tbStavkaSize.Text, out double stavka) & stavka <= 0)
 			{
 				MessageBox.Show("В поле Значение ставки введите положительное число");
-                return;
-            }
+				return;
+			}
 
-            if (tbStavkaName.Text.Length < 2 || tbStavkaName.Text.Length > 60)
+			if (tbStavkaName.Text.Length < 2 || tbStavkaName.Text.Length > 60)
 			{
-				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
-                return;
-            }
-
-            if (!DateTime.TryParse(tbStavkaDate.Text, out DateTime dateTime))
+				MessageBox.Show("В поле обоснование введите от 2 до 60 символов A-Z");
+				return;
+			}
+			if (tbStavkaName.Text == " ")
+			{
+				MessageBox.Show("Заполните поле обоснование");
+				return;
+			}
+			if (tbStavkaDate.Text == "")
+			{
+				MessageBox.Show("Заполните поле дата ставки");
+				return;
+			}
+			if (!DateTime.TryParse(tbStavkaDate.Text, out DateTime dateTime))
 			{
 				MessageBox.Show("В поле дата ставки введен неверный формат даты");
-                return;
-            }
+				return;
+			}
 
-            var existedItem = SmetaContext.Ставка_14_го_разряда
+			var existedItem = SmetaContext.Ставка_14_го_разряда
                 .Where(n => n.КодСтавки == nomer)
                 .FirstOrDefault();
 

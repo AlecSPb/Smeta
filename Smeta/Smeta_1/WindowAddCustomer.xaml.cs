@@ -31,8 +31,9 @@ namespace Smeta_1
     public partial class AddCustomer : MetroWindow
 	{
         public SmetaEntities SmetaContext { get; set; }
-
-        public AddCustomer(SmetaEntities context)
+		static string YNP;
+		static string NameP;
+		public AddCustomer(SmetaEntities context)
         {
             InitializeComponent();
 
@@ -43,33 +44,41 @@ namespace Smeta_1
 		{
 			if (!int.TryParse(tbProjectCod.Text, out int nomer))
 			{
-				tbProjectCod.Text = "Некорретный ввод!";
-                return;
+				MessageBox.Show("Некорректный ввод!");
+				return;
 			}
 
-   //         if (tbProjectName != null)
-			//{
-			//	tbProjectName.Text = "Поле не может быть пустым";
-   //             return;
-   //         }
-
-   //         if (tbProjectAdress != null)
-			//{
-			//	tbProjectAdress.Text = "Поле не может быть пустым";
-   //             return;
-   //         }
-
-            if (tbProjectYNP.Text.Length != 9)
+			if (tbProjectName.Text == "")
 			{
-				tbProjectYNP.Text = "Поле должно содержать 9 цифр!";
-                return;
-            }
+				MessageBox.Show("Заполните поле Наименование проектной организации");
+				return;
+			}
 
-            if (tbRS.Text.Length != 13)
+			if (tbProjectAdress != null)
 			{
-				tbRS.Text = "Поле должно содержать 13 цифр";
-                return;
-            }
+				MessageBox.Show("Заполните поле Адрес проектной организации");
+				return;
+			}
+			if (tbProjectYNP.Text == "")
+			{
+				MessageBox.Show("Заполните поле УНП");
+				return;
+			}
+			if (tbProjectYNP.Text.Length != 9)
+			{
+				MessageBox.Show("Поле должно содержать 9 цифр!");
+				return;
+			}
+			if (tbRS.Text == "")
+			{
+				MessageBox.Show("Заполните поле р/с");
+				return;
+			}
+			if (tbRS.Text.Length != 13)
+			{
+				MessageBox.Show("Поле должно содержать 13 цифр");
+				return;
+			}
 			var existedItem = SmetaContext.Проектная_организация
 			   .Where(n => n.КодПроектировщика == nomer)
 			   .FirstOrDefault();
@@ -77,6 +86,22 @@ namespace Smeta_1
 			if (existedItem != null)
 			{
 				MessageBox.Show("Проектная организация с данным кодом уже существует!");
+				return;
+			}
+			var existedYNP = SmetaContext.Проектная_организация
+			   .Where(n => n.УНП == YNP)
+			   .FirstOrDefault();
+			if (existedYNP != null)
+			{
+				MessageBox.Show("Проектная организация с данным УНП уже существует!");
+				return;
+			}
+			var existedName = SmetaContext.Проектная_организация
+			   .Where(n => n.НаименованиеПроектиров == NameP)
+			   .FirstOrDefault();
+			if (existedName != null)
+			{
+				MessageBox.Show("Проектная организация с данным названием уже существует!");
 				return;
 			}
 			try

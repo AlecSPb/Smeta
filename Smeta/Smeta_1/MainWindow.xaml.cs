@@ -37,11 +37,11 @@ namespace Smeta_1
 
             SmetaContext = new SmetaEntities();
 
-            // Удалить после отладки
-            this.Hide();
-            var mw = new WindowStart(SmetaContext);
-            mw.ShowDialog();
-            this.Close();
+            //// Удалить после отладки
+            //this.Hide();
+            //var mw = new WindowStart(SmetaContext);
+            //mw.ShowDialog();
+            //this.Close();
         }
 
 		private void btnLogin_Click(object sender, RoutedEventArgs e)

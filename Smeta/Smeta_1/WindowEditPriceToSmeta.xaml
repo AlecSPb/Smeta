@@ -91,15 +91,15 @@
             Grid.Row="0"
             Grid.Column="1"
             Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <!--SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>-->
         <ComboBox
             x:Name="cmbWorkName"
             Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Path=КодРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            SelectionChanged="cbSelectWorkAdd_SelectionChanged"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <!--SelectionChanged="cbSelectWorkAdd_SelectionChanged"/>-->
         <TextBox
             x:Name="tbValue"
             Grid.Row="2"
@@ -112,15 +112,15 @@
             Grid.Row="3"
             Grid.Column="1"
             Text="{Binding Path=КодСтавки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>-->
         <ComboBox
             x:Name="cmbKof"
             Grid.Row="4"
             Grid.Column="1"
             Text="{Binding Path=Код_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
-            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
-            SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
+        <!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>-->
         <StackPanel
             Grid.Row="5"
             Grid.Column="1"

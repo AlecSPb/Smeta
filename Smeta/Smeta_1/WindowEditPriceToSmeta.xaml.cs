@@ -39,41 +39,42 @@ namespace Smeta_1
 
 			SmetaContext = context;
 
-			cmbWorkType.Items.Clear();
-			cmbWorkName.Items.Clear();
-			tbValue.Text = Convert.ToString(Object.oldValue);
-			foreach (Справочник_видов_работ stw in SmetaContext.Справочник_видов_работ.ToList())
-			{
-				cmbWorkType.Items.Add(stw.ВидРабот);
-			}
-			foreach (Справочник_расценок stw in SmetaContext.Справочник_расценок.ToList())
-			{
-				cmbWorkName.Items.Add(stw.ИмяРаботы);
-			}
+			//cmbWorkType.Items.Clear();
+			//cmbWorkName.Items.Clear();
+			tbValue.Text = Convert.ToString(Object.oldObjem);
+		//	foreach (Справочник_видов_работ stw in SmetaContext.Справочник_видов_работ.ToList())
+		//	{
+		//		cmbWorkType.Items.Add(stw.ВидРабот);
+		//	}
+		//	foreach (Справочник_расценок stw in SmetaContext.Справочник_расценок.ToList())
+		//	{
+		//		cmbWorkName.Items.Add(stw.ИмяРаботы);
+		//	}
+
 
 		}
-		private void cbSelectWorkTypeAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
-			dir = SmetaContext.Справочник_видов_работ
-				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
+		//private void cbSelectWorkTypeAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		//{
+		//	var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
+		//	dir = SmetaContext.Справочник_видов_работ
+		//		.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
+		//		.AsEnumerable()
+		//		.FirstOrDefault();
 
-			SmetaContext.Справочник_видов_работ.Load();
-			categAddWorkType = dir.КодВидаРабот;
-		}
-		private void cbSelectWorkAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var dir = cmbWorkName.SelectedItem as Справочник_расценок;
-			dir = SmetaContext.Справочник_расценок
-				.Where(v => v.ИмяРаботы == cmbWorkName.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
+		//	SmetaContext.Справочник_видов_работ.Load();
+		//	categAddWorkType = dir.КодВидаРабот;
+		//}
+		//private void cbSelectWorkAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		//{
+		//	var dir = cmbWorkName.SelectedItem as Справочник_расценок;
+		//	dir = SmetaContext.Справочник_расценок
+		//		.Where(v => v.ИмяРаботы == cmbWorkName.SelectedItem)
+		//		.AsEnumerable()
+		//		.FirstOrDefault();
 
-			SmetaContext.Справочник_расценок.Load();
-			categAddWork = dir.КодРаботы;
-		}
+		//	SmetaContext.Справочник_расценок.Load();
+		//	categAddWork = dir.КодРаботы;
+		//}
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (!double.TryParse(tbValue.Text, out double kof) & kof <=0)

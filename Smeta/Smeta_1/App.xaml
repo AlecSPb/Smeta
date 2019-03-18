@@ -4,34 +4,7 @@
              xmlns:local="clr-namespace:Smeta_1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!--<Style TargetType="MenuItem" >
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="DarkCyan"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="White"/>
-        </Style>
-        <Style TargetType="TextBlock" >
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="5,0,10,5"/>
-            <Setter Property="FontSize" Value="12"/>
-        </Style>
-        <Style TargetType="Image" >
-            <Setter Property="Width" Value="30"/>
-        </Style>
-        <Style TargetType="Button" >
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="5,5,5,5"/>
-        </Style>
-
-        <Style TargetType="Expander" >
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="5,5,5,5"/>
-            --><!--<Setter Property="FontWeight" Value="Black"/> --><!--
-        </Style>-->
+      
         <ResourceDictionary>
            
                 <ResourceDictionary.MergedDictionaries>
