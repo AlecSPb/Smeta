@@ -79,15 +79,7 @@ namespace Smeta_1
 				code = obj.Шифр;
 
 				dgObject.ItemsSource = SmetaContext.Локальная_смета
-                    .Where(sm => sm.Шифр == code)
-                    .Select(l => new
-                    {
-                        l.КодРаботы,
-	                    l.Справочник_расценок.ИмяРаботы,
-	                    l.ФизОбъемРабот,
-	                    l.ТрудоемкостьРаботы,
-	                    l.СтоимостьРаботы
-                    }).ToList();
+                    .Where(sm => sm.Шифр == code).ToList();
 
 				txSumTrud.Text = SmetaContext.Локальная_смета
                     .Where(c => c.Шифр == obj.Шифр)
@@ -298,37 +290,25 @@ namespace Smeta_1
 				workbook = excel.Workbooks.Open(myPath);
 
 				var worksheet = excel.Worksheets[(object)"Smeta"];
-				var range = worksheet.Names.Item("SmetaTable").RefersToRange;
-				var column = range.Column;
-				var row = range.Row;
+				var templateTable = worksheet.Names.Item("SmetaTable").RefersToRange;
+				var row = templateTable.Row;
 
-				var firstRow = worksheet.Rows[row];
-
-				var gridRowCount = 10;
-				var gridColumnCount = 4;
+				var gridRowCount = dgObject.Items.Count;
 
 				for (int i = 0; i < gridRowCount - 1; i++)
 				{
-
-					firstRow.Insert();
+                    templateTable.Insert();
 				}
 
 				var targetTable = worksheet.Rows[row].Cells;
 
 				for (int i = 1; i <= gridRowCount; i++)
 				{
-					for (int n = 1; n <= gridColumnCount; n++)
-					{
-						// Поскольку у тебя в шаблоне колонки 2 и 3 объеденены,
-						// ты должна делать поправку на эти значения.
-						var columnIndex = n > 2 ? n + 1 : n;
-
-						//targetTable[1, 1] = dgObject.Items[1, 1].Value.ToString();
-						//targetTable[1, 1] = dgObject.Items[1, 1].ToString();
-						//targetTable[1, 1] = txtNomer.Text;
-						targetTable[i, columnIndex] = $"Grid Cell[0, 1]";
-
-					}
+                    var smeta = dgObject.Items[i - 1] as Локальная_смета;
+                    targetTable[i, 1] = smeta.КодВидаРабот;
+                    targetTable[i, 2] = smeta.Объект.НаименованиеОбъекта;
+                    targetTable[i, 4] = smeta.ТрудоемкостьРаботы;
+                    targetTable[i, 5] = smeta.СтоимостьРаботы;
 				}
 
 				var date = $"{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}";

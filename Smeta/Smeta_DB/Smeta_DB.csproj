@@ -98,15 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SmetaDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>SmetaDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>SmetaDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Договор_подряда.cs">
       <DependentUpon>SmetaDataModel.tt</DependentUpon>
     </Compile>
@@ -178,7 +169,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 и x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -188,6 +179,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Smeta.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SmetaDataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
@@ -197,6 +191,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SmetaDataModel.edmx</DependentUpon>
       <LastGenOutput>SmetaDataModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Smeta_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Smeta.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

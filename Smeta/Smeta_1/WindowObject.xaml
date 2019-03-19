@@ -532,24 +532,17 @@
                     x:Name="dgObject"
                     IsReadOnly="True"
                     ItemsSource="{Binding People}"
-                    AutoGenerateColumns="True"
                     Style="{StaticResource AzureDataGrid}"
+                    AutoGenerateColumns="False"
                     FontSize="12"
                     SelectionChanged="dgObject_SelectionChanged"
                     MouseDoubleClick="DgObject_MouseDoubleClick">
                     <DataGrid.Columns>
-                        <!---->
-                        <!--<DataGridTextColumn Header="Код" Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
-                                        <DataGridTextColumn  Header="Наименование работы" Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Объем" Width="90" Binding="{Binding Objem}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Стоимость" Width="100" Binding="{Binding Sum}"></DataGridTextColumn>
-                                        <DataGridTextColumn  Width="50" Binding="{Binding CodeWork}"></DataGridTextColumn>
-                                        <DataGridTextColumn   Width="250" Binding="{Binding WorkName}"></DataGridTextColumn>
-                                        <DataGridTextColumn  Width="90" Binding="{Binding Objem}"></DataGridTextColumn>
-                                        <DataGridTextColumn Header="Трудоемкость" Width="120" Binding="{Binding Trud}"></DataGridTextColumn>
-                                        <DataGridTextColumn  Width="100" Binding="{Binding Sum}"></DataGridTextColumn>-->
-
+                        <DataGridTextColumn Header="Код работы" Width="Auto" Binding="{Binding КодРаботы}"/>
+                        <DataGridTextColumn Header="Имя работы" Width="Auto" Binding="{Binding Справочник_расценок.ИмяРаботы}"/>
+                        <DataGridTextColumn Header="ФизОбъемРабот" Width="Auto" Binding="{Binding ФизОбъемРабот}"/>
+                        <DataGridTextColumn Header="ТрудоемкостьРаботы" Width="Auto" Binding="{Binding ТрудоемкостьРаботы}"/>
+                        <DataGridTextColumn Header="СтоимостьРаботы" Width="Auto" Binding="{Binding СтоимостьРаботы}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid
