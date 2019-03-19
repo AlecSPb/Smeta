@@ -539,10 +539,10 @@
                     MouseDoubleClick="DgObject_MouseDoubleClick">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Код работы" Width="Auto" Binding="{Binding КодРаботы}"/>
-                        <DataGridTextColumn Header="Имя работы" Width="Auto" Binding="{Binding Справочник_расценок.ИмяРаботы}"/>
-                        <DataGridTextColumn Header="ФизОбъемРабот" Width="Auto" Binding="{Binding ФизОбъемРабот}"/>
-                        <DataGridTextColumn Header="ТрудоемкостьРаботы" Width="Auto" Binding="{Binding ТрудоемкостьРаботы}"/>
-                        <DataGridTextColumn Header="СтоимостьРаботы" Width="Auto" Binding="{Binding СтоимостьРаботы}"/>
+                        <DataGridTextColumn Header="Наименование работы" Width="Auto" Binding="{Binding Справочник_расценок.ИмяРаботы}"/>
+                        <DataGridTextColumn Header="Объем" Width="Auto" Binding="{Binding ФизОбъемРабот}"/>
+                        <DataGridTextColumn Header="Трудоемкость работы" Width="Auto" Binding="{Binding ТрудоемкостьРаботы}"/>
+                        <DataGridTextColumn Header="Стоимость работы" Width="Auto" Binding="{Binding СтоимостьРаботы}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid
@@ -598,14 +598,7 @@
                              Margin="5"
                              MinWidth="100"
                              Style="{StaticResource AccentedSquareButtonStyle}"/>
-                        <Button
-                             x:Name="btnEditPrice"
-                             Content="edit price"
-                             IsDefault="True"
-                             Click="EditPriceToSmetaButton_Click"
-                             Margin="5"
-                             MinWidth="100"
-                             Style="{StaticResource AccentedSquareButtonStyle}"/>
+                        
                     </StackPanel>
                 </Grid>
             </Grid>

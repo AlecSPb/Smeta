@@ -293,7 +293,15 @@ namespace Smeta_1
 				var templateTable = worksheet.Names.Item("SmetaTable").RefersToRange;
 				var row = templateTable.Row;
 
-				var gridRowCount = dgObject.Items.Count;
+				worksheet.Cells[2,5] = txtNomer.Text;
+				worksheet.Cells[3, 5] = txtData.Text;
+				worksheet.Cells[6, 2] = txtName.Text;
+				worksheet.Cells[7, 2] = txtProectName.Text;
+				worksheet.Cells[8, 2] = txtCustName.Text;
+				worksheet.Cells[7, 5] = txSumTrud.Text;
+				worksheet.Cells[8, 5] = txStoimost.Text; 
+
+				 var gridRowCount = dgObject.Items.Count;
 
 				for (int i = 0; i < gridRowCount - 1; i++)
 				{
@@ -306,7 +314,7 @@ namespace Smeta_1
 				{
                     var smeta = dgObject.Items[i - 1] as Локальная_смета;
                     targetTable[i, 1] = smeta.КодВидаРабот;
-                    targetTable[i, 2] = smeta.Объект.НаименованиеОбъекта;
+                    targetTable[i, 2] = smeta.Справочник_расценок.ИмяРаботы;
                     targetTable[i, 4] = smeta.ТрудоемкостьРаботы;
                     targetTable[i, 5] = smeta.СтоимостьРаботы;
 				}

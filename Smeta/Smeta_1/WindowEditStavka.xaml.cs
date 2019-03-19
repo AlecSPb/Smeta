@@ -70,8 +70,7 @@ namespace Smeta_1
 		}
 		public void Update<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
 		{
-            // Отключаем отслеживание и проверку изменений для оптимизации вставки множества полей
-            SmetaContext.Configuration.AutoDetectChangesEnabled = false;
+             SmetaContext.Configuration.AutoDetectChangesEnabled = false;
             SmetaContext.Configuration.ValidateOnSaveEnabled = false;
 
             SmetaContext.Database.Log = (s => System.Diagnostics.Debug.WriteLine(s));

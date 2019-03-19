@@ -33,6 +33,7 @@ namespace Smeta_1
         public SmetaEntities SmetaContext { get; set; }
 		static string YNP;
 		static string NameP;
+		static string RS;
 		public AddCustomer(SmetaEntities context)
         {
             InitializeComponent();
@@ -54,7 +55,7 @@ namespace Smeta_1
 				return;
 			}
 
-			if (tbProjectAdress != null)
+			if (tbProjectAdress.Text == "")
 			{
 				MessageBox.Show("Заполните поле Адрес проектной организации");
 				return;
@@ -91,6 +92,7 @@ namespace Smeta_1
 			var existedYNP = SmetaContext.Проектная_организация
 			   .Where(n => n.УНП == YNP)
 			   .FirstOrDefault();
+		  
 			if (existedYNP != null)
 			{
 				MessageBox.Show("Проектная организация с данным УНП уже существует!");
@@ -102,6 +104,14 @@ namespace Smeta_1
 			if (existedName != null)
 			{
 				MessageBox.Show("Проектная организация с данным названием уже существует!");
+				return;
+			}
+			var existedRS = SmetaContext.Проектная_организация
+			   .Where(n => n.Р_с == RS)
+			   .FirstOrDefault();
+			if (existedRS != null)
+			{
+				MessageBox.Show("Проектная организация с данным расчетным счетом уже существует!");
 				return;
 			}
 			try

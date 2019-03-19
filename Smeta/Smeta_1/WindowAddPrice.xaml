@@ -95,6 +95,7 @@
             Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}" 
             SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>
+        <!--DisplayMemberPath="ИмяРаботы"/>-->
         <TextBox
             x:Name="tbWorkCode"
             Grid.Row="1"

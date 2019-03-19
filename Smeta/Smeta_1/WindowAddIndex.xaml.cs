@@ -51,11 +51,11 @@ namespace Smeta_1
 				return;
 			}
 
-			if (tbKofCode != null)
-			{
-				MessageBox.Show("Поле Код коэффициента не может быть пустым");
-				return;
-			}
+			//if (tbKofCode != null)
+			//{
+			//	MessageBox.Show("Поле Код коэффициента не может быть пустым");
+			//	return;
+			//}
 			if (tbKofSize.Text == " ")
 			{
 				MessageBox.Show("Заполните поле Значение коэффициента");

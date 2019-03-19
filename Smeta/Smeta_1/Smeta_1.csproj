@@ -232,7 +232,6 @@
     <None Include="shablon_smety.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="smeta.xlsx" />
     <None Include="template_dogovor.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -30,7 +30,7 @@ namespace Smeta_1
 	public partial class AddStavka : MetroWindow
 	{
         public SmetaEntities SmetaContext { get; set; }
-
+		static DateTime stDate;
         public AddStavka(SmetaEntities context)
         {
             InitializeComponent();
@@ -40,11 +40,7 @@ namespace Smeta_1
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (tbStavkaCode.Text == "")
-			{
-				MessageBox.Show("Заполните поле Код ставки");
-				return;
-			}
+			
 			if (!int.TryParse(tbStavkaCode.Text, out int nomer) & nomer <= 0)
 			{
 				MessageBox.Show("В поле Код ставки введите положительное число");
@@ -90,8 +86,15 @@ namespace Smeta_1
             {
                 MessageBox.Show("Ставка с данным кодом уже существует!");
             }
+			var existedDate = SmetaContext.Ставка_14_го_разряда
+				.Where(n => n.Дата_ставки == stDate)
+				.FirstOrDefault();
 
-            try
+			if (existedDate != null)
+			{
+				MessageBox.Show("Ставка с данной датой уже существует!");
+			}
+			try
             {
                 var addStavka = new Ставка_14_го_разряда()
                 {

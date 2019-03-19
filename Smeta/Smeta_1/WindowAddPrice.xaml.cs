@@ -32,7 +32,7 @@ namespace Smeta_1
 	public partial class AddPrice : MetroWindow
 	{
 		static int categAddWorkType;
-
+		static string PriceName;
         public SmetaEntities SmetaContext { get; set; }
 
         public AddPrice(SmetaEntities context)
@@ -109,6 +109,15 @@ namespace Smeta_1
 			if (existedItem != null)
 			{
 				MessageBox.Show("Расценка с данным кодом уже существует!");
+				return;
+			}
+			var existedPriceName = SmetaContext.Справочник_расценок
+			   .Where(n => n.ИмяРаботы == PriceName)
+			   .FirstOrDefault();
+
+			if (existedPriceName != null)
+			{
+				MessageBox.Show("Расценка с данным названием уже существует!");
 				return;
 			}
 			try

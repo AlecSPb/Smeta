@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:Smeta_1"
         mc:Ignorable="d"
-        Title="Изменить объем в смете" Height="280" Width="500"
+        Title="Изменить объем в смете" Height="120" Width="500"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         FontSize="16"
@@ -50,10 +50,10 @@
  </Window.Resources>
  <Grid Name="grid4">
             <Grid.RowDefinitions>
+                <!--<RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>-->
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -61,7 +61,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-        <Label
+        <!--<Label
             x:Name="WorkTypeNameEdit"
             Grid.Row="0"
             Grid.Column="0"
@@ -70,13 +70,13 @@
             x:Name="WorkNameEdit"
             Grid.Row="1"
             Grid.Column="0"
-            Content="* Наименование вида работ:"/>
+            Content="* Наименование вида работ:"/>-->
         <Label 
             x:Name="Value"
-            Grid.Row="2"
+            Grid.Row="0"
             Grid.Column="0"
             Content="* Объем:"/>
-        <Label 
+        <!--<Label 
             x:Name="StavkaCodeEdit"
             Grid.Row="3"
             Grid.Column="0"
@@ -92,37 +92,37 @@
             Grid.Column="1"
             Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <!--SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>-->
+        --><!--SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>--><!--
         <ComboBox
             x:Name="cmbWorkName"
             Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Path=КодРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <!--SelectionChanged="cbSelectWorkAdd_SelectionChanged"/>-->
+        --><!--SelectionChanged="cbSelectWorkAdd_SelectionChanged"/>-->
         <TextBox
             x:Name="tbValue"
-            Grid.Row="2"
+            Grid.Row="0"
             Grid.Column="1"
             Text="{Binding Path=ФизОбъемРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             />
-        <ComboBox
+        <!--<ComboBox
             x:Name="cmbStavka"
             Grid.Row="3"
             Grid.Column="1"
             Text="{Binding Path=КодСтавки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>-->
+        --><!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>--><!--
         <ComboBox
             x:Name="cmbKof"
             Grid.Row="4"
             Grid.Column="1"
             Text="{Binding Path=Код_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-        <!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>-->
+        --><!--SelectionChanged="cbSelectStavkakAdd_SelectionChanged"/>-->
         <StackPanel
-            Grid.Row="5"
+            Grid.Row="1"
             Grid.Column="1"
             Orientation="Horizontal"
             HorizontalAlignment="Right"

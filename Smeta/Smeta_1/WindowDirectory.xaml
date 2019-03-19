@@ -165,6 +165,7 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             SelectionChanged="cbSelectTypeWork_SelectionChanged"/>
+        <!--DisplayMemberPath="ВидРабот"/>-->
         <DataGrid
             Grid.Row="3"
             Grid.Column="0"

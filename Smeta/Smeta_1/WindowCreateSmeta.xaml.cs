@@ -35,6 +35,7 @@ namespace Smeta_1
 		static int categAddStavka;
 		static int categAddWorkTypeCode;
 		static int categAddWorkCode;
+		static int DogNomer;
 
         public SmetaEntities SmetaContext { get; set; }
 
@@ -49,7 +50,7 @@ namespace Smeta_1
             cmbProject.Items.Clear();
             cmbStavka.Items.Clear();
             cmbWorkName.Items.Clear();
-            //dgDirectory_1.Items.Clear();
+           
             cmbWorkType.Items.Clear();
 
             foreach (var stw in SmetaContext.Заказчик.ToList())
@@ -80,7 +81,7 @@ namespace Smeta_1
             foreach (var stw in SmetaContext.Справочник_расценок.ToList())
             {
                 cmbWorkName.Items.Add(stw.ИмяРаботы);
-                //dgDirectory_1.Items.Add(stw);
+                
             }
         }
 
@@ -142,15 +143,7 @@ namespace Smeta_1
 				.FirstOrDefault();
 			SmetaContext.Справочник_видов_работ.Load();
 			categAddWorkTypeCode = dir.КодВидаРабот;
-			//dgDirectory_1.Items.Clear();
-			//cat = dir.КодВидаРабот;
-			//foreach (Справочник_расценок item in GetAllPrices())
-			//{
-			//	if (item.КодВидаРабот == cat)
-			//	{
-			//		dgDirectory_1.Items.Add(item);
-			//	}
-			//}
+			
 		}
 
 		private void CmbWorkName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -171,11 +164,11 @@ namespace Smeta_1
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			//if (cbSelectCustomer.Text.Length == 0 || cbSelectProject.Text.Length == 0 || CmbObjectProject.Text.Length ==0 || CmbStavka.Text.Length == 0)
-			//{
-			//	MessageBox.Show("Выберите категорию!");
-				
-			//}
+			if (txObjectName.Text == "")
+			{
+				MessageBox.Show("Заполните поле наименование объекта");
+
+			}
 			if (txObjectName.Text.Length < 2 || txObjectName.Text.Length > 60)
 			{
 				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
@@ -187,12 +180,12 @@ namespace Smeta_1
 				MessageBox.Show("В поле Шифр введите цифры");
                 return;
             }
-            //else if (txShifr != null)
-            //{
-            //	MessageBox.Show("Поле Шифр не может быть пустым");
-            //}
-
-            if (txAdress.Text.Length < 2 || txAdress.Text.Length > 60)
+			if (txAdress.Text == "")
+			{
+				MessageBox.Show("Заполните поле адрес");
+				return;
+			}
+			if (txAdress.Text.Length < 2 || txAdress.Text.Length > 60)
 			{
 				MessageBox.Show("Поле адрес содержит от 2 до 60 символов A-Z");
                 return;
@@ -209,46 +202,69 @@ namespace Smeta_1
 				MessageBox.Show("В поле номер договора введите цифры");
                 return;
             }
+			var existedItem = SmetaContext.Объект
+			   .Where(n => n.Шифр == nomer)
+			   .FirstOrDefault();
 
-            var addObject = new Объект()
-            {
-                КодЗаказчик = categAddCust,
-                КодПроектировщика = categAddProject,
-                Код_коэффициента = categAddKof,
-                КодСтавки = categAddStavka,
-                Шифр = nomer,
-                НаименованиеОбъекта = txObjectName.Text,
-                Адрес = txAdress.Text
-            };
+			if (existedItem != null)
+			{
+				MessageBox.Show("Объект с данным шифром уже существует!");
+				return;
+			}
+			var existedDog = SmetaContext.Договор_подряда
+			   .Where(n => n.НомерДог == DogNomer)
+			   .FirstOrDefault();
 
-            var addDogovor = new Договор_подряда()
-            {
-                НомерДог = nomer1,
-                ДатаДог = date,
-                Код_коэффициента = categAddKof,
-                КодСтавки = categAddStavka,
-                Шифр = nomer
-            };
+			if (existedDog != null)
+			{
+				MessageBox.Show("Данный договор уже существует!");
+				return;
+			}
 
-            var addSmeta = new Локальная_смета()
-            {
-                Шифр = nomer,
-                КодВидаРабот = categAddWorkTypeCode,
-                КодРаботы = categAddWorkCode,
-                КодСтавки = categAddStavka,
-                Код_коэффициента = categAddKof,
-                ФизОбъемРабот = double.Parse(txObjem.Text),
-                //СтоимостьРаботы = Convert.ToDouble(txSum.Text),
-                //ТрудоемкостьРаботы = Convert.ToDouble(txTrud.Text)
-            };
+			try
+			{
+				var addObject = new Объект()
+				{
+					КодЗаказчик = categAddCust,
+					КодПроектировщика = categAddProject,
+					Код_коэффициента = categAddKof,
+					КодСтавки = categAddStavka,
+					Шифр = nomer,
+					НаименованиеОбъекта = txObjectName.Text,
+					Адрес = txAdress.Text
+				};
 
-            SmetaContext.Объект.Add(addObject);
-            SmetaContext.Договор_подряда.Add(addDogovor);
-            SmetaContext.Локальная_смета.Add(addSmeta);
-            SmetaContext.SaveChanges();
-            MessageBox.Show("Данные добавлены. Смета создана");
-            Close();
-        }
+				var addDogovor = new Договор_подряда()
+				{
+					НомерДог = nomer1,
+					ДатаДог = date,
+					Код_коэффициента = categAddKof,
+					КодСтавки = categAddStavka,
+					Шифр = nomer
+				};
+
+				var addSmeta = new Локальная_смета()
+				{
+					Шифр = nomer,
+					КодВидаРабот = categAddWorkTypeCode,
+					КодРаботы = categAddWorkCode,
+					КодСтавки = categAddStavka,
+					Код_коэффициента = categAddKof,
+					ФизОбъемРабот = double.Parse(txObjem.Text),
+
+				};
+
+				SmetaContext.Объект.Add(addObject);
+				SmetaContext.Договор_подряда.Add(addDogovor);
+				SmetaContext.Локальная_смета.Add(addSmeta);
+				SmetaContext.SaveChanges();
+				MessageBox.Show("Данные добавлены. Смета создана");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "SQL Error");
+			}
+			Close();
+		}
 	}
 }
-//сделать проверку на существование объекта в базе!!!
