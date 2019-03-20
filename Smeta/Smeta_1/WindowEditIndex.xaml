@@ -20,18 +20,15 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
         </Style>
-
         <Style TargetType="Label">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
-
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="FontStyle" Value="Oblique"/>
-
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
                     <Setter Property="Background" Value="Pink"/>
@@ -46,7 +43,6 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
 
     <Grid Name="grid4">
@@ -75,14 +71,12 @@
             x:Name="tbKofNameEdit" 
             Grid.Row="0" 
             Grid.Column="1" 
-            Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             Margin="5"/>
         <TextBox
             x:Name="tbKofSizeEdit"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             Margin="5"/>
         <StackPanel

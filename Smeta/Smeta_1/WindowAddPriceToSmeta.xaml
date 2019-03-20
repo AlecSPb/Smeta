@@ -26,7 +26,6 @@
         </Style>
         <Style TargetType="ComboBox">
             <Setter Property="Margin" Value="5"/>
-
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -47,12 +46,9 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
-
     <Grid Name="grid">
         <Grid.RowDefinitions>
-           
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -61,38 +57,42 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-           
         </Grid.ColumnDefinitions>
-        
-                <Label
-                         Grid.Row="0"
-                         Grid.Column="0"
-                         Content="Наименование объекта:"/>
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Name="cmbObjectName"
-                    SelectionChanged="CmbObjectName_SelectionChanged"/>
-               <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Content="Наименование работы:"/>
-                <ComboBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    x:Name="cmbWorkName"
-                    SelectionChanged="CmbWorkName_SelectionChanged"
-                    />
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Content="Объем:"/>
-                <TextBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    x:Name="txObjem"
-                    Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
-          
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="Наименование объекта:"
+            />
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Name="cmbObjectName"
+            DisplayMemberPath="НаименованиеОбъекта"
+            SelectionChanged="CmbObjectName_SelectionChanged"
+            />
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Наименование работы:"
+            />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="cmbWorkName"
+            DisplayMemberPath="ИмяРаботы"
+            SelectionChanged="CmbWorkName_SelectionChanged"
+            />
+        <Label
+            Grid.Row="2"
+            Grid.Column="0"
+            Content="Объем:"
+            />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="1"
+            x:Name="txObjem"
+            Validation.ErrorTemplate="{StaticResource ErrorTempl}"
+            />
         <StackPanel
             Grid.Row="3"
             Grid.Column="2"

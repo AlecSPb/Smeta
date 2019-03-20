@@ -1,35 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.Entity;
-using Microsoft.Win32;
-using System.Xml.Linq;
-using Ninject;
 using Smeta_DB;
 
 namespace Smeta_1
 {
-	/// <summary>
-	/// Interaction logic for Справочник.xaml
-	/// </summary>
-	public partial class Directory : MetroWindow
+    /// <summary>
+    /// Interaction logic for Справочник.xaml
+    /// </summary>
+    public partial class Directory : MetroWindow
 	{
-		static int cat;
+		private int cat;
+
+        public int pk2ID { get; set; }
+        public string oldNaz { get; set; }
+        public double oldPrice { get; set; }
+        public int pkIDStavka { get; set; }
+        public string oldNazStavka { get; set; }
+        public double oldPriceStavka { get; set; }
+        public DateTime oldDateStavka { get; set; }
 
         public SmetaEntities SmetaContext { get; set; }
 
@@ -38,11 +31,6 @@ namespace Smeta_1
             InitializeComponent();
 
             SmetaContext = context;
-
-            cbSelectTypeWork.Items.Clear();
-            dgDirectory.Items.Clear();
-            dgKof.Items.Clear();
-            dgStavka.Items.Clear();
 
             if (MainWindow.sRole == "admin")
             {
@@ -60,22 +48,22 @@ namespace Smeta_1
                 menuEdit.IsEnabled = false;
             }
 
-            foreach (Справочник_расценок item in SmetaContext.Справочник_расценок.ToList())
+            foreach (var item in SmetaContext.Справочник_расценок.ToList())
             {
                 dgDirectory.Items.Add(item);
             }
 
-            foreach (Справочник_видов_работ stw in SmetaContext.Справочник_видов_работ.ToList())
+            foreach (var stw in SmetaContext.Справочник_видов_работ.ToList())
             {
-                cbSelectTypeWork.Items.Add(stw.ВидРабот);
+                cbSelectTypeWork.Items.Add(stw);
             }
 
-            foreach (Поправочный_коэффициент_по_типу_ПИР item in SmetaContext.Поправочный_коэффициент_по_типу_ПИР.ToList())
+            foreach (var item in SmetaContext.Поправочный_коэффициент_по_типу_ПИР.ToList())
             {
                 dgKof.Items.Add(item);
             }
 
-            foreach (Ставка_14_го_разряда item in SmetaContext.Ставка_14_го_разряда.ToList())
+            foreach (var item in SmetaContext.Ставка_14_го_разряда.ToList())
             {
                 dgStavka.Items.Add(item);
             }
@@ -84,16 +72,12 @@ namespace Smeta_1
 		private void cbSelectTypeWork_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var catalWork = cbSelectTypeWork.SelectedItem as Справочник_видов_работ;
-			catalWork = SmetaContext.Справочник_видов_работ
-				.Where(v => v.ВидРабот == cbSelectTypeWork.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-			SmetaContext.Справочник_видов_работ.Load();
 
-			dgDirectory.Items.Clear();
-			cat = catalWork.КодВидаРабот;
+            cat = catalWork.КодВидаРабот;
 
-			foreach (Справочник_расценок item in SmetaContext.Справочник_расценок.ToList())
+            dgDirectory.Items.Clear();
+
+            foreach (Справочник_расценок item in SmetaContext.Справочник_расценок.Where(n => n.КодВидаРабот == cat).ToList())
 			{
 				if (item.КодВидаРабот == cat)
 				{
@@ -106,21 +90,16 @@ namespace Smeta_1
 		{
             
 		}
+
 		private void dgKof_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
             
         }
+
         private void dgStavka_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
            
         }
-        public static int pk2ID;
-		public static string oldNaz;
-		public static double oldPrice;
-		public static int pkIDStavka;
-		public static string oldNazStavka;
-		public static double oldPriceStavka;
-		public static DateTime oldDateStavka;
 
 		private void dg1_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
@@ -131,7 +110,7 @@ namespace Smeta_1
 				pk2ID = sd.Код_коэффициента;
 				oldNaz = sd.Наименование_коэффициента;
 				oldPrice = sd.Значение_коэффициента.Value;
-				EditIndex b = new EditIndex(SmetaContext);
+				EditIndex b = new EditIndex(SmetaContext, this);
 				b.Owner = this;
 				b.ShowDialog();
 			}
@@ -148,7 +127,7 @@ namespace Smeta_1
 				oldPriceStavka = sd.Значение_ставки;
 				oldDateStavka = sd.Дата_ставки;
 
-				EditStavka b = new EditStavka(SmetaContext);
+				EditStavka b = new EditStavka(SmetaContext, this);
 				b.Owner = this;
 				b.ShowDialog();
 			}

@@ -164,8 +164,8 @@
             Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
+            DisplayMemberPath="ВидРабот"
             SelectionChanged="cbSelectTypeWork_SelectionChanged"/>
-        <!--DisplayMemberPath="ВидРабот"/>-->
         <DataGrid
             Grid.Row="3"
             Grid.Column="0"
@@ -173,7 +173,6 @@
             x:Name="dgDirectory"
             IsReadOnly="True"
             FontSize="16"
-            ItemsSource="{Binding People}"
             Style="{StaticResource AzureDataGrid}"
             SelectionChanged="dg1_SelectionChanged">
             <DataGrid.Columns>
@@ -182,7 +181,6 @@
                 <DataGridTextColumn Header="Затраты труда" Width="Auto" Binding="{Binding ЗатратыТрудаЕдОбъема}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-
         <Expander
             Grid.Row="4"
             Grid.Column="0"
@@ -195,8 +193,7 @@
                 MouseRightButtonDown="dg1_MouseRightButtonDown"
                 SelectionChanged="dgKof_SelectionChanged"
                 Margin="5"
-                FontSize="12" 
-                ItemsSource="{Binding People}"
+                FontSize="12"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Значение" Width="*" Binding = "{Binding Значение_коэффициента}"/>
@@ -218,7 +215,6 @@
                         SelectionChanged="dgStavka_SelectionChanged"
                         Margin="5"
                         FontSize="12"
-                        ItemsSource="{Binding People}"
                         >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Значение" Width="*" Binding = "{Binding Значение_ставки}"/>

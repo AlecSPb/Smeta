@@ -279,7 +279,7 @@
                                 x:Name="txtCustPhone"
                                 Margin="5"
                                 ></TextBlock>
-                            
+
                             <Image
                                 Grid.Row="4"
                                 Grid.Column="0"
@@ -339,85 +339,80 @@
                                 FontSize="14" 
                                 FontWeight="Bold"
                                 Margin="5">Наименование:</TextBlock>
-                            <!--<Label x:Name="labelProectName" Content=""></Label>-->
                             <TextBlock
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 x:Name="txtProectName" 
                                 Margin="5"></TextBlock>
-                         
-                                <TextBlock 
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    FontSize="14" 
-                                    Margin="5" 
-                                    FontWeight="Bold">Адрес:</TextBlock>
-                                <!--<Label x:Name="labelProectAdress" Content=""></Label>-->
-                                <TextBlock 
-                                    Grid.Row="1"
-                                    Grid.Column="2"
-                                    x:Name="txtProectAdress" 
-                                    Margin="5"></TextBlock>
- 
-                                <TextBlock 
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    FontSize="14" 
-                                    Margin="5" 
-                                    FontWeight="Bold">УНП:</TextBlock>
-                                <!--<Label x:Name="labelProectYNP" Content=""></Label>-->
-                                <TextBlock
-                                    Grid.Row="2"
-                                    Grid.Column="2"
-                                    x:Name="txtProectYNP" 
-                                    Margin="5"></TextBlock>
-                        
-                                <Image 
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                                    Source="Images\phone_object.png" 
-                                    Width="40"
-                                    Height="30"></Image>
-                                <TextBlock
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    FontSize="14" 
-                                    FontWeight="Bold"
-                                    Margin="5">Телефон:</TextBlock>
-                                <!--<Label x:Name="labelProectPhone" Content=""></Label>-->
-                                <TextBlock 
-                                   Grid.Row="3"
-                                   Grid.Column="2"
-                                   x:Name="txtProectPhone" 
-                                   Margin="5"></TextBlock>
-                                <Image
-                                    Grid.Row="4"
-                                    Grid.Column="0"
-                                    Source="Images\mail_object_1.png" 
-                                    Width="40"
-                                    Height="30"
-                                    Margin="5"></Image>
-                                <TextBlock
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    FontSize="14" 
-                                    FontWeight="Bold"
-                                    Margin="5">Эл.почта:</TextBlock>
-                                <!--<Label x:Name="labelProectMail" Content=""></Label>-->
-                                <TextBlock
-                                    Grid.Row="4"
-                                    Grid.Column="2"
-                                    x:Name="txtProectMail" 
-                                    Margin="5"></TextBlock>
-                         </Grid>
+
+                            <TextBlock 
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontSize="14" 
+                                Margin="5" 
+                                FontWeight="Bold">Адрес:</TextBlock>
+                            <TextBlock 
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                x:Name="txtProectAdress" 
+                                Margin="5"></TextBlock>
+
+                            <TextBlock 
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                FontSize="14" 
+                                Margin="5" 
+                                FontWeight="Bold">УНП:</TextBlock>
+                            <TextBlock
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                x:Name="txtProectYNP" 
+                                Margin="5"></TextBlock>
+
+                            <Image 
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Source="Images\phone_object.png" 
+                                Width="40"
+                                Height="30"></Image>
+                            <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                FontSize="14" 
+                                FontWeight="Bold"
+                                Margin="5">Телефон:</TextBlock>
+                            <TextBlock 
+                                Grid.Row="3"
+                                Grid.Column="2"
+                                x:Name="txtProectPhone" 
+                                Margin="5"></TextBlock>
+                            <Image
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                Source="Images\mail_object_1.png" 
+                                Width="40"
+                                Height="30"
+                                Margin="5"></Image>
+                            <TextBlock
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                FontSize="14" 
+                                FontWeight="Bold"
+                                Margin="5">Эл.почта:</TextBlock>
+                            <TextBlock
+                                Grid.Row="4"
+                                Grid.Column="2"
+                                x:Name="txtProectMail" 
+                                Margin="5"></TextBlock>
+                        </Grid>
                     </GroupBox>
-                   
+
                 </Expander>
                 <Expander
                     Grid.Row="2"
                     IsExpanded="True"
                     Header="Объект">
-                       <GroupBox  Header="Данные">
+                    <GroupBox  Header="Данные">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -441,7 +436,6 @@
                                 FontSize="14" 
                                 FontWeight="Bold"
                                 Margin="5">Наименование:</TextBlock>
-                            <!--<Label x:Name="labelName" Content="" FontSize="14"></Label>-->
                             <TextBlock 
                                 Grid.Row="0"
                                 Grid.Column="2"
@@ -454,7 +448,6 @@
                                 FontSize="14" 
                                 Margin="5" 
                                 FontWeight="Bold">Адрес:</TextBlock>
-                            <!--<Label x:Name="labelAd" Content="" FontSize="14" ></Label>-->
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="2"
@@ -462,14 +455,12 @@
                                 Margin="5"></TextBlock>
                         </Grid>
                     </GroupBox>
-                    
                 </Expander>
                 <Expander
                     Grid.Row="3"
                     IsExpanded="True"
                     Header="Договор">
-                  
-                        <GroupBox  Header="Данные">
+                    <GroupBox  Header="Данные">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -493,7 +484,6 @@
                                 FontSize="14" 
                                 FontWeight="Bold"
                                 Margin="5">№</TextBlock>
-                            <!--<Label x:Name="labelData" Content=""></Label>-->
                             <TextBlock
                                 Grid.Row="0"
                                 Grid.Column="2"
@@ -506,7 +496,6 @@
                                 FontSize="14"
                                 Margin="5"
                                 FontWeight="Bold">Дата:</TextBlock>
-                            <!--<Label x:Name="labelNomer" Content=""></Label>-->
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="2"
@@ -514,7 +503,7 @@
                                 Margin="5"></TextBlock>
                         </Grid>
                     </GroupBox>
-                 </Expander>
+                </Expander>
             </Grid>
         </ScrollViewer>
         <GroupBox
@@ -531,7 +520,6 @@
                     Grid.Row="0"
                     x:Name="dgObject"
                     IsReadOnly="True"
-                    ItemsSource="{Binding People}"
                     Style="{StaticResource AzureDataGrid}"
                     AutoGenerateColumns="False"
                     FontSize="12"
@@ -559,30 +547,30 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Content="Всего трудозатраты:"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Всего трудозатраты:"
                     />
                     <TextBox
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    x:Name="txSumTrud"/>
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        x:Name="txSumTrud"/>
                     <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Content="чел/час"/>
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Content="чел/час"/>
                     <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Content="Всего стоимость:"/>
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Content="Всего стоимость:"/>
                     <TextBox
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    x:Name="txStoimost"/>
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        x:Name="txStoimost"/>
                     <Label
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Content="руб.коп."/>
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Content="руб.коп."/>
                     <StackPanel
                         Grid.Row="2"
                         Grid.ColumnSpan="3"
@@ -598,12 +586,9 @@
                              Margin="5"
                              MinWidth="100"
                              Style="{StaticResource AccentedSquareButtonStyle}"/>
-                        
                     </StackPanel>
                 </Grid>
             </Grid>
         </GroupBox>
-       
     </Grid>
-
 </Controls:MetroWindow>

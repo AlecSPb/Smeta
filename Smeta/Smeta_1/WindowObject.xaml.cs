@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Data;
-using System.Data.Entity;
-using Ninject;
 using Smeta_DB;
 using Word = Microsoft.Office.Interop.Word;
 using Excel = Microsoft.Office.Interop.Excel;
-using System.IO;
 using System.Windows.Input;
 
 namespace Smeta_1
@@ -21,15 +16,15 @@ namespace Smeta_1
     /// </summary>
     public partial class Object : MetroWindow
 	{
-		private static int code;
-		public static int WorkTypeCode;
-		public static int Shifr;
-		public static int WorkCode;
-		public static int StavkaCode;
-		public static int KofCode;
-		public static double oldObjem;
-
+		private int code;
         private object oMissing = System.Reflection.Missing.Value;
+
+        public int WorkTypeCode { get; set; }
+		public int Shifr { get; set; }
+        public int WorkCode { get; set; }
+        public int StavkaCode { get; set; }
+        public int KofCode { get; set; }
+        public double oldObjem { get; set; }
 
         public SmetaEntities SmetaContext { get; set; }
 
@@ -38,7 +33,6 @@ namespace Smeta_1
 			InitializeComponent();
             SmetaContext = context;
             ReDrow();
-			dgObject.Items.Clear();
 
 			if (MainWindow.sRole == "admin")
 			{
@@ -56,9 +50,9 @@ namespace Smeta_1
 				btnAddPrice.IsEnabled = true;
 			}
 		}
+
 		public void ReDrow()
 		{
-			listBox1.Items.Clear();
 			foreach (var obj in SmetaContext.Объект.ToList())
 			{
 				listBox1.Items.Add(obj);
@@ -71,24 +65,23 @@ namespace Smeta_1
 			
 			if (obj != null)
 			{
-
-				
 				txtAd.Text = obj.Адрес;
 				txtName.Text = obj.НаименованиеОбъекта;
 				
 				code = obj.Шифр;
 
-				dgObject.ItemsSource = SmetaContext.Локальная_смета
+                // Зачем делать 3 одинаковых запросов к БД?
+                var listOfSmeta = SmetaContext.Локальная_смета
                     .Where(sm => sm.Шифр == code).ToList();
 
-				txSumTrud.Text = SmetaContext.Локальная_смета
-                    .Where(c => c.Шифр == obj.Шифр)
+                dgObject.ItemsSource = listOfSmeta;
+
+				txSumTrud.Text = listOfSmeta
                     .Select(c => c.ТрудоемкостьРаботы)
                     .Sum()
                     .ToString();
 
-				txStoimost.Text = SmetaContext.Локальная_смета
-                    .Where(c => c.Шифр == obj.Шифр)
+				txStoimost.Text = listOfSmeta
                     .Select(c => c.СтоимостьРаботы)
                     .Sum()
                     .ToString();
@@ -113,6 +106,7 @@ namespace Smeta_1
 				var pr = SmetaContext.Проектная_организация
                     .Where(p => p.КодПроектировщика == obj.КодПроектировщика)
                     .FirstOrDefault();
+
 				txtProectName.Text = pr.НаименованиеПроектиров;
 				txtProectAdress.Text = pr.ЮрАдрес;
 				txtProectYNP.Text = pr.УНП;
@@ -194,6 +188,7 @@ namespace Smeta_1
                 word?.Quit(ref oMissing, ref oMissing, ref oMissing);
             }
         }
+
 		private void SetTemplate(Word._Document oDoc)
 		{
 			object oBookMark = "CustomerName";
@@ -227,6 +222,7 @@ namespace Smeta_1
 			oDoc.Bookmarks.get_Item(ref oBookMark_13).Range.Text = txtProectName.Text;
 			oDoc.Bookmarks.get_Item(ref oBookMark_14).Range.Text = txtCustName.Text;
 		}
+
 		private void SaveToDisk(Word._Document oDoc, string filePath)
 		{
 			object fileName = filePath;
@@ -250,6 +246,7 @@ namespace Smeta_1
                 ref oMissing,
                 ref oMissing);
 		}
+
 		private void AddPriceToSmetaButton_Click(object sender, RoutedEventArgs e)
 		{
 			var wa = new AddPriceToSmeta(SmetaContext);
@@ -269,11 +266,10 @@ namespace Smeta_1
 				StavkaCode = sd.КодСтавки;
 				KofCode = sd.Код_коэффициента;
 				oldObjem = sd.ФизОбъемРабот.Value;
-				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext, this);
 				b.Owner = this;
 				b.ShowDialog();
 			}
-
 		}
 
 
@@ -350,7 +346,6 @@ namespace Smeta_1
 				workbook?.Close();
 				excel?.Quit();
 			}
-
 		}
 
 		private void DgObject_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -365,7 +360,7 @@ namespace Smeta_1
 				StavkaCode = sd.КодСтавки;
 				KofCode = sd.Код_коэффициента;
 				oldObjem = sd.ФизОбъемРабот.Value;
-				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext);
+				EditPriceToSmeta b = new EditPriceToSmeta(SmetaContext, this);
 				b.Owner = this;
 				b.ShowDialog();
 			}

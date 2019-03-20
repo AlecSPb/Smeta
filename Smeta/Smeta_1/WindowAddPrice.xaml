@@ -64,25 +64,21 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <Label
-        x:Name="WorkTypeName"
-        Grid.Row="0"
-        Grid.Column="0"
-        Content="* Наименование вида работ:"/>
-
+            x:Name="WorkTypeName"
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="* Наименование вида работ:"/>
         <Label
             x:Name="WorkCode"
             Grid.Row="1"
             Grid.Column="0"
             Content="* Код работы:"/>
-
         <Label
             x:Name="TrudObjem"
             Grid.Row="2"
             Grid.Column="0"
             Content="* Затраты труда:"/>
-
         <Label 
             x:Name="WorkName"
             Grid.Row="3" 
@@ -92,27 +88,23 @@
             x:Name="cmbWorkType"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Path=КодВидаРабот, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}" 
-            SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"/>
-        <!--DisplayMemberPath="ИмяРаботы"/>-->
+            SelectionChanged="cbSelectWorkTypeAdd_SelectionChanged"
+            DisplayMemberPath="ВидРабот"/>
         <TextBox
             x:Name="tbWorkCode"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=КодРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox 
             x:Name="tbTrudObjem"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Path=ЗатратыТрудаЕдОбъема, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbWorkName"
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding Path=ИмяРаботы, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <StackPanel
             Grid.Row="4"

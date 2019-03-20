@@ -20,13 +20,11 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="16" />
         </Style>
-
         <Style TargetType="Label">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="5"/>
-
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -35,7 +33,7 @@
             <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
-                                 <Setter Property="Background" Value="Pink"/>
+                    <Setter Property="Background" Value="Pink"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -47,7 +45,6 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
 
     <Grid Name="grid">
@@ -86,25 +83,21 @@
             x:Name="tbStavkaCode"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Path=КодСтавки, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" 
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbStavkaDate"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=Дата_Ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbStavkaSize"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox 
             x:Name="tbStavkaName"
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
        <StackPanel
             Grid.Row="5"

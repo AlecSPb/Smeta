@@ -35,8 +35,6 @@
             <Setter Property="Margin" Value="5"/>
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="true">
-                    <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self},Path=(Validation.Errors)[0].ErrorContent}"/>-->
-                   
                     <Setter Property="Background" Value="Pink"/>
                 </Trigger>
             </Style.Triggers>
@@ -49,7 +47,6 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
 
     <Grid>
@@ -106,7 +103,6 @@
             Grid.Row="0"
             Grid.Column="1"
             x:Name="tbProjectCod"
-            Text="{Binding Path=КодПроектировщика, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             />
         <StackPanel
@@ -116,7 +112,6 @@
             >
             <TextBox
                 x:Name="tbProjectName"
-                Text="{Binding НаименованиеПроектиров, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
                 Validation.ErrorTemplate="{StaticResource ErrorTempl}"
                 />
             <TextBlock
@@ -128,35 +123,30 @@
             Grid.Row="2"
             Grid.Column="1" 
             x:Name="tbProjectAdress"
-            Text="{Binding Path=ЮрАдрес, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="3"
             Grid.Column="1"
             Grid.ColumnSpan="2" 
             x:Name="tbProjectYNP"
-            Text="{Binding Path=УНП, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="4"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbRS"
-            Text="{Binding Path=Р_с, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="5"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbPhone"
-            Text="{Binding Path=Тел, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             Grid.Row="6"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="tbMail"
-            Text="{Binding Path=ЭлПочта, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <StackPanel
             Grid.Row="7"

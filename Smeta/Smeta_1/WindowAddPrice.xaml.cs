@@ -1,38 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.Entity;
-using Microsoft.Win32;
-using System.Xml.Linq;
-using Ninject;
 using Smeta_DB;
-
 
 namespace Smeta_1
 {
-	/// <summary>
-	/// Interaction logic for AddPrice.xaml
-	/// </summary>
-	/// 
-	public partial class AddPrice : MetroWindow
+    /// <summary>
+    /// Interaction logic for AddPrice.xaml
+    /// </summary>
+    /// 
+    public partial class AddPrice : MetroWindow
 	{
-		static int categAddWorkType;
-		static string PriceName;
+        private int categAddWorkType;
+
+        // У тебя данная переменная никогда нигде не присваивается. Следовательно проверка на
+        //
+        // var existedPriceName = SmetaContext.Справочник_расценок
+		//      .Where(n => n.ИмяРаботы == PriceName)
+		//      .FirstOrDefault();
+        //
+        // Работать не будет!!!
+
+        private string PriceName;
+
         public SmetaEntities SmetaContext { get; set; }
 
         public AddPrice(SmetaEntities context)
@@ -41,45 +34,38 @@ namespace Smeta_1
 
             SmetaContext = context;
 
-            cmbWorkType.Items.Clear();
-
-            foreach (Справочник_видов_работ stw in SmetaContext.Справочник_видов_работ.ToList())
+            foreach (var item in SmetaContext.Справочник_видов_работ.ToList())
             {
-                cmbWorkType.Items.Add(stw.ВидРабот);
+                cmbWorkType.Items.Add(item);
             }
         }
 
 		private void cbSelectWorkTypeAdd_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
-			dir = SmetaContext.Справочник_видов_работ
-				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			SmetaContext.Справочник_видов_работ.Load();
 			categAddWorkType = dir.КодВидаРабот;
 		}
+
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-
-
-
-			if (tbWorkCode.Text == "")
+			if (string.IsNullOrWhiteSpace(tbWorkCode.Text))
 			{
 				MessageBox.Show("Заполните поле Код работы");
 				return;
 			}
+
 			if (!int.TryParse(tbWorkCode.Text, out int nomer1) & nomer1 <= 0)
 			{
 				MessageBox.Show("В поле Код работы введите положительное число");
 				return;
 			}
-			if (tbTrudObjem.Text == "")
+
+			if (string.IsNullOrWhiteSpace(tbTrudObjem.Text))
 			{
 				MessageBox.Show("Заполните поле Затраты Труда за ед-ну объема");
 				return;
 			}
+
 			if (!double.TryParse(tbTrudObjem.Text, out double TrudObjem))
 			{
 				MessageBox.Show("В поле Затраты Труда за ед-ну объема введите число");
@@ -92,16 +78,18 @@ namespace Smeta_1
 				return;
 			}
 
-			if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
+            if (string.IsNullOrWhiteSpace(tbWorkName.Text))
+            {
+                MessageBox.Show("Заполните поле Наименование работы");
+                return;
+            }
+
+            if (tbWorkName.Text.Length < 2 || tbWorkName.Text.Length > 50)
 			{
 				MessageBox.Show("Поле Наименование работы содержит от 2 до 50 символов A-Z");
 				return;
 			}
-			if (tbWorkName.Text == "")
-			{
-				MessageBox.Show("Заполните поле Наименование работы");
-				return;
-			}
+
 			var existedItem = SmetaContext.Справочник_расценок
 			   .Where(n => n.КодРаботы == nomer1)
 			   .FirstOrDefault();
@@ -111,6 +99,7 @@ namespace Smeta_1
 				MessageBox.Show("Расценка с данным кодом уже существует!");
 				return;
 			}
+
 			var existedPriceName = SmetaContext.Справочник_расценок
 			   .Where(n => n.ИмяРаботы == PriceName)
 			   .FirstOrDefault();
@@ -120,6 +109,7 @@ namespace Smeta_1
 				MessageBox.Show("Расценка с данным названием уже существует!");
 				return;
 			}
+
 			try
 			{
 				var addPrice = new Справочник_расценок()
@@ -133,12 +123,13 @@ namespace Smeta_1
 				SmetaContext.Справочник_расценок.Add(addPrice);
 				SmetaContext.SaveChanges();
 				MessageBox.Show("Расценка добавлена");
-				
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "SQL Error");
+                return;
 			}
+
 			Close();
 		}
 

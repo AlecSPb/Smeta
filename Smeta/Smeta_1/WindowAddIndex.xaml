@@ -46,7 +46,6 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
 
     <Grid Name="grid3">
@@ -65,36 +64,30 @@
             Grid.Row="0"
             Grid.Column="0"
             Content="* Код коэффициента:"/>
-
         <Label
             x:Name="KofName"
             Grid.Row="1"
             Grid.Column="0"
             Content="* Наименование:"/>
-
         <Label 
             x:Name="KofSize"
             Grid.Row="2"
             Grid.Column="0"
             Content="* Значение:"/>
-
         <TextBox 
             x:Name="tbKofCode"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Path=Код_коэффициента, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox 
             x:Name="tbKofName"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=Наименование_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <TextBox
             x:Name="tbKofSize"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Path=Значение_коэффициента, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
         <StackPanel
             Grid.Row="3"

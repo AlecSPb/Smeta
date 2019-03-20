@@ -1,41 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
-using System.Data.Sql;
-using System.Data.Entity;
-using Microsoft.Win32;
-using System.Xml.Linq;
-using Ninject;
 using Smeta_DB;
 
 namespace Smeta_1
 {
-	/// <summary>
-	/// Interaction logic for WindowCreateSmeta.xaml
-	/// </summary>
-	public partial class CreateSmeta : MetroWindow
+    /// <summary>
+    /// Interaction logic for WindowCreateSmeta.xaml
+    /// </summary>
+    public partial class CreateSmeta : MetroWindow
 	{
-		static int categAddCust;
-		static int categAddProject;
-		static int categAddKof;
-		static int categAddStavka;
-		static int categAddWorkTypeCode;
-		static int categAddWorkCode;
-		static int DogNomer;
+		private int categAddCust;
+        private int categAddProject;
+        private int categAddKof;
+        private int categAddStavka;
+        private int categAddWorkTypeCode;
+        private int categAddWorkCode;
+
+        // У тебя данная переменная никогда нигде не присваивается. Следовательно проверка на
+        //
+        // var existedDog = SmetaContext.Договор_подряда
+        //   .Where(n => n.НомерДог == DogNomer)
+        //   .FirstOrDefault();
+        //
+        // Работать не будет!!!
+        private int DogNomer;
 
         public SmetaEntities SmetaContext { get; set; }
 
@@ -45,115 +37,70 @@ namespace Smeta_1
 
             SmetaContext = context;
 
-            cmbCustomers.Items.Clear();
-            cmbObjectProject.Items.Clear();
-            cmbProject.Items.Clear();
-            cmbStavka.Items.Clear();
-            cmbWorkName.Items.Clear();
-           
-            cmbWorkType.Items.Clear();
-
-            foreach (var stw in SmetaContext.Заказчик.ToList())
+            foreach (var item in SmetaContext.Заказчик.ToList())
             {
-                cmbCustomers.Items.Add(stw.НаименованиеЗаказчика);
+                cmbCustomers.Items.Add(item);
             }
 
-            foreach (var stw in SmetaContext.Проектная_организация.ToList())
+            foreach (var item in SmetaContext.Проектная_организация.ToList())
             {
-                cmbProject.Items.Add(stw.НаименованиеПроектиров);
+                cmbProject.Items.Add(item);
             }
 
-            foreach (var stw in SmetaContext.Поправочный_коэффициент_по_типу_ПИР.ToList())
+            foreach (var item in SmetaContext.Поправочный_коэффициент_по_типу_ПИР.ToList())
             {
-                cmbObjectProject.Items.Add(stw.Наименование_коэффициента);
+                cmbObjectProject.Items.Add(item);
             }
 
-            foreach (var stw in SmetaContext.Ставка_14_го_разряда.ToList())
+            foreach (var item in SmetaContext.Ставка_14_го_разряда.ToList())
             {
-                cmbStavka.Items.Add(stw.Обоснование);
+                cmbStavka.Items.Add(item);
             }
 
-            foreach (var stw in SmetaContext.Справочник_видов_работ.ToList())
+            foreach (var item in SmetaContext.Справочник_видов_работ.ToList())
             {
-                cmbWorkType.Items.Add(stw.ВидРабот);
+                cmbWorkType.Items.Add(item);
             }
 
-            foreach (var stw in SmetaContext.Справочник_расценок.ToList())
+            foreach (var item in SmetaContext.Справочник_расценок.ToList())
             {
-                cmbWorkName.Items.Add(stw.ИмяРаботы);
-                
+                cmbWorkName.Items.Add(item);
             }
         }
 
 		private void cbSelectCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var cust = cmbCustomers.SelectedItem as Заказчик;
-			cust = SmetaContext.Заказчик
-				.Where(v => v.НаименованиеЗаказчика == cmbCustomers.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			SmetaContext.Заказчик.Load();
 			categAddCust = cust.КодЗаказчик;
 		}
 
 		private void cbSelectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var pro = cmbProject.SelectedItem as Проектная_организация;
-			pro = SmetaContext.Проектная_организация
-				.Where(v => v.НаименованиеПроектиров == cmbProject.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			SmetaContext.Проектная_организация.Load();
 			categAddProject = pro.КодПроектировщика;
 		}
 
 		private void CmbObjectProject_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var kof = cmbObjectProject.SelectedItem as Поправочный_коэффициент_по_типу_ПИР;
-			kof = SmetaContext.Поправочный_коэффициент_по_типу_ПИР
-				.Where(v => v.Наименование_коэффициента == cmbObjectProject.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			SmetaContext.Поправочный_коэффициент_по_типу_ПИР.Load();
 			categAddKof = kof.Код_коэффициента;
 		}
 
 		private void CmbStavka_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var stv = cmbStavka.SelectedItem as Ставка_14_го_разряда;
-			stv = SmetaContext.Ставка_14_го_разряда
-				.Where(v => v.Обоснование == cmbStavka.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-
-			SmetaContext.Ставка_14_го_разряда.Load();
-
 			categAddStavka = stv.КодСтавки;
 		}
 
 		private void cbSelectWorkType_SelectionChanged (object sender, SelectionChangedEventArgs e)
 		{
 			var dir = cmbWorkType.SelectedItem as Справочник_видов_работ;
-			dir = SmetaContext.Справочник_видов_работ
-				.Where(v => v.ВидРабот == cmbWorkType.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-			SmetaContext.Справочник_видов_работ.Load();
 			categAddWorkTypeCode = dir.КодВидаРабот;
-			
 		}
 
 		private void CmbWorkName_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			var pr = cmbWorkName.SelectedItem as Справочник_расценок;
-			pr = SmetaContext.Справочник_расценок
-				.Where(v => v.ИмяРаботы == cmbWorkName.SelectedItem)
-				.AsEnumerable()
-				.FirstOrDefault();
-			SmetaContext.Справочник_расценок.Load();
 			categAddWorkCode = pr.КодРаботы;
 		}
 
@@ -164,11 +111,12 @@ namespace Smeta_1
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (txObjectName.Text == "")
+			if (string.IsNullOrWhiteSpace(txObjectName.Text))
 			{
 				MessageBox.Show("Заполните поле наименование объекта");
-
+                return;
 			}
+
 			if (txObjectName.Text.Length < 2 || txObjectName.Text.Length > 60)
 			{
 				MessageBox.Show("В поле наименование объекта введите от 2 до 60 символов A-Z");
@@ -180,11 +128,13 @@ namespace Smeta_1
 				MessageBox.Show("В поле Шифр введите цифры");
                 return;
             }
-			if (txAdress.Text == "")
+
+			if (string.IsNullOrWhiteSpace(txAdress.Text))
 			{
 				MessageBox.Show("Заполните поле адрес");
 				return;
 			}
+
 			if (txAdress.Text.Length < 2 || txAdress.Text.Length > 60)
 			{
 				MessageBox.Show("Поле адрес содержит от 2 до 60 символов A-Z");
@@ -202,6 +152,7 @@ namespace Smeta_1
 				MessageBox.Show("В поле номер договора введите цифры");
                 return;
             }
+
 			var existedItem = SmetaContext.Объект
 			   .Where(n => n.Шифр == nomer)
 			   .FirstOrDefault();
@@ -211,6 +162,7 @@ namespace Smeta_1
 				MessageBox.Show("Объект с данным шифром уже существует!");
 				return;
 			}
+
 			var existedDog = SmetaContext.Договор_подряда
 			   .Where(n => n.НомерДог == DogNomer)
 			   .FirstOrDefault();
@@ -258,12 +210,15 @@ namespace Smeta_1
 				SmetaContext.Договор_подряда.Add(addDogovor);
 				SmetaContext.Локальная_смета.Add(addSmeta);
 				SmetaContext.SaveChanges();
+
 				MessageBox.Show("Данные добавлены. Смета создана");
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "SQL Error");
+                return;
 			}
+
 			Close();
 		}
 	}

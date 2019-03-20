@@ -120,7 +120,6 @@
                       Grid.Row="4"
                       Grid.Column="1"
                       x:Name="txDateDog"
-                      Text="{Binding Path=DateOfUnloading, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged,StringFormat=\{0:dd.MM.yyyy\}}"
                       Validation.ErrorTemplate="{StaticResource ErrorTempl}"/>
             </Grid>
         </GroupBox>
@@ -147,6 +146,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Name="cmbCustomers"
+                    DisplayMemberPath="НаименованиеЗаказчика"
                     SelectionChanged="cbSelectCustomer_SelectionChanged"/>
                 <Label
                     Grid.Row="1"
@@ -156,6 +156,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     x:Name="cmbProject"
+                    DisplayMemberPath="НаименованиеПроектиров"
                     SelectionChanged="cbSelectProject_SelectionChanged"/>
                 <Label
                     Grid.Row="2"
@@ -165,16 +166,18 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Name="cmbObjectProject"
+                    DisplayMemberPath="Наименование_коэффициента"
                     SelectionChanged="CmbObjectProject_SelectionChanged"/>
                 <Label
-                     Grid.Row="3"
-                     Grid.Column="0"
-                     Content="Ставка 14-го разряда"/>
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="Ставка 14-го разряда"/>
                 <ComboBox
-                     Grid.Row="3"
-                     Grid.Column="1"
-                     Name="cmbStavka"
-                     SelectionChanged="CmbStavka_SelectionChanged"/>
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Name="cmbStavka"
+                    DisplayMemberPath="Обоснование"
+                    SelectionChanged="CmbStavka_SelectionChanged"/>
             </Grid>
         </GroupBox>
         <GroupBox
@@ -199,6 +202,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Name="cmbWorkType"
+                    DisplayMemberPath="ВидРабот"
                     SelectionChanged="cbSelectWorkType_SelectionChanged"/>
                 <Label
                     Grid.Row="1"
@@ -208,6 +212,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     x:Name="cmbWorkName"
+                    DisplayMemberPath="ИмяРаботы"
                     SelectionChanged="CmbWorkName_SelectionChanged"
                     Margin="5"/>
                 <Label

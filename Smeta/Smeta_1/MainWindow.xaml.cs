@@ -1,30 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-using Ninject;
-using System.Data.Entity;
-using Microsoft.Win32;
-using System.Xml.Linq;
 using Smeta_DB;
 
 namespace Smeta_1
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : MetroWindow
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : MetroWindow
 	{
 		public static string sRole; // Роль пользователя, вошедшего в систему
 		public static int idSotrudn; // ID пользователя, вошедшего в систему
@@ -36,12 +21,6 @@ namespace Smeta_1
 			InitializeComponent();
 
             SmetaContext = new SmetaEntities();
-
-            //// Удалить после отладки
-            //this.Hide();
-            //var mw = new WindowStart(SmetaContext);
-            //mw.ShowDialog();
-            //this.Close();
         }
 
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -65,19 +44,19 @@ namespace Smeta_1
 
                 if (sRole == "admin")
                 {
-                    this.Hide();
+                    Hide();
                     MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
                     var mw = new WindowStart(SmetaContext);
                     mw.ShowDialog();
-                    this.Close();
+                    Close();
                 }
                 if (sRole == "user")
                 {
-                    this.Hide();
+                    Hide();
                     MessageBox.Show(sotrudn.ФИО + ", вы вошли в систему как " + sotrudn.Должность);
                     var mw = new WindowStart(SmetaContext);
                     mw.ShowDialog();
-                    this.Close();
+                    Close();
                 }
             }
         }
@@ -86,8 +65,5 @@ namespace Smeta_1
 		{
 			Close();
 		}
-
-        //public event EventHandler ClickAdmin;
-        //public event EventHandler ClickUser;
     }
 }

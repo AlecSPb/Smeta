@@ -46,7 +46,6 @@
                 <TextBlock Foreground="Red" FontSize="24">*</TextBlock>
             </StackPanel>
         </ControlTemplate>
-
     </Window.Resources>
 
     <Grid Name="grid">
@@ -82,21 +81,18 @@
             x:Name="tbStavkaDateEdit"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Path=Дата_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             Margin="5"/>
         <TextBox
             x:Name="tbStavkaSizeEdit"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Path=Значение_ставки, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             Margin="5"/>
         <TextBox
             x:Name="tbStavkaNameEdit"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Path=Обоснование, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
             Validation.ErrorTemplate="{StaticResource ErrorTempl}"
             Margin="5"/>
         <StackPanel
